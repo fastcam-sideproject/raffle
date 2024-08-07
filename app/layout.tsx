@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import HeaderNav from '../components/Header/HeaderNav';
 import Footer from '../components/Footer/Footer';
+import ReactQueryProviders from '../hooks/useReactQuery';
 
 const pretendard = localFont({
   src: [
@@ -49,7 +50,8 @@ export default function RootLayout({
     <html lang="ko">
       <body className={pretendard.className}>
         <HeaderNav />
-        {children}
+        <ReactQueryProviders>{children}</ReactQueryProviders>
+
         <Footer />
       </body>
     </html>
