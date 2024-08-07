@@ -12,9 +12,10 @@ export default function GoogleLoginButton() {
   return (
     <button
       onClick={handleLogin}
-      className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+      className="flex  items-center text-lg  border py-2 px-4 gap-2 bg-white text-black rounded hover:bg-gray-100 transition-colors"
     >
-      구글로 로그인
+      <img src="/image/google_logo.svg" alt="구글 로그인 로고" />
+      <span>Sign in with Google</span>
     </button>
   );
 }

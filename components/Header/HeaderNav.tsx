@@ -25,9 +25,6 @@ export default function HeaderNav() {
           <div className="py-3 px-4">
             <GoogleLoginButton />
           </div>
-          <button type="button" className="py-3 px-4 bg-blue-400 text-white rounded-lg">
-            회원가입
-          </button>
         </ul>
       </nav>
     </header>
