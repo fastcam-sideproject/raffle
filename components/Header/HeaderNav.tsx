@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import GoogleLoginButton from '../GoogleLoginButton';
 
-function HeaderNav() {
+export default function HeaderNav() {
   return (
     <header className="w-full bg-slate-100">
       <nav className="flex justify-between items-center px-6 py-4">
@@ -21,9 +22,9 @@ function HeaderNav() {
           </li>
         </ul>
         <ul className="flex gap-3">
-          <button type="button" className="py-3 px-4">
-            로그인
-          </button>
+          <div className="py-3 px-4">
+            <GoogleLoginButton />
+          </div>
           <button type="button" className="py-3 px-4 bg-blue-400 text-white rounded-lg">
             회원가입
           </button>
@@ -32,5 +33,3 @@ function HeaderNav() {
     </header>
   );
 }
-
-export default HeaderNav;
