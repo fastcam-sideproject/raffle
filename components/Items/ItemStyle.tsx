@@ -4,25 +4,38 @@ interface ItemProps {
   name: string;
   category: number;
   imageUrl: string;
-  defaultTotalCount: number;
+  currentCount: number;
+  totalCount: number;
 }
 
-function ItemStyle({ name, category, imageUrl, defaultTotalCount }: ItemProps) {
+function ItemStyle({ name, category, imageUrl, currentCount, totalCount }: ItemProps) {
+  const percentageComplete = Math.round((currentCount / totalCount) * 100);
   return (
-    <div className="p-4 w-full">
-      <Image width={100} height={100} src={imageUrl} alt="상품이미지" />
-      <h4 className="text-lg font-bold">{name}</h4>
-      <span>카테고리 {category}</span>
-      <div>
-        <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded" type="button">
-          구매하기
+    <div className="p-4 w-full flex flex-col gap-4">
+      <Image width={100} height={100} src={imageUrl} alt="상품이미지" className="w-full" />
+      <div className="bg-gray-50 p-4 w-full">
+        <div>
+          <h4 className="text-lg font-bold">{name}</h4>
+          <span className="text-gray-400">카테고리{category}</span>
+        </div>
+        <button
+          className={`mt-2 px-2 py-1 ${
+            percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
+          } text-white rounded float-right max-md:float-none max-md:w-full`}
+          type="button"
+        >
+          {percentageComplete === 100 ? '결과확인' : '구매하기'}
         </button>
-        <div className="mt-2 w-full bg-gray-300 rounded-full h-6 overflow-hidden">
+        <div>
+          <span className="text-lg font-semibold">{percentageComplete}%</span>
+          <span>{percentageComplete === 100 ? '진행중' : '완료'}</span>
+        </div>
+        <div className="mt-6 w-full  bg-gray-300 rounded-full h-3 overflow-hidden">
           <div
             className={`h-full transition-all duration-300 ${
-              defaultTotalCount === 100 ? 'bg-red-500' : 'bg-blue-500'
+              percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
             }`}
-            style={{ width: `${defaultTotalCount}%` }}
+            style={{ width: `${percentageComplete}%` }}
           />
         </div>
       </div>

@@ -1,27 +1,24 @@
 'use client';
 
-/* eslint-disable import/no-extraneous-dependencies */
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { Key } from 'react';
 import ItemStyle from './ItemStyle';
-
-async function fetchRaffleData() {
-  const response = await axios.get('http://allyouraffle.co.kr/api/v1/raffle/all');
-  return response.data;
-}
-
-interface ItemProps {
-  name: string;
-  category: number;
-  imageUrl: string;
-  defaultTotalCount: number;
-}
+import useAuthStore from '../../lib/store/useAuthStore';
+import { fetchRaffleData } from '../../api/api';
+import GoogleLoginButton from '../GoogleLoginButton';
 
 function Item() {
+  const userToken = useAuthStore((state) => state.userToken);
+
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['shopItems'],
+    queryKey: ['shopItems', userToken],
     queryFn: fetchRaffleData,
+    enabled: !!userToken,
   });
+
+  if (!userToken) {
+    return <GoogleLoginButton />;
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -34,17 +31,29 @@ function Item() {
       </div>
     );
   }
-
   return (
     <div>
-      {data.items?.map((item: ItemProps) => (
-        <ItemStyle
-          name={item.name}
-          category={item.category}
-          imageUrl={item.imageUrl}
-          defaultTotalCount={item.defaultTotalCount}
-        />
-      ))}
+      {data.map(
+        (itemData: {
+          currentCount: number;
+          totalCount: number;
+          item: {
+            id: Key;
+            name: string;
+            category: number;
+            imageUrl: string;
+          };
+        }) => (
+          <ItemStyle
+            key={itemData.item.id}
+            name={itemData.item.name}
+            category={itemData.item.category}
+            imageUrl={itemData.item.imageUrl}
+            currentCount={itemData.currentCount}
+            totalCount={itemData.totalCount}
+          />
+        ),
+      )}
     </div>
   );
 }
