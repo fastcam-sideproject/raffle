@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import GoogleLoginButton from '../GoogleLoginButton';
-import { useAuthStore } from '../../lib/store/useAuthStore';
+import useAuthStore from '../../lib/store/useAuthStore';
 
 export default function HeaderNav() {
   const userToken = useAuthStore((state) => state.userToken);
@@ -29,7 +29,7 @@ export default function HeaderNav() {
         <ul className="flex gap-3">
           {userToken ? (
             <div className="py-3 px-4 ">
-              <img src="/image/profile.svg" alt="profile_icon" />
+              <Image width={20} height={20} src="/image/profile.svg" alt="profile_icon" />
             </div>
           ) : (
             <div className="py-3 px-4">
