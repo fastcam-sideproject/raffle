@@ -51,7 +51,6 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <HeaderNav />
         <ReactQueryProviders>{children}</ReactQueryProviders>
-
         <Footer />
       </body>
     </html>
