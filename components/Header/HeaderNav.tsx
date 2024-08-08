@@ -4,9 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import GoogleLoginButton from '../GoogleLoginButton';
 import { useAuthStore } from '../../lib/store/useAuthStore';
+import { useState } from 'react';
+import { ProfilePopover } from '../ProfilePopover';
 
 export default function HeaderNav() {
   const userToken = useAuthStore((state) => state.userToken);
+  const [isPopverOpen, setIsPopverOpen] = useState(false);
+
+  const handleProfileClick = () => {
+    setIsPopverOpen(!isPopverOpen);
+  };
+
+  const handleClosePopver = () => {
+    setIsPopverOpen(false);
+  };
 
   return (
     <header className="w-full bg-slate-100">
@@ -28,8 +39,11 @@ export default function HeaderNav() {
         </ul>
         <ul className="flex gap-3">
           {userToken ? (
-            <div className="py-3 px-4 ">
-              <img src="/image/profile.svg" alt="profile_icon" />
+            <div>
+              <button className="py-3 px-6" onClick={handleProfileClick}>
+                <img src="/image/profile.svg" alt="profile_icon" />
+              </button>
+              {isPopverOpen && <ProfilePopover onClose={handleClosePopver} />}
             </div>
           ) : (
             <div className="py-3 px-4">
