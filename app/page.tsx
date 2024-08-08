@@ -2,9 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useAuthStore } from '../lib/store/useAuthStore';
 
 export default function Home() {
   const router = useRouter();
+  const setUserToken = useAuthStore((state) => state.setUserToken);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -12,8 +14,10 @@ export default function Home() {
 
     if (token) {
       localStorage.setItem('access_token', token);
+      setUserToken(token);
       router.replace('/');
     }
-  }, []);
-  return <div>123</div>;
+  }, [router, setUserToken]);
+
+  return <div>home</div>;
 }
