@@ -23,7 +23,7 @@ export default function HeaderNav() {
     <header className="w-full bg-slate-100">
       <nav className="flex justify-between items-center px-6 py-4">
         <Image width={100} height={100} src="/image/logo_title.png" alt="Logo_img" />
-        <ul className="flex gap-8">
+        <ul className="flex gap-8 text-xl">
           <li>
             <Link href="/">Home</Link>
           </li>
