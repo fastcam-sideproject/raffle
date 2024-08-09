@@ -1,7 +1,7 @@
 import axios from 'axios';
-import baseURL from './baseURL';
+import baseURL from '../baseURL';
 
-async function fetchRaffleData({ queryKey }) {
+async function getRaffleData({ queryKey }) {
   const [, userToken] = queryKey;
   try {
     const response = await axios.get(`${baseURL}/api/v1/raffle/all`, {
@@ -15,4 +15,4 @@ async function fetchRaffleData({ queryKey }) {
   }
 }
 
-export { fetchRaffleData };
+export { getRaffleData };
