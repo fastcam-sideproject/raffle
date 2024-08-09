@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useAuthStore } from '../lib/store/useAuthStore';
+import Banner from '../components/Banner/Banner';
 
 export default function Home() {
   const router = useRouter();
@@ -19,5 +20,5 @@ export default function Home() {
     }
   }, [router, setUserToken]);
 
-  return <div>home</div>;
+  return <Banner />;
 }
