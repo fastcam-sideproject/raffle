@@ -37,7 +37,7 @@ export default function ItemStyle({
         width={100}
         height={100}
         src={imageUrl}
-        alt="상품 이미지"
+        alt="추첨할 상품 이미지"
         className="w-full"
       />
       <div className="bg-gray-50 p-4 w-full">
