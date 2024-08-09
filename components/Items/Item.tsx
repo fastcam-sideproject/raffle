@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { Key } from 'react';
 import ItemStyle from './ItemStyle';
 import { useAuthStore } from '../../lib/store/useAuthStore';
 import { getRaffleData } from '../../api/raffle/raffleApi';
@@ -31,6 +30,7 @@ export default function Item() {
       </div>
     );
   }
+
   return (
     <div>
       {data.map(
@@ -38,7 +38,7 @@ export default function Item() {
           currentCount: number;
           totalCount: number;
           item: {
-            id: Key;
+            id: string;
             name: string;
             category: number;
             imageUrl: string;
@@ -51,6 +51,7 @@ export default function Item() {
             imageUrl={itemData.item.imageUrl}
             currentCount={itemData.currentCount}
             totalCount={itemData.totalCount}
+            raffleId={itemData.item.id}
           />
         ),
       )}
