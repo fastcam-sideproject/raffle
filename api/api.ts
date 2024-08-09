@@ -15,5 +15,4 @@ async function fetchRaffleData({ queryKey }) {
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export { fetchRaffleData };
