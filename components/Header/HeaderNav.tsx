@@ -2,14 +2,15 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import GoogleLoginButton from '../GoogleLoginButton';
 import { useAuthStore } from '../../lib/store/useAuthStore';
-import { useState } from 'react';
-import { ProfilePopover } from '../ProfilePopover';
+import ProfilePopover from '../ProfilePopover';
 
 export default function HeaderNav() {
   const userToken = useAuthStore((state) => state.userToken);
   const [isPopverOpen, setIsPopverOpen] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   const handleProfileClick = () => {
     setIsPopverOpen(!isPopverOpen);
@@ -19,28 +20,66 @@ export default function HeaderNav() {
     setIsPopverOpen(false);
   };
 
+  const handleNavDropDown = () => {
+    setToggle(!toggle);
+  };
+
+  const closeMenu = () => {
+    setToggle(false);
+  };
+
   return (
-    <header className="w-full bg-slate-100">
+    <header className="w-full bg-slate-100 sticky top-0">
       <nav className="flex justify-between items-center px-6 py-4">
-        <Image width={100} height={100} src="/image/logo_title.png" alt="Logo_img" />
-        <ul className="flex gap-8 text-xl">
-          <li>
-            <Link href="/">Home</Link>
+        <Image
+          width={100}
+          height={100}
+          src="/image/logo_title.png"
+          alt="Logo_img"
+        />
+        <ul
+          className={`${toggle
+              ? 'absolute w-1/2 top-16 left-0 flex flex-col p-5 gap-1'
+              : 'max-sm:hidden'
+            } sm:flex sm:gap-3 sm:static sm:flex-row sm:w-auto sm:p-0`}
+        >
+          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+            <Link href="/" className="p-6" onClick={closeMenu}>
+              Home
+            </Link>
           </li>
-          <li>
-            <Link href="/shop">Shop</Link>
+          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+            <Link href="/shop" className="p-6" onClick={closeMenu}>
+              Shop
+            </Link>
           </li>
-          <li>
-            <Link href="/about">About</Link>
+          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+            <Link href="/about" className="p-6" onClick={closeMenu}>
+              About
+            </Link>
           </li>
-          <li>
-            <Link href="/contant">Contact</Link>
+          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+            <Link href="/contact" className="p-6" onClick={closeMenu}>
+              Contact
+            </Link>
           </li>
         </ul>
+        <button
+          type="button"
+          className="hidden max-sm:flex hover:cursor-pointer"
+          onClick={handleNavDropDown}
+        >
+          메뉴
+        </button>
+
         <ul className="flex gap-3">
           {userToken ? (
             <div>
-              <button className="py-3 px-6" onClick={handleProfileClick}>
+              <button
+                type="button"
+                className="py-3 px-6"
+                onClick={handleProfileClick}
+              >
                 <img src="/image/profile.svg" alt="profile_icon" />
               </button>
               {isPopverOpen && <ProfilePopover onClose={handleClosePopver} />}
