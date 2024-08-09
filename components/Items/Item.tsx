@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Key } from 'react';
 import ItemStyle from './ItemStyle';
-import useAuthStore from '../../lib/store/useAuthStore';
+import { useAuthStore } from '../../lib/store/useAuthStore';
 import { fetchRaffleData } from '../../api/api';
 import GoogleLoginButton from '../GoogleLoginButton';
 
