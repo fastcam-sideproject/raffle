@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import HeaderNav from '../components/Header/HeaderNav';
 import Footer from '../components/Footer/Footer';
-import ReactQueryProviders from '../hooks/useReactQuery';
+import ReactQueryProviders from '../lib/hooks/useReactQuery';
 
 const pretendard = localFont({
   src: [

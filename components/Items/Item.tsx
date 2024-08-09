@@ -3,21 +3,21 @@
 import { useQuery } from '@tanstack/react-query';
 import { Key } from 'react';
 import ItemStyle from './ItemStyle';
-import useAuthStore from '../../lib/store/useAuthStore';
-import { fetchRaffleData } from '../../api/api';
-import GoogleLoginButton from '../GoogleLoginButton';
+import { useAuthStore } from '../../lib/store/useAuthStore';
+import { getRaffleData } from '../../api/raffle/raffleApi';
 
-function Item() {
+export default function Item() {
   const userToken = useAuthStore((state) => state.userToken);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['shopItems', userToken],
-    queryFn: fetchRaffleData,
+    queryFn: getRaffleData,
     enabled: !!userToken,
+    staleTime: 1000 * 60 * 5,
   });
 
   if (!userToken) {
-    return <GoogleLoginButton />;
+    return <div>로그인이 필요합니다</div>;
   }
 
   if (isLoading) {
@@ -57,5 +57,3 @@ function Item() {
     </div>
   );
 }
-
-export default Item;

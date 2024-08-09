@@ -1,11 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-type AuthStore = {
-  userToken: string;
-  setUserToken: (userToken: string) => void;
-  logout: () => void;
-};
+import { AuthStore } from '../types/AuthStore';
 
 export const useAuthStore = create<AuthStore>()(
   persist(
