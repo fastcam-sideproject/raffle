@@ -41,7 +41,7 @@ export default function HeaderNav() {
           {userToken ? (
             <div>
               <button className="py-3 px-6" onClick={handleProfileClick}>
-                <img src="/image/profile.svg" alt="profile_icon" />
+                <img src="/image/profile.svg" alt="로그인한 사용자 프로필 아이콘" />
               </button>
               {isPopverOpen && <ProfilePopover onClose={handleClosePopver} />}
             </div>
