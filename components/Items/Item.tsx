@@ -32,7 +32,7 @@ export default function Item() {
   }
 
   return (
-    <div>
+    <>
       {data.map(
         (itemData: {
           currentCount: number;
@@ -55,6 +55,6 @@ export default function Item() {
           />
         ),
       )}
-    </div>
+    </>
   );
 }
