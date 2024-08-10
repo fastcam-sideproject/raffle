@@ -1,8 +1,6 @@
 import Image from 'next/image';
-import { useMutation } from '@tanstack/react-query';
-import { useAuthStore } from '../../lib/store/useAuthStore';
-import { postPurchaseRaffle } from '../../api/raffle/raffleApi';
 import { ItemProps } from '../../lib/types/item';
+import navigateToPurchasePage from '../navigateToPurchasePage';
 
 export default function ItemStyle({
   name,
@@ -14,21 +12,22 @@ export default function ItemStyle({
 }: ItemProps) {
   const percentageComplete = Math.round((currentCount / totalCount) * 100);
 
-  const userToken = useAuthStore((state) => state.userToken);
+  const handlePurchasePage = navigateToPurchasePage({ raffleId });
 
-  const mutation = useMutation({
-    mutationKey: ['purchaseRaffle', raffleId],
-    mutationFn: () => postPurchaseRaffle({ raffleId, userToken }),
-    onSuccess: (data) => {
-      console.log('구매 성공', data);
-    },
-    onError: (error) => {
-      console.error('구매 실패', error);
-    },
-  });
-  const handlePurchase = () => {
-    mutation.mutate();
-  };
+  // const userToken = useAuthStore((state) => state.userToken);
+  // const mutation = useMutation({
+  //   mutationKey: ['purchaseRaffle', raffleId],
+  //   mutationFn: () => postPurchaseRaffle({ raffleId, userToken }),
+  //   onSuccess: (data) => {
+  //     console.log('구매 성공', data);
+  //   },
+  //   onError: (error) => {
+  //     console.error('구매 실패', error);
+  //   },
+  // });
+  // const handlePurchase = () => {
+  //   mutation.mutate();
+  // };
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
@@ -50,9 +49,9 @@ export default function ItemStyle({
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
-          onClick={handlePurchase}
+          onClick={percentageComplete !== 100 ? handlePurchasePage : undefined}
         >
-          {percentageComplete === 100 ? '결과확인' : '구매하기'}
+          {percentageComplete === 100 ? '결과 확인' : '응모하기'}
         </button>
         <div>
           <span className="text-lg font-semibold">{percentageComplete}%</span>
