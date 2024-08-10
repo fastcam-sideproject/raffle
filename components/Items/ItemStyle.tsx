@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useMutation } from '@tanstack/react-query';
 import { useAuthStore } from '../../lib/store/useAuthStore';
 import { postPurchaseRaffle } from '../../api/raffle/raffleApi';
-import { ItemProps } from '../../lib/store/item';
+import { ItemProps } from '../../lib/types/item';
 
 export default function ItemStyle({
   name,
