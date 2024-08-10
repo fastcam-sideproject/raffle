@@ -31,17 +31,11 @@ export default function HeaderNav() {
   return (
     <header className="w-full bg-slate-100 sticky top-0">
       <nav className="flex justify-between items-center px-6 py-4">
-        <Image
-          width={100}
-          height={100}
-          src="/image/logo_title.png"
-          alt="Logo_img"
-        />
+        <Image width={100} height={100} src="/image/logo_title.png" alt="Logo_img" />
         <ul
-          className={`${toggle
-              ? 'absolute w-1/2 top-16 left-0 flex flex-col p-5 gap-1'
-              : 'max-sm:hidden'
-            } sm:flex sm:gap-3 sm:static sm:flex-row sm:w-auto sm:p-0`}
+          className={`${
+            toggle ? 'absolute w-1/2 top-16 left-0 flex flex-col p-5 gap-1' : 'max-sm:hidden'
+          } sm:flex sm:gap-3 sm:static sm:flex-row sm:w-auto sm:p-0`}
         >
           <li className="bg-slate-100 p-2 sm:bg-sky-50">
             <Link href="/" className="p-6" onClick={closeMenu}>
@@ -75,12 +69,8 @@ export default function HeaderNav() {
         <ul className="flex gap-3">
           {userToken ? (
             <div>
-              <button
-                type="button"
-                className="py-3 px-6"
-                onClick={handleProfileClick}
-              >
-                <img src="/image/profile.svg" alt="profile_icon" />
+              <button type="button" className="py-3 px-6" onClick={handleProfileClick}>
+                <img src="/image/profile.svg" alt="로그인한 사용자 프로필 아이콘" />
               </button>
               {isPopverOpen && <ProfilePopover onClose={handleClosePopver} />}
             </div>

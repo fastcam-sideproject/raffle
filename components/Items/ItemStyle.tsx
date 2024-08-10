@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useMutation } from '@tanstack/react-query';
 import { useAuthStore } from '../../lib/store/useAuthStore';
 import { postPurchaseRaffle } from '../../api/raffle/raffleApi';
-import { ItemProps } from '../../lib/store/item';
+import { ItemProps } from '../../lib/types/item';
 
 export default function ItemStyle({
   name,
@@ -31,16 +31,13 @@ export default function ItemStyle({
   };
 
   return (
-    <li
-      id={raffleId}
-      className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light"
-    >
+    <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
       <Image
         priority
         width={100}
         height={100}
         src={imageUrl}
-        alt="상품 이미지"
+        alt="추첨할 상품 이미지"
         className="w-full h-80 rounded object-contain"
       />
       <div className="bg-gray-50 p-4 w-full rounded">
@@ -50,8 +47,9 @@ export default function ItemStyle({
         </div>
         <button
           type="button"
-          className={`mt-2 px-2 py-1 ${percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
-            } text-white rounded float-right max-md:float-none max-md:w-full`}
+          className={`mt-2 px-2 py-1 ${
+            percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
+          } text-white rounded float-right max-md:float-none max-md:w-full`}
           onClick={handlePurchase}
         >
           {percentageComplete === 100 ? '결과확인' : '구매하기'}
@@ -62,8 +60,9 @@ export default function ItemStyle({
         </div>
         <div className="mt-6 w-full bg-gray-300 rounded-full h-3 overflow-hidden ">
           <div
-            className={`h-full transition-all duration-300 ${percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
-              }`}
+            className={`h-full transition-all duration-300 ${
+              percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
+            }`}
             style={{ width: `${percentageComplete}%` }}
           />
         </div>
