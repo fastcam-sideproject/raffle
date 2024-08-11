@@ -41,12 +41,32 @@ export default function PurchasePage({ params }) {
     return <div>Error: {error ? error.message : 'Item not found'}</div>;
   }
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('submit');
+  };
+
+  // const userToken = useAuthStore((state) => state.userToken);
+  // const mutation = useMutation({
+  //   mutationKey: ['purchaseRaffle', raffleId],
+  //   mutationFn: () => postPurchaseRaffle({ raffleId, userToken }),
+  //   onSuccess: (data) => {
+  //     console.log('구매 성공', data);
+  //   },
+  //   onError: (error) => {
+  //     console.error('구매 실패', error);
+  //   },
+  // });
+  // const handlePurchase = () => {
+  //   mutation.mutate();
+  // };
+
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">응모 하기</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-8">
-          <section className="border p-4 rounded-lg">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-4">
+          <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">응모 상품 정보</h2>
             <div className="flex items-center space-x-4">
               <Image
@@ -54,7 +74,7 @@ export default function PurchasePage({ params }) {
                 alt={raffleItem.item.name}
                 width={100}
                 height={100}
-                className="rounded-lg"
+                className="rounded-md"
               />
               <div>
                 <h3 className="font-medium">{raffleItem.item.name}</h3>
@@ -64,7 +84,7 @@ export default function PurchasePage({ params }) {
             </div>
           </section>
 
-          <section className="border p-4 rounded-lg">
+          <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
             <div className="space-y-2">
               <p>홍길동</p>
@@ -73,7 +93,7 @@ export default function PurchasePage({ params }) {
             </div>
           </section>
 
-          <section className="border p-4 rounded-lg">
+          <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
             <div className="space-y-2">
               <p>홍길동</p>
@@ -83,8 +103,8 @@ export default function PurchasePage({ params }) {
           </section>
         </div>
 
-        <div className="space-y-8">
-          <section className="border p-4 rounded-lg">
+        <div className="space-y-4">
+          <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">최종 결제 내역</h2>
             <div className="space-y-2">
               <p>상품가격: {raffleItem.ticketPrice}원</p>
@@ -92,25 +112,34 @@ export default function PurchasePage({ params }) {
             </div>
           </section>
 
-          <section className="border p-4 rounded-lg">
+          <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">결제하기</h2>
-            <button className="w-full bg-yellow-400 text-black py-2 rounded-lg">KakaoPay</button>
+            <div className="flex gap-2">
+              <input type="checkbox" className=" text-black py-2 rounded-md" />
+              <img src="/image/payment_icon_kakao.svg" alt="카카오페이 결제 아이콘" />
+            </div>
           </section>
 
-          <section className="border p-4 rounded-lg">
-            <div className="space-y-2">
+          <section className="border  rounded-md">
+            <div className="space-y-2 p-4">
               <label className="flex items-center space-x-2">
-                <input type="checkbox" className="form-checkbox" />
+                <input type="checkbox" />
                 <span>전체동의</span>
               </label>
               <label className="flex items-center space-x-2">
-                <input type="checkbox" className="form-checkbox" />
+                <input type="checkbox" />
                 <span>구매조건 확인 및 결제 진행 동의</span>
               </label>
             </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-400 text-white py-3 font-semibold rounded-bl-md rounded-br-md"
+            >
+              결제하기
+            </button>
           </section>
         </div>
-      </div>
+      </form>
     </main>
   );
 }

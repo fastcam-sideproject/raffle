@@ -11,23 +11,7 @@ export default function ItemStyle({
   raffleId,
 }: ItemProps) {
   const percentageComplete = Math.round((currentCount / totalCount) * 100);
-
   const handlePurchasePage = navigateToPurchasePage({ raffleId });
-
-  // const userToken = useAuthStore((state) => state.userToken);
-  // const mutation = useMutation({
-  //   mutationKey: ['purchaseRaffle', raffleId],
-  //   mutationFn: () => postPurchaseRaffle({ raffleId, userToken }),
-  //   onSuccess: (data) => {
-  //     console.log('구매 성공', data);
-  //   },
-  //   onError: (error) => {
-  //     console.error('구매 실패', error);
-  //   },
-  // });
-  // const handlePurchase = () => {
-  //   mutation.mutate();
-  // };
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
