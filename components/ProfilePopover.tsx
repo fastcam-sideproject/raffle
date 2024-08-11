@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useAuthStore } from '../lib/store/useAuthStore';
 
-export default function ProfilePopover({ onClose }) {
+export default function ProfilePopover({ onClose }: { onClose: () => void }) {
   const logout = useAuthStore((state) => state.logout);
   const popoverRef = useRef(null);
 
