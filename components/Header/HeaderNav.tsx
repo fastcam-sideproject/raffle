@@ -49,22 +49,22 @@ export default function HeaderNav() {
             toggle ? 'absolute w-1/2 top-16 left-0 flex flex-col p-5 gap-1' : 'max-sm:hidden'
           } sm:flex sm:gap-3 sm:static sm:flex-row sm:w-auto sm:p-0`}
         >
-          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+          <li className="bg-slate-100 p-2">
             <Link href="/" className="p-6" onClick={closeMenu}>
               Home
             </Link>
           </li>
-          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+          <li className="bg-slate-100 p-2">
             <Link href="/shop" className="p-6" onClick={closeMenu}>
               Shop
             </Link>
           </li>
-          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+          <li className="bg-slate-100 p-2">
             <Link href="/about" className="p-6" onClick={closeMenu}>
               About
             </Link>
           </li>
-          <li className="bg-slate-100 p-2 sm:bg-sky-50">
+          <li className="bg-slate-100 p-2">
             <Link href="/contact" className="p-6" onClick={closeMenu}>
               Contact
             </Link>
