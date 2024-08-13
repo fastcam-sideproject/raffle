@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useAuthStore } from '../lib/store/useAuthStore';
-import Banner from '../components/Banner/Banner';
+import HomeMain from '../components/Home/HomeMain';
 
 export default function Home() {
   const router = useRouter();
@@ -20,5 +20,5 @@ export default function Home() {
     }
   }, [router, setUserToken]);
 
-  return <Banner />;
+  return <HomeMain />;
 }
