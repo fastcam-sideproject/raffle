@@ -6,6 +6,7 @@ import { useAuthStore } from '../../../lib/store/useAuthStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
+import ShippingAddressForm from '../../../components/shippingAddress';
 
 export default function PurchasePage({ params }) {
   const { id } = params;
@@ -18,6 +19,7 @@ export default function PurchasePage({ params }) {
     },
   });
   const userToken = useAuthStore((state) => state.userToken);
+  const [address, setAddress] = useState('');
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['raffleItem', userToken],
@@ -29,7 +31,9 @@ export default function PurchasePage({ params }) {
   useEffect(() => {
     if (data && id) {
       const foundItem = data.find((raffle: { id: number }) => raffle.id === parseInt(id));
-      setRaffleItem(foundItem);
+      if (foundItem) {
+        setRaffleItem(foundItem);
+      }
     }
   }, [data, id]);
 
@@ -46,20 +50,9 @@ export default function PurchasePage({ params }) {
     console.log('submit');
   };
 
-  // const userToken = useAuthStore((state) => state.userToken);
-  // const mutation = useMutation({
-  //   mutationKey: ['purchaseRaffle', raffleId],
-  //   mutationFn: () => postPurchaseRaffle({ raffleId, userToken }),
-  //   onSuccess: (data) => {
-  //     console.log('구매 성공', data);
-  //   },
-  //   onError: (error) => {
-  //     console.error('구매 실패', error);
-  //   },
-  // });
-  // const handlePurchase = () => {
-  //   mutation.mutate();
-  // };
+  const handleAddressChange = (address: string) => {
+    setAddress(address);
+  };
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -95,10 +88,7 @@ export default function PurchasePage({ params }) {
 
           <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
-            <div className="space-y-2">
-              <p>서울특별시 서대문구 정산로7길 성산로7길</p>
-              <p>상세 주소</p>
-            </div>
+            <ShippingAddressForm onAddressChange={handleAddressChange} />
           </section>
         </div>
 
