@@ -8,7 +8,13 @@ import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
 import ShippingAddressForm from '../../../components/shippingAddress';
 
-export default function PurchasePage({ params }) {
+export default function PurchasePage({
+  params,
+}: {
+  params: {
+    id: string;
+  };
+}) {
   const { id } = params;
   const [raffleItem, setRaffleItem] = useState<RaffleItem>({
     ticketPrice: 0,
