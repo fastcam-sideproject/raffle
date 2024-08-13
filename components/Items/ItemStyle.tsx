@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { ItemProps } from '../../lib/types/item';
-import navigateToPurchasePage from '../navigateToPurchasePage';
+import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
 
 export default function ItemStyle({
   name,

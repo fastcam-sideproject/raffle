@@ -96,9 +96,8 @@ export default function PurchasePage({ params }) {
           <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
             <div className="space-y-2">
-              <p>홍길동</p>
-              <p>010-1111-1111</p>
               <p>서울특별시 서대문구 정산로7길 성산로7길</p>
+              <p>상세 주소</p>
             </div>
           </section>
         </div>
