@@ -12,7 +12,10 @@ export default function HeaderNav() {
   const userToken = useAuthStore((state) => state.userToken);
   const [isPopverOpen, setIsPopverOpen] = useState(false);
   const [toggle, setToggle] = useState(false);
+
   const pathName = usePathname();
+  const hideHeaderRoutes = /^\/purchase\/\w+$/;
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleProfileClick = () => {
@@ -40,6 +43,10 @@ export default function HeaderNav() {
 
   if (!isLoading) {
     return <div className="w-full bg-slate-100  px-6 py-6">Loading...</div>;
+  }
+
+  if (hideHeaderRoutes.test(pathName)) {
+    return null;
   }
 
   return (
