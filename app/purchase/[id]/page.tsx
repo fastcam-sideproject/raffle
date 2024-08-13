@@ -1,23 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import { getRaffleData } from '../../../api/raffle/raffleApi';
 import { useAuthStore } from '../../../lib/store/useAuthStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { RaffleItem } from '../../../lib/types/item';
 
-type Item = {
-  item: {
-    name: string;
-    description: string;
-    imageUrl: string;
-  };
-};
-
-export default function PurchasePage() {
-  const { id } = useParams<{ id: string }>();
-  const [raffleItem, setRaffleItem] = useState<Item>({
+export default function PurchasePage({ params }) {
+  const { id } = params;
+  const [raffleItem, setRaffleItem] = useState<RaffleItem>({
+    ticketPrice: 0,
     item: {
       name: '',
       description: '',
@@ -35,8 +28,7 @@ export default function PurchasePage() {
 
   useEffect(() => {
     if (data && id) {
-      const parseId = Array.isArray(id) ? id[0] : id;
-      const foundItem = data.find((raffle: { id: number }) => raffle.id === parseInt(parseId));
+      const foundItem = data.find((raffle: { id: number }) => raffle.id === parseInt(id));
       setRaffleItem(foundItem);
     }
   }, [data, id]);
@@ -49,16 +41,105 @@ export default function PurchasePage() {
     return <div>Error: {error ? error.message : 'Item not found'}</div>;
   }
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('submit');
+  };
+
+  // const userToken = useAuthStore((state) => state.userToken);
+  // const mutation = useMutation({
+  //   mutationKey: ['purchaseRaffle', raffleId],
+  //   mutationFn: () => postPurchaseRaffle({ raffleId, userToken }),
+  //   onSuccess: (data) => {
+  //     console.log('구매 성공', data);
+  //   },
+  //   onError: (error) => {
+  //     console.error('구매 실패', error);
+  //   },
+  // });
+  // const handlePurchase = () => {
+  //   mutation.mutate();
+  // };
+
   return (
-    <div>
-      <h1>{raffleItem.item.name} 결제 페이지</h1>
-      <p>{raffleItem.item.description}</p>
-      <Image
-        src={raffleItem.item.imageUrl}
-        alt={raffleItem.item.name + '이미지'}
-        width={200}
-        height={200}
-      />
-    </div>
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-center mb-8">응모 하기</h1>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-4">
+          <section className="border p-4 rounded-md">
+            <h2 className="text-xl font-semibold mb-4">응모 상품 정보</h2>
+            <div className="flex items-center space-x-4">
+              <Image
+                src={raffleItem.item.imageUrl}
+                alt={raffleItem.item.name}
+                width={100}
+                height={100}
+                className="rounded-md"
+              />
+              <div>
+                <h3 className="font-medium">{raffleItem.item.name}</h3>
+                <p className="text-sm text-gray-600">{raffleItem.item.description}</p>
+                <p className="font-bold">{raffleItem.ticketPrice}원</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="border p-4 rounded-md">
+            <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
+            <div className="space-y-2">
+              <p>홍길동</p>
+              <p>010-1111-1111</p>
+              <p>xx@xx.com</p>
+            </div>
+          </section>
+
+          <section className="border p-4 rounded-md">
+            <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
+            <div className="space-y-2">
+              <p>홍길동</p>
+              <p>010-1111-1111</p>
+              <p>서울특별시 서대문구 정산로7길 성산로7길</p>
+            </div>
+          </section>
+        </div>
+
+        <div className="space-y-4">
+          <section className="border p-4 rounded-md">
+            <h2 className="text-xl font-semibold mb-4">최종 결제 내역</h2>
+            <div className="space-y-2">
+              <p>상품가격: {raffleItem.ticketPrice}원</p>
+              <p className="font-bold">총 결제 금액: {raffleItem.ticketPrice}원</p>
+            </div>
+          </section>
+
+          <section className="border p-4 rounded-md">
+            <h2 className="text-xl font-semibold mb-4">결제하기</h2>
+            <div className="flex gap-2">
+              <input type="checkbox" className=" text-black py-2 rounded-md" />
+              <img src="/image/payment_icon_kakao.svg" alt="카카오페이 결제 아이콘" />
+            </div>
+          </section>
+
+          <section className="border  rounded-md">
+            <div className="space-y-2 p-4">
+              <label className="flex items-center space-x-2">
+                <input type="checkbox" />
+                <span>전체동의</span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input type="checkbox" />
+                <span>구매조건 확인 및 결제 진행 동의</span>
+              </label>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-400 text-white py-3 font-semibold rounded-bl-md rounded-br-md"
+            >
+              결제하기
+            </button>
+          </section>
+        </div>
+      </form>
+    </main>
   );
 }

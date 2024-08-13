@@ -1,12 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import baseURL from '../api/baseURL';
 
 export default function GoogleLoginButton() {
   const router = useRouter();
 
   const handleLogin = () => {
-    router.push('http://allyouraffle.co.kr/oauth2/authorization/google');
+    router.push(`${baseURL}/oauth2/authorization/google`);
   };
 
   return (

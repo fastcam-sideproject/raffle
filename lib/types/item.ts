@@ -6,3 +6,12 @@ export interface ItemProps {
   totalCount: number;
   raffleId: string;
 }
+
+export type RaffleItem = {
+  ticketPrice: number;
+  item: {
+    name: string;
+    description: string;
+    imageUrl: string;
+  };
+};
