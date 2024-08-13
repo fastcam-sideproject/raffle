@@ -19,6 +19,7 @@ const config: Config = {
     },
   },
   plugins: [
+    // eslint-disable-next-line func-names
     function ({ addUtilities }) {
       const newUtilities = {
         '.text-shadow-white-shadow': {

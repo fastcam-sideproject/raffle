@@ -24,8 +24,14 @@ function Footer() {
           <span>Returns</span>
           <span>Privacy Policies</span>
         </div>
-        <div>
-          <span className="text-gray-300">NewsLatter</span>
+        <div className="flex flex-col gap-4">
+          <span className="text-gray-300">Kakao Pay</span>
+          <Image
+            width={200}
+            height={200}
+            src="/image/logo/kakao_pay_logo.png"
+            alt="카카오페이로고"
+          />
         </div>
       </div>
     </footer>

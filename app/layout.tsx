@@ -48,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={pretendard.className}>
+      <body className={`${pretendard.className} text-gray-900`}>
         <ReactQueryProviders>
           <HeaderNav />
           {children}
