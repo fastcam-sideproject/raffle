@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
 import ShippingAddressForm from '../../../components/ShippingAddressForm';
+import Input from '../../../lib/common/Input';
 
 export default function PurchasePage({
   params,
