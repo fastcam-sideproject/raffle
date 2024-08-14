@@ -3,7 +3,7 @@ import { useAuthStore } from '../lib/store/useAuthStore';
 
 export default function ProfilePopover({ onClose }: { onClose: () => void }) {
   const logout = useAuthStore((state) => state.logout);
-  const popoverRef = useRef(null);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
 
   const handleLogout = () => {
     logout();
@@ -12,8 +12,8 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
         onClose();
       }
     };

@@ -25,7 +25,7 @@ export default function PurchasePage({
     },
   });
   const userToken = useAuthStore((state) => state.userToken);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState<string>('');
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['raffleItem', userToken],
