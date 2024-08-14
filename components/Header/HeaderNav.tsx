@@ -16,8 +16,6 @@ export default function HeaderNav() {
   const pathName = usePathname();
   const hideHeaderRoutes = /^\/purchase\/\w+$/;
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleProfileClick = () => {
     setIsPopverOpen(!isPopverOpen);
   };
@@ -33,17 +31,6 @@ export default function HeaderNav() {
   const closeMenu = () => {
     setToggle(false);
   };
-
-  /**
-   * 새로고침 시  userToken이 있으면 로딩중으로 나타냄.
-   */
-  useEffect(() => {
-    setIsLoading(true);
-  }, [userToken]);
-
-  if (!isLoading) {
-    return <div className="w-full bg-slate-100  px-6 py-6">Loading...</div>;
-  }
 
   if (hideHeaderRoutes.test(pathName)) {
     return null;
