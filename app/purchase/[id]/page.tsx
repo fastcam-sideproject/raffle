@@ -6,7 +6,7 @@ import { useAuthStore } from '../../../lib/store/useAuthStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
-import ShippingAddressForm from '../../../components/shippingAddress';
+import ShippingAddressForm from '../../../components/ShippingAddressForm';
 
 export default function PurchasePage({
   params,

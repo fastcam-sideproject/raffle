@@ -2,10 +2,7 @@
 
 import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
-
-type ShippingAddressFormProps = {
-  onAddressChange: (address: string) => void;
-};
+import { ShippingAddressFormProps } from '../lib/types/shippingAddressForm';
 
 export default function ShippingAddressForm({ onAddressChange }: ShippingAddressFormProps) {
   const [address, setAddress] = useState<string>('');
