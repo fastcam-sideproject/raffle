@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import HeaderNav from '../components/Header/HeaderNav';
 import Footer from '../components/Footer/Footer';
 import ReactQueryProviders from '../lib/hooks/useReactQuery';
 
@@ -50,7 +49,6 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${pretendard.className} text-gray-900`}>
         <ReactQueryProviders>
-          <HeaderNav />
           {children}
           <Footer />
         </ReactQueryProviders>

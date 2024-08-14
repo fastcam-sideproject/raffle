@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useAuthStore } from '../lib/store/useAuthStore';
 import HomeMain from '../components/Home/HomeMain';
+import HeaderNav from '../components/Header/HeaderNav';
 
 export default function Home() {
   const router = useRouter();
@@ -20,5 +21,10 @@ export default function Home() {
     }
   }, [router, setUserToken]);
 
-  return <HomeMain />;
+  return (
+    <>
+      <HeaderNav />
+      <HomeMain />;
+    </>
+  );
 }
