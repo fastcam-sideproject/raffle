@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
-import ShippingAddressForm from '../../../components/ShippingAddressForm';
+import ShoppingAddressForm from '../../../components/ShoppingAddressForm';
 import useRaffleData from '../../../lib/hooks/useRaffleData';
 
 export default function PurchasePage({
@@ -86,7 +86,7 @@ export default function PurchasePage({
 
           <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
-            <ShippingAddressForm onAddressChange={handleAddressChange} />
+            <ShoppingAddressForm onAddressChange={handleAddressChange} />
           </section>
         </div>
 
