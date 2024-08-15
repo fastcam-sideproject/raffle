@@ -1,16 +1,5 @@
 import React from 'react';
-
-type ButtonProps = {
-  type: 'button' | 'submit' | 'reset';
-  onClick?: () => void;
-  label: string;
-  disabled?: boolean;
-  width: string;
-  fontSize: string;
-  ariaLabel?: string;
-  ariaDescribedBy?: string;
-  className?: string;
-};
+import { ButtonProps } from '../types/button';
 
 const Button = ({
   type,
