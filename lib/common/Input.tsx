@@ -1,3 +1,5 @@
+import { InputType } from '../types/input';
+
 export default function Input({
   type,
   label,
@@ -10,25 +12,7 @@ export default function Input({
   fontSize,
   register,
   errors,
-}: {
-  type: string;
-  label: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  name: string;
-  placeholder: string;
-  required: boolean;
-  width: string;
-  fontSize: string;
-  register: {
-    ref: {
-      current: HTMLInputElement | null;
-    };
-  };
-  errors: {
-    message: string;
-  };
-}) {
+}: InputType) {
   const widthClass = `w-${width}`;
   const fontSizeClass = `text-${fontSize}`;
 

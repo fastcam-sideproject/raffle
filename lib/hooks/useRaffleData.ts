@@ -6,7 +6,7 @@ export default function useRaffleData() {
   const userToken = useAuthStore((state) => state.userToken);
 
   const queryResult = useQuery({
-    queryKey: ['shopItems', userToken],
+    queryKey: ['RaffleItems', userToken],
     queryFn: getRaffleData,
     enabled: !!userToken,
     staleTime: 1000 * 60 * 5,
