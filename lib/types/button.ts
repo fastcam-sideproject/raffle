@@ -7,5 +7,6 @@ export type ButtonProps = {
   fontSize: string;
   ariaLabel?: string;
   ariaDescribedBy?: string;
+  backgroundColor?: string;
   className?: string;
 };
