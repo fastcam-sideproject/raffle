@@ -1,12 +1,12 @@
 import React from 'react';
 
 type ButtonProps = {
-  type?: 'button' | 'submit' | 'reset';
+  type: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   label: string;
   disabled?: boolean;
-  width?: string;
-  fontSize?: string;
+  width: string;
+  fontSize: string;
   ariaLabel?: string;
   ariaDescribedBy?: string;
   className?: string;
@@ -17,8 +17,8 @@ const Button = ({
   onClick,
   label,
   disabled = false,
-  width = 'full',
-  fontSize = 'base',
+  width,
+  fontSize,
   ariaLabel,
   ariaDescribedBy,
   className = '',

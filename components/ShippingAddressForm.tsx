@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import { ShippingAddressFormProps } from '../lib/types/shippingAddressForm';
 import Button from '../lib/common/Button';
+import Input from '../lib/common/Input';
 
 export default function ShippingAddressForm({ onAddressChange }: ShippingAddressFormProps) {
   const [address, setAddress] = useState<string>('');
@@ -41,18 +42,20 @@ export default function ShippingAddressForm({ onAddressChange }: ShippingAddress
 
   return (
     <div>
-      <label htmlFor="address">주소</label>
       <div className="flex items-center gap-2">
-        <input
-          id="address"
+        <Input
           type="text"
+          label="우편번호"
           value={address}
-          className="w-10/12 p-2 border rounded
-          focus:outline-none  focus:border-blue-600"
-          placeholder="주소"
-          readOnly={true}
+          name="address"
+          placeholder="우편번호"
+          width="10/12"
+          fontSize="base"
+          disabled={true}
+          className="flex-grow"
         />
         <Button
+          type="button"
           label="우편번호 찾기"
           onClick={() => setIsPostcodeOpen(true)}
           width="auto"
@@ -60,21 +63,23 @@ export default function ShippingAddressForm({ onAddressChange }: ShippingAddress
           className="hover:bg-blue-500"
         />
       </div>
-      <div>
-        <label htmlFor="detailAddress">상세 주소</label>
-        <input
-          id="detailAddress"
-          type="text"
-          value={detailAddress}
-          onChange={handleOnChange}
-          placeholder="상세주소"
-          className="w-full p-2 border rounded"
-        />
-      </div>
+      <Input
+        type="text"
+        label="상세 주소"
+        value={detailAddress}
+        onChange={handleOnChange}
+        name="detailAddress"
+        placeholder="상세 주소를 입력하세요"
+        width="full"
+        fontSize="base"
+        className="focus:outline-none focus:border-blue-400"
+      />
       {isPostcodeOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto h-full w-full">
           <div className="relative top-20 w-1/3 h-3/5 mx-auto p-5 shadow-lg border bg-white">
-            <button onClick={() => setIsPostcodeOpen(false)}>닫기</button>
+            <button className="absolute top-2 right-2" onClick={() => setIsPostcodeOpen(false)}>
+              닫기
+            </button>
             <div className="mt-10">
               <DaumPostcode onComplete={handleComplete} />
             </div>

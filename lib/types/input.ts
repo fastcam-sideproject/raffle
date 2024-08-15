@@ -1,19 +1,16 @@
 export type InputProps = {
-  type: string;
+  type: 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'; // 지원하는 input 타입
   label: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string | number;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
-  placeholder: string;
-  required: boolean;
-  width: string;
-  fontSize: string;
-  register: {
-    ref: {
-      current: HTMLInputElement | null;
-    };
-  };
-  errors: {
-    message: string;
-  };
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  width?: string;
+  fontSize?: string;
+  ariaLabel?: string;
+  ariaDescribedBy?: string;
+  className?: string;
+  errors?: { message?: string };
 };
