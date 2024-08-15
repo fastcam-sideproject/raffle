@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import { ShoppingAddressFormProps } from '../lib/types/shoppingAddressForm';
-import Button from '../lib/common/Button';
+import { Button } from '../lib/common/Button';
 import Input from '../lib/common/Input';
 
 export default function ShippingAddressForm({ onAddressChange }: ShoppingAddressFormProps) {

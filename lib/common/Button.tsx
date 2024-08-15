@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonProps } from '../types/button';
 
-const Button = ({
+export function Button({
   type,
   onClick,
   label,
@@ -12,7 +12,8 @@ const Button = ({
   ariaDescribedBy,
   className,
   backgroundColor,
-}: ButtonProps) => {
+  children,
+}: ButtonProps) {
   const widthClass = `w-${width}`;
   const fontSizeClass = `text-${fontSize}`;
 
@@ -27,8 +28,7 @@ const Button = ({
         ${widthClass} ${fontSizeClass} ${className}`}
     >
       {label}
+      {children}
     </button>
   );
-};
-
-export default Button;
+}

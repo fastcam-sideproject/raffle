@@ -9,4 +9,5 @@ export type ButtonProps = {
   ariaDescribedBy?: string;
   backgroundColor?: string;
   className?: string;
+  children?: React.ReactNode;
 };
