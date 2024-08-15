@@ -1,4 +1,4 @@
-export type InputType = {
+export type InputProps = {
   type: string;
   label: string;
   value: string;

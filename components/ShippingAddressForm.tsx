@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import { ShippingAddressFormProps } from '../lib/types/shippingAddressForm';
+import Button from '../lib/common/Button';
 
 export default function ShippingAddressForm({ onAddressChange }: ShippingAddressFormProps) {
   const [address, setAddress] = useState<string>('');
@@ -40,16 +41,24 @@ export default function ShippingAddressForm({ onAddressChange }: ShippingAddress
 
   return (
     <div>
-      <div>
-        <label htmlFor="address">주소</label>
-        <input id="address" type="text" value={address} className="w-full p-2 border rounded" />
-        <button
-          type="button"
+      <label htmlFor="address">주소</label>
+      <div className="flex items-center gap-2">
+        <input
+          id="address"
+          type="text"
+          value={address}
+          className="w-10/12 p-2 border rounded
+          focus:outline-none  focus:border-blue-600"
+          placeholder="주소"
+          readOnly={true}
+        />
+        <Button
+          label="우편번호 찾기"
           onClick={() => setIsPostcodeOpen(true)}
-          className="mt-2 bg-gray-200 text-gray-700 py-2 px-4 rounded"
-        >
-          우편번호 찾기
-        </button>
+          width="auto"
+          fontSize="base"
+          className="hover:bg-blue-500"
+        />
       </div>
       <div>
         <label htmlFor="detailAddress">상세 주소</label>
