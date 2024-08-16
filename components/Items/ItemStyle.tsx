@@ -31,7 +31,7 @@ export default function ItemStyle({
         <button
           type="button"
           className={`mt-2 px-2 py-1 ${
-            percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
+            percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
           onClick={percentageComplete !== 100 ? handlePurchasePage : undefined}
         >
@@ -44,7 +44,7 @@ export default function ItemStyle({
         <div className="mt-6 w-full bg-gray-300 rounded-full h-3 overflow-hidden ">
           <div
             className={`h-full transition-all duration-300 ${
-              percentageComplete === 100 ? 'bg-red-400' : 'bg-blue-400'
+              percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
             }`}
             style={{ width: `${percentageComplete}%` }}
           />

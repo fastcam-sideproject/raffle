@@ -72,7 +72,7 @@ export default function ShippingAddressForm({ onAddressChange }: ShoppingAddress
         placeholder="상세 주소를 입력하세요"
         width="full"
         fontSize="base"
-        className="focus:outline-none focus:border-blue-400"
+        className="focus:outline-none focus:border-primary"
       />
       {isPostcodeOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto h-full w-full">
