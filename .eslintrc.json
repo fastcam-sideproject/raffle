@@ -24,6 +24,8 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "eslint-disable no-console": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
