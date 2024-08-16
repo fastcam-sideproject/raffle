@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { AuthStore } from '../types/authStore';
 
-export const useAuthStore = create<AuthStore>()(
+const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
       userToken: '',
@@ -14,3 +14,5 @@ export const useAuthStore = create<AuthStore>()(
     },
   ),
 );
+
+export default useAuthStore;

@@ -2,9 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useAuthStore } from '../lib/store/useAuthStore';
+
 import HomeMain from '../components/Home/HomeMain';
 import HeaderNav from '../components/Header/HeaderNav';
+import useAuthStore from '../lib/store/useAuthStore';
 
 export default function Home() {
   const router = useRouter();
