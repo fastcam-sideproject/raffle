@@ -1,4 +1,5 @@
 export interface ItemData {
+  id: number;
   totalCount: number;
   currentCount: number;
   ticketPrice: number;
@@ -12,7 +13,6 @@ export interface ItemData {
     possibleRaffle: boolean;
     id: number;
   };
-  id: number;
 }
 
 export interface FilterProps {
@@ -27,6 +27,10 @@ export interface ItemProps {
   currentCount: number;
   totalCount: number;
   raffleId: string;
+}
+
+export interface ItemManualProps {
+  onClose: () => void;
 }
 
 export type RaffleItem = {
