@@ -1,40 +1,28 @@
-export default function Input({
+import { InputProps } from '../types/input';
+
+const Input = ({
   type,
   label,
   value,
   onChange,
   name,
-  placeholder,
-  required,
+  placeholder = '',
+  required = false,
+  disabled = false,
   width,
   fontSize,
-  register,
+  ariaLabel,
+  ariaDescribedBy,
+  className = '',
   errors,
-}: {
-  type: string;
-  label: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  name: string;
-  placeholder: string;
-  required: boolean;
-  width: string;
-  fontSize: string;
-  register: {
-    ref: {
-      current: HTMLInputElement | null;
-    };
-  };
-  errors: {
-    message: string;
-  };
-}) {
+}: InputProps) => {
   const widthClass = `w-${width}`;
   const fontSizeClass = `text-${fontSize}`;
+  const errorId = `${name}-error`;
 
   return (
-    <div className={`mb-4 ${widthClass}`}>
-      <label className={`block text-gray-700 font-bold mb-2 ${fontSizeClass}`} htmlFor={name}>
+    <div className={`flex flex-col gap-1 mb-6 ${widthClass}`}>
+      <label htmlFor={name} className={`block text-gray-700 font-bold mb-2 ${fontSizeClass}`}>
         {label}
       </label>
       <input
@@ -45,12 +33,20 @@ export default function Input({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        {...register}
-        className={`shadow appearance-none border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${fontSizeClass} focus:border-blue-400  ${
-          errors ? 'border-red-500' : ''
-        }`}
+        disabled={disabled}
+        aria-label={ariaLabel}
+        aria-describedby={errors ? errorId : ariaDescribedBy}
+        className={`shadow appearance-none border rounded w-full py-2 px-2 text-gray-700  ${
+          errors ? 'border-red-500' : 'border-gray-300'
+        } ${fontSizeClass} ${className}`}
       />
-      {errors && <p className="text-xs italic text-red-500">{errors.message}</p>}
+      {errors && (
+        <p id={errorId} className="text-xs italic text-red-500">
+          {errors.message}
+        </p>
+      )}
     </div>
   );
-}
+};
+
+export default Input;

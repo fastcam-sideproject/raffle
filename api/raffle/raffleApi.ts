@@ -1,6 +1,6 @@
 import baseURL from '../baseURL';
 
-async function getRaffleData({ queryKey }) {
+async function getRaffleData({ queryKey }: { queryKey: [string, string] }) {
   const [, userToken] = queryKey;
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/all`, {
@@ -12,7 +12,7 @@ async function getRaffleData({ queryKey }) {
     });
     return response.json();
   } catch (error) {
-    throw new Error('데이터를 불러오는데 실패했습니다.', error);
+    console.error('raffle item 조회 실패', error);
   }
 }
 
