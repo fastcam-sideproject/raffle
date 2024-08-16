@@ -42,7 +42,7 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
 
   return (
     <div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <Input
           type="text"
           label="우편번호"
@@ -52,7 +52,7 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
           width="10/12"
           fontSize="base"
           disabled={true}
-          className="flex-grow"
+          className="focus:outline-none focus:border-primary"
         />
         <Button
           type="button"
@@ -60,7 +60,7 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
           onClick={() => setIsPostcodeOpen(true)}
           width="auto"
           fontSize="base"
-          className="hover:bg-blue-500"
+          className="bg-primary hover:bg-blue-500"
         />
       </div>
       <Input

@@ -85,13 +85,16 @@ export default function PurchasePage({
           </section>
 
           <section className="border p-4 rounded-md">
-            <div className="flex justify-between">
+            <div>
               <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
-              <button className="mb-4 border rounded p-1 text-sm bg-primary text-white">
-                등록
-              </button>
             </div>
             <ShoppingAddressForm onAddressChange={handleAddressChange} />
+            <button
+              onClick={() => console.log('등록 버튼 클릭')}
+              className="bg-primary text-white p-1 rounded"
+            >
+              등록
+            </button>
           </section>
         </div>
 

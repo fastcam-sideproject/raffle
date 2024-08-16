@@ -21,7 +21,7 @@ const Input = ({
   const errorId = `${name}-error`;
 
   return (
-    <div className={`flex flex-col gap-1 mb-6 ${widthClass}`}>
+    <div className={`${widthClass} flex flex-col gap-1 mb-6 `}>
       <label htmlFor={name} className={`block text-gray-700 font-bold mb-2 ${fontSizeClass}`}>
         {label}
       </label>
