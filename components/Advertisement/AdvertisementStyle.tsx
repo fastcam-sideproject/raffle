@@ -40,7 +40,7 @@ export default function AdvertisementStyle() {
         <button
           aria-label="응모하기"
           type="button"
-          className="bg-blue-400 py-2 px-6 md:py-4 md:px-8 rounded-xl text-white text-sm md:text-base"
+          className="bg-primary py-2 px-6 md:py-4 md:px-8 rounded-xl text-white text-sm md:text-base"
         >
           응모하기
         </button>

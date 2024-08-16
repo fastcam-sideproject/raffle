@@ -2,7 +2,7 @@
 
 import HeaderNav from '../components/Header/HeaderNav';
 
-function Error() {
+export default function Error() {
   return (
     <>
       <HeaderNav />
@@ -10,5 +10,3 @@ function Error() {
     </>
   );
 }
-
-export default Error;
