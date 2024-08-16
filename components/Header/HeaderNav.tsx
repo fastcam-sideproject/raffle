@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import GoogleLoginButton from '../GoogleLoginButton';
-import { useAuthStore } from '../../lib/store/useAuthStore';
+
 import ProfilePopover from '../ProfilePopover';
+import useAuthStore from '../../lib/store/useAuthStore';
 
 export default function HeaderNav() {
   const userToken = useAuthStore((state) => state.userToken);

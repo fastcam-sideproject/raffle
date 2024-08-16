@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useAuthStore } from '../lib/store/useAuthStore';
+import useAuthStore from '../lib/store/useAuthStore';
 
 export default function ProfilePopover({ onClose }: { onClose: () => void }) {
   const logout = useAuthStore((state) => state.logout);
@@ -30,7 +30,11 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
     >
       <ul>
         <li>
-          <button onClick={handleLogout} className="w-full py-2 px-4  hover:bg-gray-100">
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="w-full py-2 px-4 hover:bg-gray-100"
+          >
             로그아웃
           </button>
         </li>
