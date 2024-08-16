@@ -6,7 +6,7 @@ import { ShoppingAddressFormProps } from '../lib/types/shoppingAddressForm';
 import { Button } from '../lib/common/Button';
 import Input from '../lib/common/Input';
 
-export default function ShippingAddressForm({ onAddressChange }: ShoppingAddressFormProps) {
+export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddressFormProps) {
   const [address, setAddress] = useState<string>('');
   const [detailAddress, setDetailAddress] = useState<string>('');
   const [isPostcodeOpen, setIsPostcodeOpen] = useState<boolean>(false);

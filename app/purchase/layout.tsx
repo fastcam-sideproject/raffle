@@ -1,3 +1,4 @@
 export default function PuchaseLayout({ children }: { children: React.ReactNode }) {
-  return { children };
+  console.log(children);
+  return <div>{children}</div>;
 }

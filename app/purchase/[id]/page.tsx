@@ -2,12 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
-import { getRaffleData } from '../../../api/raffle/raffleApi';
 import { RaffleItem } from '../../../lib/types/item';
-import ShippingAddressForm from '../../../components/ShippingAddressForm';
-// import Input from '../../../lib/common/Input';
-import useAuthStore from '../../../lib/store/useAuthStore';
+import ShoppingAddressForm from '../../../components/ShoppingAddressForm';
+import useRaffleData from '../../../lib/hooks/useRaffleData';
 
 export default function PurchasePage({
   params,

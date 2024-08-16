@@ -1,6 +1,6 @@
 import HeaderNav from '../components/Header/HeaderNav';
 
-function NotFound() {
+export default function NotFound() {
   return (
     <>
       <HeaderNav />
@@ -8,5 +8,3 @@ function NotFound() {
     </>
   );
 }
-
-export default NotFound;
