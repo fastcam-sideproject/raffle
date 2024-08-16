@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { useAuthStore } from '../store/useAuthStore';
 import { getRaffleData } from '../../api/raffle/raffleApi';
+import useAuthStore from '../store/useAuthStore';
 
 export default function useRaffleData() {
   const userToken = useAuthStore((state) => state.userToken);

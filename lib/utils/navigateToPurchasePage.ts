@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation';
  * @param param raffleId
  * @returns
  */
-export default function navigateToPurchasePage({ raffleId }: { raffleId: string }) {
+
+export default function useNavigateToPurchasePage({ raffleId }: { raffleId: string }) {
   const router = useRouter();
-  return () => router.push(`/purchase/${raffleId}`);
+
+  return () => {
+    router.push(`/purchase/${raffleId}`);
+  };
 }
