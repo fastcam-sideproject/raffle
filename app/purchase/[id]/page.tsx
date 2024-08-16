@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { getRaffleData } from '../../../api/raffle/raffleApi';
-
 import { RaffleItem } from '../../../lib/types/item';
 import ShippingAddressForm from '../../../components/ShippingAddressForm';
 // import Input from '../../../lib/common/Input';
@@ -26,15 +25,9 @@ export default function PurchasePage({
       imageUrl: '',
     },
   });
-  const userToken = useAuthStore((state) => state.userToken);
-  const [address, setAddress] = useState<string>('');
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['raffleItem', userToken],
-    queryFn: getRaffleData,
-    enabled: !!userToken,
-    staleTime: 1000 * 60 * 5,
-  });
+  const [address, setAddress] = useState<string>('');
+  const { data, isLoading, isError, error } = useRaffleData();
 
   useEffect(() => {
     if (data && id) {
@@ -73,8 +66,8 @@ export default function PurchasePage({
               <Image
                 src={raffleItem.item.imageUrl}
                 alt={raffleItem.item.name}
-                width={100}
-                height={100}
+                width={150}
+                height={150}
                 className="rounded-md"
               />
               <div>
@@ -95,8 +88,13 @@ export default function PurchasePage({
           </section>
 
           <section className="border p-4 rounded-md">
-            <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
-            <ShippingAddressForm onAddressChange={handleAddressChange} />
+            <div className="flex justify-between">
+              <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
+              <button className="mb-4 border rounded p-1 text-sm bg-blue-400 text-white">
+                등록
+              </button>
+            </div>
+            <ShoppingAddressForm onAddressChange={handleAddressChange} />
           </section>
         </div>
 
