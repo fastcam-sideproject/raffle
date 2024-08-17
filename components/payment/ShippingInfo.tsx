@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import Input from '../../lib/common/Input';
 import Button from '../../lib/common/Button';
-import { ShoppingAddressFormProps } from '../../lib/types/shoppingAddressForm';
+import { ShippingInfoProp } from '../../lib/types/shippingInfo';
 
-export default function ShippingInfo({ onAddressChange }: ShoppingAddressFormProps) {
+export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
   const [address, setAddress] = useState<string>('');
   const [detailAddress, setDetailAddress] = useState<string>('');
   const [isPostcodeOpen, setIsPostcodeOpen] = useState<boolean>(false);

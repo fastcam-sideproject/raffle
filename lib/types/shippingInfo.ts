@@ -1,3 +1,3 @@
-export type ShoppingAddressFormProps = {
+export type ShippingInfoProp = {
   onAddressChange: (address: string) => void;
 };
