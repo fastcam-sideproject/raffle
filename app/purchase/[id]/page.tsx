@@ -7,6 +7,7 @@ import useRaffleData from '../../../lib/hooks/useRaffleData';
 import Button from '../../../lib/common/Button';
 import PhoneNumber from '../../../components/PhoneNumber';
 import ShoppingAddressForm from '../../../components/payment/ShoppingAddressForm';
+import RaffleInfo from '../../../components/payment/RaffleInfo';
 
 export default function PurchasePage({
   params,
@@ -27,15 +28,6 @@ export default function PurchasePage({
   const [address, setAddress] = useState<string>('');
   const { data, isLoading, isError, error } = useRaffleData();
 
-  useEffect(() => {
-    if (data && id) {
-      const foundItem = data.find((raffle: { id: number }) => raffle.id === parseInt(id));
-      if (foundItem) {
-        setRaffleItem(foundItem);
-      }
-    }
-  }, [data, id]);
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('submit');
@@ -45,6 +37,14 @@ export default function PurchasePage({
     setAddress(address);
   };
 
+  useEffect(() => {
+    if (data && id) {
+      const foundItem = data.find((raffle: { id: number }) => raffle.id === parseInt(id));
+      if (foundItem) {
+        setRaffleItem(foundItem);
+      }
+    }
+  }, [data, id]);
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -59,30 +59,14 @@ export default function PurchasePage({
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <section className="border p-4 rounded-md">
-            <h2 className="text-xl font-semibold mb-4">응모 상품 정보</h2>
-            <div className="flex items-center space-x-4">
-              <Image
-                src={raffleItem.item.imageUrl}
-                alt={raffleItem.item.name}
-                width={150}
-                height={150}
-                className="rounded-md"
-              />
-              <div>
-                <h3 className="font-medium">{raffleItem.item.name}</h3>
-                <p className="text-sm text-gray-600">{raffleItem.item.description}</p>
-                <p className="font-bold">{raffleItem.ticketPrice}원</p>
-              </div>
-            </div>
+            <RaffleInfo id={id} />
           </section>
 
           <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
             <div className="space-y-2">
               <p>홍길동</p>
-              <div className="flex items-center gap-3">
-                <PhoneNumber />
-              </div>
+              <PhoneNumber />
             </div>
           </section>
 
