@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import Button from '../../../lib/common/Button';
-import PhoneNumber from '../../../components/PhoneNumber';
 import ShoppingAddressForm from '../../../components/payment/ShoppingAddressForm';
 import RaffleInfo from '../../../components/payment/RaffleInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
+import PhoneNumber from '../../../components/payment/PhoneNumber';
 
 export default function PurchasePage({
   params,
