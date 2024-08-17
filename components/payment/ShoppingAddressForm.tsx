@@ -9,6 +9,10 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
   const [detailAddress, setDetailAddress] = useState<string>('');
   const [isPostcodeOpen, setIsPostcodeOpen] = useState<boolean>(false);
 
+  /**
+   * 우편번호 찾기 버튼 클릭시 실행되는 카카오 우편번호 API
+   * @param data
+   */
   const handleComplete = (data: {
     address: string;
     addressType: string;
@@ -39,7 +43,7 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
   };
 
   return (
-    <>
+    <section className="border p-4 rounded-md">
       <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
       <div className="flex items-center gap-3">
         <Input
@@ -62,17 +66,27 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
           className="bg-primary hover:bg-blue-500"
         />
       </div>
-      <Input
-        type="text"
-        label="상세 주소"
-        value={detailAddress}
-        onChange={handleOnChange}
-        name="detailAddress"
-        placeholder="상세 주소를 입력하세요"
-        width="full"
-        fontSize="base"
-        className="focus:outline-none focus:border-primary"
-      />
+      <div className="flex items-center gap-3">
+        <Input
+          type="text"
+          label="상세 주소"
+          value={detailAddress}
+          onChange={handleOnChange}
+          name="detailAddress"
+          placeholder="상세 주소를 입력하세요"
+          width="10/12"
+          fontSize="base"
+          className="focus:outline-none focus:border-primary"
+        />
+        <Button
+          type="button"
+          label="배송주소 등록"
+          onClick={() => console.log('주소 등록')}
+          width="auto"
+          fontSize="base"
+          className="bg-primary hover:bg-blue-500"
+        />
+      </div>
       {isPostcodeOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto h-full w-full">
           <div className="relative top-20 w-1/3 h-3/5 mx-auto p-5 shadow-lg border bg-white">
@@ -85,6 +99,6 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 }

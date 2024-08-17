@@ -60,7 +60,7 @@ export default function PhoneNumber() {
         fontSize="base"
         onClick={handleRegisterPhoneNumber}
         disabled={isRegistered}
-        className="bg-primary focus:outline-none focus:bg-blue-500"
+        className="bg-primary hover:bg-blue-500"
       />
     </div>
   );

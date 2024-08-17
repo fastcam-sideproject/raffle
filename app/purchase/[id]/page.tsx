@@ -34,28 +34,14 @@ export default function PurchasePage({
           <section className="border p-4 rounded-md">
             <RaffleInfo id={id} />
           </section>
-
-          <section className="border p-4 rounded-md">
+          <section className="border p-4 rounded-md w-">
             <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
             <div className="space-y-2">
               <p>홍길동</p>
               <PhoneNumber />
             </div>
           </section>
-
-          <section className="border p-4 rounded-md">
-            <ShoppingAddressForm onAddressChange={handleAddressChange} />
-            <div className="flex justify-center">
-              <Button
-                type="button"
-                label="등록"
-                onClick={() => console.log('주소 등록')}
-                width="auto"
-                fontSize="base"
-                className="bg-primary text-white  rounded"
-              />
-            </div>
-          </section>
+          <ShoppingAddressForm onAddressChange={handleAddressChange} />
         </div>
 
         <div className="space-y-4">
