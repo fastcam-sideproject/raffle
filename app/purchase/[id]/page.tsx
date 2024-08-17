@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import ShoppingAddressForm from '../../../components/payment/ShoppingAddressForm';
+import ShippingInfo from '../../../components/payment/ShippingInfo';
 import RaffleInfo from '../../../components/payment/RaffleInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
 import PhoneNumber from '../../../components/payment/PhoneNumber';
@@ -39,7 +39,7 @@ export default function PurchasePage({
             </div>
           </section>
 
-          <ShoppingAddressForm onAddressChange={handleAddressChange} />
+          <ShippingInfo onAddressChange={handleAddressChange} />
         </div>
 
         <div className="space-y-4">
