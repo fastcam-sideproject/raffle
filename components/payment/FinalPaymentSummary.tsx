@@ -32,12 +32,12 @@ export default function FinalPaymentSummary({ id }: { id: string }) {
   }
 
   return (
-    <>
+    <section className="border p-4 rounded-md">
       <h2 className="text-xl font-semibold mb-4">최종 결제 내역</h2>
       <div className="space-y-2">
         <p>상품가격: {raffleItem.ticketPrice}원</p>
         <p className="font-bold">총 결제 금액: {raffleItem.ticketPrice}원</p>
       </div>
-    </>
+    </section>
   );
 }
