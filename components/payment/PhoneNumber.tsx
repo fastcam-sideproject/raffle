@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import useAuthStore from '../../lib/store/useAuthStore';
-import { postPhoneNumber } from '../../api/user/phoneNumber';
 import Button from '../../lib/common/Button';
 import Input from '../../lib/common/Input';
+import { postPhoneNumber } from '../../api/user/phoneNumberApi';
 
 export default function PhoneNumber() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
