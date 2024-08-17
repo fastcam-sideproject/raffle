@@ -96,7 +96,7 @@ export default function PurchasePage({
                 type="button"
                 label="등록"
                 onClick={() => console.log('주소 등록')}
-                width="1/2"
+                width="auto"
                 fontSize="base"
                 className="bg-primary text-white  rounded"
               />

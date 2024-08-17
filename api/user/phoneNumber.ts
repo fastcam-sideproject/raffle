@@ -22,7 +22,7 @@ async function postPhoneNumber({
     if (!response.ok) {
       throw new Error('전화번호 등록 실패');
     }
-    return response.json();
+    return response;
   } catch (error) {
     console.error('전화번호 등록 실패', error);
   }

@@ -7,14 +7,14 @@ import useAuthStore from '../lib/store/useAuthStore';
 
 export default function PhoneNumber() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
   const useToken = useAuthStore((state) => state.userToken);
 
   const mutation = useMutation({
     mutationKey: ['phoneNumber'],
     mutationFn: () => postPhoneNumber({ phoneNumber, useToken }),
-    onSuccess: (data) => {
-      console.log(data);
-      console.log('전화번호 등록 성공');
+    onSuccess: () => {
+      setIsRegistered(true);
       alert('전화번호 등록 성공');
     },
 
@@ -48,9 +48,9 @@ export default function PhoneNumber() {
         onChange={handleChange}
         name="phoneNumber"
         placeholder="010-1234-5678"
-        required
         width="10/12"
         fontSize="base"
+        disabled={isRegistered}
         className="focus:outline-none focus:border-primary"
       />
       <Button
@@ -59,6 +59,7 @@ export default function PhoneNumber() {
         width="auto"
         fontSize="base"
         onClick={handleRegisterPhoneNumber}
+        disabled={isRegistered}
         className="bg-primary focus:outline-none focus:bg-blue-500"
       />
     </div>
