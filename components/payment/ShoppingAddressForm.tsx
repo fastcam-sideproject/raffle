@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import Input from '../../lib/common/Input';
@@ -41,7 +39,8 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
   };
 
   return (
-    <div>
+    <>
+      <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
       <div className="flex items-center gap-3">
         <Input
           type="text"
@@ -86,6 +85,6 @@ export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddress
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
