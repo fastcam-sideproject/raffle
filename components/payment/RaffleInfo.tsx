@@ -31,7 +31,7 @@ export default function RaffleInfo({ id }: { id: string }) {
     return <div>Error: {error ? error.message : 'Item not found'}</div>;
   }
   return (
-    <>
+    <section className="border p-4 rounded-md">
       <h2 className="text-xl font-semibold mb-4">응모 상품 정보</h2>
       <div className="flex space-x-4 gap-4">
         <Image
@@ -47,6 +47,6 @@ export default function RaffleInfo({ id }: { id: string }) {
           <p className="font-bold">{raffleItem.ticketPrice}원</p>
         </div>
       </div>
-    </>
+    </section>
   );
 }
