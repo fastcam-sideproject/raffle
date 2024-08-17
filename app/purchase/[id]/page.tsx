@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
-import ShoppingAddressForm from '../../../components/ShoppingAddressForm';
 import useRaffleData from '../../../lib/hooks/useRaffleData';
 import Button from '../../../lib/common/Button';
 import PhoneNumber from '../../../components/PhoneNumber';
+import ShoppingAddressForm from '../../../components/payment/ShoppingAddressForm';
 
 export default function PurchasePage({
   params,
