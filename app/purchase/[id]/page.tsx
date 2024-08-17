@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
 import useRaffleData from '../../../lib/hooks/useRaffleData';
 import Button from '../../../lib/common/Button';
