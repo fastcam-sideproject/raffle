@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
 import ShoppingAddressForm from '../../../components/ShoppingAddressForm';
 import useRaffleData from '../../../lib/hooks/useRaffleData';
+import Button from '../../../lib/common/Button';
+import PhoneNumber from '../../../components/PhoneNumber';
 
 export default function PurchasePage({
   params,
@@ -22,7 +24,6 @@ export default function PurchasePage({
       imageUrl: '',
     },
   });
-
   const [address, setAddress] = useState<string>('');
   const { data, isLoading, isError, error } = useRaffleData();
 
@@ -35,14 +36,6 @@ export default function PurchasePage({
     }
   }, [data, id]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError || !raffleItem) {
-    return <div>Error: {error ? error.message : 'Item not found'}</div>;
-  }
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('submit');
@@ -51,6 +44,14 @@ export default function PurchasePage({
   const handleAddressChange = (address: string) => {
     setAddress(address);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError || !raffleItem) {
+    return <div>Error: {error ? error.message : 'Item not found'}</div>;
+  }
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -79,8 +80,9 @@ export default function PurchasePage({
             <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
             <div className="space-y-2">
               <p>홍길동</p>
-              <p>010-1111-1111</p>
-              <p>xx@xx.com</p>
+              <div className="flex items-center gap-3">
+                <PhoneNumber />
+              </div>
             </div>
           </section>
 
@@ -89,12 +91,16 @@ export default function PurchasePage({
               <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
             </div>
             <ShoppingAddressForm onAddressChange={handleAddressChange} />
-            <button
-              onClick={() => console.log('등록 버튼 클릭')}
-              className="bg-primary text-white p-1 rounded"
-            >
-              등록
-            </button>
+            <div className="flex justify-center">
+              <Button
+                type="button"
+                label="등록"
+                onClick={() => console.log('주소 등록')}
+                width="1/2"
+                fontSize="base"
+                className="bg-primary text-white  rounded"
+              />
+            </div>
           </section>
         </div>
 

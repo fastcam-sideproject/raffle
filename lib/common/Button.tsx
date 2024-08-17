@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonProps } from '../types/button';
 
-export function Button({
+export default function Button({
   type,
   onClick,
   label,

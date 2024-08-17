@@ -46,6 +46,9 @@ const config: Config = {
         50: '#f9fafb',
         100: '#f3f4f6',
       },
+      red: {
+        500: '#ef4444',
+      },
     },
   },
   plugins: [

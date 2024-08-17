@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../lib/common/Button';
+import Button from '../lib/common/Button';
 
 const meta = {
   title: 'Sample/Button',
@@ -32,7 +32,7 @@ export const Primary: Story = {
     label: '버튼',
     width: 'auto',
     fontSize: 'base',
-    backgroundColor: 'bg-blue-400',
+    backgroundColor: 'bg-primary',
     className: 'hover:bg-blue-500',
   },
 };
@@ -43,7 +43,7 @@ export const Secondary: Story = {
     label: '버튼',
     width: 'auto',
     fontSize: 'base',
-    backgroundColor: 'bg-red-400',
+    backgroundColor: 'bg-secondary',
     className: 'hover:bg-red-500',
   },
 };
