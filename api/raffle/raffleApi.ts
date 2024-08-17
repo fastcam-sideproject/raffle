@@ -45,7 +45,6 @@ async function postPurchaseRaffle({
     return response.json();
   } catch (error) {
     console.error('raffle item 구매 실패', error);
-    return null;
   }
 }
 

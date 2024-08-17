@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { RaffleItem } from '../../../lib/types/item';
-import ShoppingAddressForm from '../../../components/ShoppingAddressForm';
 import useRaffleData from '../../../lib/hooks/useRaffleData';
+import Button from '../../../lib/common/Button';
+import PhoneNumber from '../../../components/PhoneNumber';
+import ShoppingAddressForm from '../../../components/payment/ShoppingAddressForm';
+import RaffleInfo from '../../../components/payment/RaffleInfo';
 
 export default function PurchasePage({
   params,
@@ -22,26 +24,8 @@ export default function PurchasePage({
       imageUrl: '',
     },
   });
-
   const [address, setAddress] = useState<string>('');
   const { data, isLoading, isError, error } = useRaffleData();
-
-  useEffect(() => {
-    if (data && id) {
-      const foundItem = data.find((raffle: { id: number }) => raffle.id === parseInt(id));
-      if (foundItem) {
-        setRaffleItem(foundItem);
-      }
-    }
-  }, [data, id]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError || !raffleItem) {
-    return <div>Error: {error ? error.message : 'Item not found'}</div>;
-  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -52,46 +36,54 @@ export default function PurchasePage({
     setAddress(address);
   };
 
+  useEffect(() => {
+    if (data && id) {
+      const foundItem = data.find((raffle: { id: number }) => raffle.id === parseInt(id));
+      if (foundItem) {
+        setRaffleItem(foundItem);
+      }
+    }
+  }, [data, id]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError || !raffleItem) {
+    return <div>Error: {error ? error.message : 'Item not found'}</div>;
+  }
+
   return (
     <main className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">응모 하기</h1>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <section className="border p-4 rounded-md">
-            <h2 className="text-xl font-semibold mb-4">응모 상품 정보</h2>
-            <div className="flex items-center space-x-4">
-              <Image
-                src={raffleItem.item.imageUrl}
-                alt={raffleItem.item.name}
-                width={150}
-                height={150}
-                className="rounded-md"
-              />
-              <div>
-                <h3 className="font-medium">{raffleItem.item.name}</h3>
-                <p className="text-sm text-gray-600">{raffleItem.item.description}</p>
-                <p className="font-bold">{raffleItem.ticketPrice}원</p>
-              </div>
-            </div>
+            <RaffleInfo id={id} />
           </section>
 
           <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
             <div className="space-y-2">
               <p>홍길동</p>
-              <p>010-1111-1111</p>
-              <p>xx@xx.com</p>
+              <PhoneNumber />
             </div>
           </section>
 
           <section className="border p-4 rounded-md">
-            <div className="flex justify-between">
+            <div>
               <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
-              <button className="mb-4 border rounded p-1 text-sm bg-primary text-white">
-                등록
-              </button>
             </div>
             <ShoppingAddressForm onAddressChange={handleAddressChange} />
+            <div className="flex justify-center">
+              <Button
+                type="button"
+                label="등록"
+                onClick={() => console.log('주소 등록')}
+                width="auto"
+                fontSize="base"
+                className="bg-primary text-white  rounded"
+              />
+            </div>
           </section>
         </div>
 
