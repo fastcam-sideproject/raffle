@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
-import { ShoppingAddressFormProps } from '../lib/types/shoppingAddressForm';
-import Button from '../lib/common/Button';
-import Input from '../lib/common/Input';
+import Input from '../../lib/common/Input';
+import Button from '../../lib/common/Button';
+import { ShoppingAddressFormProps } from '../../lib/types/shoppingAddressForm';
 
 export default function ShoppingAddressForm({ onAddressChange }: ShoppingAddressFormProps) {
   const [address, setAddress] = useState<string>('');
