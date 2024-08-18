@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ItemProps } from '../../lib/types/item';
 import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
+import Button from '../../lib/common/Button';
 
 export default function ItemStyle({
   name,
@@ -28,15 +29,18 @@ export default function ItemStyle({
           <h4 className="text-lg font-bold">{name}</h4>
           <span className="text-gray-400">카테고리{category}</span>
         </div>
-        <button
+        <Button
           type="button"
+          ariaLabel={percentageComplete === 100 ? '결과 확인' : '응모하기'}
+          label={percentageComplete === 100 ? '결과 확인' : '응모하기'}
+          width=""
+          fontSize=""
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
           onClick={percentageComplete !== 100 ? handlePurchasePage : undefined}
-        >
-          {percentageComplete === 100 ? '결과 확인' : '응모하기'}
-        </button>
+        />
+
         <div>
           <span className="text-lg font-semibold">{percentageComplete}%</span>
           <span>{percentageComplete === 100 ? '진행중' : '완료'}</span>

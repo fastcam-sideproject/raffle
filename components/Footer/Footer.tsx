@@ -11,7 +11,7 @@ function Footer() {
             height={100}
             src="/image/logo/logo_title.png"
             alt="Logo"
-            className="w-auto h-auto"
+            className="w-36 h-auto"
           />
           <span className="text-gray-300">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque cum quia corrupti!
