@@ -34,12 +34,19 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
 
     setAddress(fullAddress);
     setIsPostcodeOpen(false);
-    onAddressChange(fullAddress);
+    onAddressChange(`${fullAddress} ${detailAddress}`);
+    console.log(data);
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(event.target.value);
     onAddressChange(`${address} ${detailAddress}`);
+  };
+
+  const handleRegisterAddress = () => {
+    if (address === '' || detailAddress === '') {
+      alert('주소를 입력해주세요');
+    }
   };
 
   return (
@@ -81,10 +88,10 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
         <Button
           type="button"
           label="배송주소 등록"
-          onClick={() => console.log('주소 등록')}
+          onClick={handleRegisterAddress}
           width="auto"
           fontSize="base"
-          className="bg-primary hover:bg-blue-500"
+          className="bg-secondary hover:bg-red-500"
         />
       </div>
       {isPostcodeOpen && (

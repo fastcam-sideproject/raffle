@@ -15,6 +15,7 @@ export default function PurchasePage({
 }) {
   const { id } = params;
   const [address, setAddress] = useState<string>('');
+  console.log(address); // 우편번호 주소 + 상세주소 출력됨.
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

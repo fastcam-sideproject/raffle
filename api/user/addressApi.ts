@@ -1,6 +1,6 @@
 import baseURL from '../baseURL';
 
-async function postAddress() {
+export async function postAddress() {
   try {
     const response = await fetch(`${baseURL}/api/v1/user/set_address`, {
       method: 'POST',
@@ -17,5 +17,3 @@ async function postAddress() {
     console.error('주소 등록 실패', error);
   }
 }
-
-export { postAddress };
