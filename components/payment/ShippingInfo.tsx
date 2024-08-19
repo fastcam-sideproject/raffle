@@ -40,7 +40,18 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
    * 우편번호 찾기 버튼 클릭시 실행되는 카카오 우편번호 API
    * @param data
    */
-  const handleComplete = (data: any) => {
+  const handleComplete = (data: {
+    address: string;
+    addressEnglish: string;
+    bname: string;
+    jibunAddress: string;
+    jibunAddressEnglish: string;
+    roadAddress: string;
+    sido: string;
+    sigungu: string;
+    query: string;
+    addressType: string;
+  }) => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -86,7 +97,7 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
       jibunAddressEnglish: daumAddress.jibunAddressEnglish,
       roadAddress: daumAddress.roadAddress,
       sido: daumAddress.sido,
-      sigu: daumAddress.sigungu,
+      sigungu: daumAddress.sigungu,
       detail: detailAddress,
       postalCode: daumAddress.query,
       country: 'KR',
