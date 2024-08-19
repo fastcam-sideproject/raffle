@@ -3,6 +3,8 @@
 import ItemStyle from './ItemStyle';
 import useRaffleData from '../../lib/hooks/useRaffleData';
 import { FilterProps, ItemData } from '../../lib/types/item';
+import NoUserToken from '../ErrorPages/NoUserToken';
+import ErrorPage from '../ErrorPages/ErrorPage';
 
 export default function Item({ filter }: FilterProps) {
   const { data, isLoading, isError, error, userToken } = useRaffleData();
@@ -15,7 +17,11 @@ export default function Item({ filter }: FilterProps) {
     : [];
 
   if (!userToken) {
-    return <div>로그인이 필요합니다</div>;
+    return (
+      <div className="col-span-4">
+        <NoUserToken />
+      </div>
+    );
   }
 
   if (isLoading) {
@@ -23,9 +29,11 @@ export default function Item({ filter }: FilterProps) {
   }
 
   if (isError) {
+    // eslint-disable-next-line no-console
+    console.error(error.toString());
     return (
-      <div>
-        Error loading data <span>{error.toString()}</span>
+      <div className="col-span-4">
+        <ErrorPage />
       </div>
     );
   }
