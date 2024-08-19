@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Input from '../lib/common/Input';
-import Button from '../lib/common/Button';
 import { useMutation } from '@tanstack/react-query';
-import { postPhoneNumber } from '../api/user/phoneNumber';
-import useAuthStore from '../lib/store/useAuthStore';
+import useAuthStore from '../../lib/store/useAuthStore';
+import Button from '../../lib/common/Button';
+import Input from '../../lib/common/Input';
+import { postPhoneNumber } from '../../api/user/phoneNumberApi';
 
 export default function PhoneNumber() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
@@ -60,7 +60,7 @@ export default function PhoneNumber() {
         fontSize="base"
         onClick={handleRegisterPhoneNumber}
         disabled={isRegistered}
-        className="bg-primary focus:outline-none focus:bg-blue-500"
+        className="bg-primary hover:bg-blue-500"
       />
     </div>
   );
