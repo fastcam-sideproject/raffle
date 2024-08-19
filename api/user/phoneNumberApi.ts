@@ -1,6 +1,6 @@
 import baseURL from '../baseURL';
 
-async function postPhoneNumber({
+export async function postPhoneNumber({
   phoneNumber,
   useToken,
 }: {
@@ -27,5 +27,3 @@ async function postPhoneNumber({
     console.error('전화번호 등록 실패', error);
   }
 }
-
-export { postPhoneNumber };
