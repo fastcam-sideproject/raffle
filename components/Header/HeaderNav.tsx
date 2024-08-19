@@ -51,10 +51,10 @@ export default function HeaderNav() {
         </Link>
         <ul
           className={`${
-            toggle ? 'absolute w-full top-16 left-0 flex flex-col p-5 gap-1' : 'max-sm:hidden'
+            toggle ? 'absolute w-full top-12 left-0 flex flex-col p-5 gap-1' : 'max-sm:hidden'
           } sm:flex sm:gap-3 sm:static sm:flex-row sm:w-auto sm:p-0`}
         >
-          <li className="bg-slate-100 p-2 flex items-center justify-center">
+          <li className="sm:border-none border-solid border-4 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center">
             <Link
               href="/"
               className={`p-2 w-full text-center ${pathName === '/' ? 'text-blue-700 font-bold' : 'text-gray-500'}`}
@@ -63,7 +63,7 @@ export default function HeaderNav() {
               Home
             </Link>
           </li>
-          <li className="bg-slate-100 p-2 flex items-center justify-center">
+          <li className="sm:border-none border-solid border-4 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center">
             <Link
               href="/shop"
               className={`p-2 w-full text-center ${pathName === '/shop' ? 'text-blue-700 font-bold' : 'text-gray-500'}`}
@@ -72,7 +72,7 @@ export default function HeaderNav() {
               Shop
             </Link>
           </li>
-          <li className="bg-slate-100 p-2 flex items-center justify-center">
+          <li className="sm:border-none border-solid border-4 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center">
             <Link
               href="/about"
               className={`p-2 w-full text-center ${pathName === '/about' ? 'text-blue-700 font-bold' : 'text-gray-500'}`}
@@ -81,7 +81,7 @@ export default function HeaderNav() {
               About
             </Link>
           </li>
-          <li className="bg-slate-100 p-2 flex items-center justify-center">
+          <li className="sm:border-none border-solid border-4 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center ">
             <Link
               href="/contact"
               className={`p-2 w-full text-center ${pathName === '/contact' ? 'text-blue-700 font-bold' : 'text-gray-500'}`}
