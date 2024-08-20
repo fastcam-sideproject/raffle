@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ShippingInfo from '../../../components/payment/ShippingInfo';
 import RaffleInfo from '../../../components/payment/RaffleInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
-import PhoneNumber from '../../../components/payment/PhoneNumber';
+import OrdererInfo from '../../../components/payment/OrdererInfo';
 
 export default function PurchasePage({
   params,
@@ -32,14 +32,7 @@ export default function PurchasePage({
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <RaffleInfo id={id} />
-          <section className="border p-4 rounded-md">
-            <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
-            <div className="space-y-2">
-              <p>홍길동</p>
-              <PhoneNumber />
-            </div>
-          </section>
-
+          <OrdererInfo />
           <ShippingInfo onAddressChange={handleAddressChange} />
         </div>
 
