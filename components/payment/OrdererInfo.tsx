@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
 import PhoneNumber from './PhoneNumber';
-import { useQuery } from '@tanstack/react-query';
-import { getMyPage } from '../../api/user/mypageApi';
-import useAuthStore from '../../lib/store/useAuthStore';
+import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
 
 export default function OrdererInfo() {
-  const userToken = useAuthStore((state) => state.userToken);
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['ordererInfo'],
-    queryFn: () => getMyPage(userToken),
-    staleTime: 1000 * 60 * 5,
-  });
-
-  if (!data || isError) {
-    return <p>주문자 정보를 불러오는데 실패했습니다.</p>;
-  }
+  const { data, isLoading, isError } = useOrdererInfo();
 
   if (isLoading) {
     return <p>주문자 정보를 불러오는 중입니다.</p>;
+  }
+
+  if (!data) {
+    return <p>주문자 정보가 없습니다.</p>;
+  }
+
+  if (isError) {
+    return <p>주문자 정보를 불러오는데 실패했습니다.</p>;
   }
 
   return (
