@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import PhoneNumber from './PhoneNumber';
 import { useQuery } from '@tanstack/react-query';
 import { getMyPage } from '../../api/user/mypageApi';
