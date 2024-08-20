@@ -4,7 +4,7 @@ import Input from '../../lib/common/Input';
 import Button from '../../lib/common/Button';
 import { useMutation } from '@tanstack/react-query';
 import { postAddress } from '../../api/user/addressApi';
-import { PurchaseAddress, ShippingInfoProp } from '../../lib/types/purchase';
+import { PurchaseAddress, DaumPostcodeAddress, ShippingInfoProp } from '../../lib/types/purchase';
 import useAuthStore from '../../lib/store/useAuthStore';
 
 export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
@@ -40,18 +40,7 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
    * 우편번호 찾기 버튼 클릭시 실행되는 카카오 우편번호 API
    * @param data
    */
-  const handleComplete = (data: {
-    address: string;
-    addressEnglish: string;
-    bname: string;
-    jibunAddress: string;
-    jibunAddressEnglish: string;
-    roadAddress: string;
-    sido: string;
-    sigungu: string;
-    query: string;
-    addressType: string;
-  }) => {
+  const handleComplete = (data: DaumPostcodeAddress) => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -89,7 +78,7 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
       return;
     }
 
-    const addressData: any = {
+    const addressData: PurchaseAddress = {
       address: daumAddress.address,
       addressEnglish: daumAddress.addressEnglish,
       bname: daumAddress.bname,
@@ -103,8 +92,6 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
       country: 'KR',
       isDefault: true,
     };
-
-    console.log('전송할 주소 데이터:', addressData); // 데이터 확인용 로그 추가
     mutation.mutate(addressData);
   };
 
