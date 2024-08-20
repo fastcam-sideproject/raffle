@@ -34,13 +34,17 @@ export default function RaffleInfo({ id }: { id: string }) {
     <section className="border p-4 rounded-md">
       <h2 className="text-xl font-semibold mb-4">응모 상품 정보</h2>
       <div className="flex space-x-4 gap-4">
-        <Image
-          src={raffleItem.item.imageUrl}
-          alt={raffleItem.item.name}
-          width={150}
-          height={150}
-          className="rounded-md"
-        />
+        {raffleItem.item.imageUrl ? (
+          <Image
+            src={raffleItem.item.imageUrl}
+            alt={raffleItem.item.name}
+            width={150}
+            height={150}
+            className="rounded-md"
+          />
+        ) : (
+          <div className="w-150 h-150 bg-gray-200 rounded-md" />
+        )}
         <div>
           <h3 className="font-medium">{raffleItem.item.name}</h3>
           <p className="text-sm text-gray-600">{raffleItem.item.description}</p>
