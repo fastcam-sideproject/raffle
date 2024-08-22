@@ -8,7 +8,7 @@ function Banner() {
     pathName.replace('/', '').charAt(0).toUpperCase() + pathName.slice(2).toLocaleLowerCase();
 
   return (
-    <div className="bg-[url('/image/background/shop_bg.jpg')] w-full h-72 flex flex-col justify-center items-center">
+    <div className="bg-[url('/image/background/shop_bg.jpg')] w-full h-28 lg:h-60 flex flex-col justify-center items-center">
       <span className="text-shadow-white-shadow font-extrabold text-4xl">
         {pathName === '/' ? 'Home' : formattedPathName}
       </span>
