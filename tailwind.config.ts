@@ -63,6 +63,6 @@ const config: Config = {
       addUtilities(newUtilities, ['responsive', 'hover']);
     },
   ],
-  safelist: ['w-10/12', 'w-auto'],
+  safelist: ['w-9/12', 'w-10/12', 'w-auto'],
 };
 export default config;
