@@ -31,6 +31,7 @@ export default function FinalPaymentSummary({ id }: { id: string }) {
     return <div>Error: {error ? error.message : 'Item not found'}</div>;
   }
 
+
   return (
     <section className="border p-4 rounded-md">
       <h2 className="text-xl font-semibold mb-4">최종 결제 내역</h2>
