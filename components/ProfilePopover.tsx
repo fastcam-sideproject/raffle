@@ -1,8 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { use, useEffect, useRef } from 'react';
 import useAuthStore from '../lib/store/useAuthStore';
+import { useQuery } from '@tanstack/react-query';
+import { getTickets } from '../api/user/ticketsApi';
 
 export default function ProfilePopover({ onClose }: { onClose: () => void }) {
   const logout = useAuthStore((state) => state.logout);
+  const userToken = useAuthStore((state) => state.userToken);
   const popoverRef = useRef<HTMLDivElement | null>(null);
 
   const handleLogout = () => {
@@ -23,6 +26,12 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
     };
   }, [onClose]);
 
+  const {data } = useQuery({
+    queryKey: ['getTickets'],
+    queryFn: () => getTickets(userToken),
+  })
+
+
   return (
     <div
       ref={popoverRef}
@@ -37,6 +46,11 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
           >
             로그아웃
           </button>
+        </li>
+        <li>
+          {
+            data
+          }개
         </li>
       </ul>
     </div>
