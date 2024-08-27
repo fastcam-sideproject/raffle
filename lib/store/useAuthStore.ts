@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { AuthStore } from '../types/authStore';
+import { AuthStore } from '../types/authStores';
+
 
 const useAuthStore = create<AuthStore>()(
   persist(
