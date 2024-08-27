@@ -5,8 +5,6 @@ import { useEffect } from 'react';
 import HomeMain from '../components/Home/HomeMain';
 import HeaderNav from '../components/Header/HeaderNav';
 import useAuthStore from '../lib/store/useAuthStore';
-import { useMutation } from '@tanstack/react-query';
-import { postVerifyPhone } from '../api/user/phoneNumberApi';
 
 export default function Home() {
   const router = useRouter();
@@ -27,17 +25,7 @@ export default function Home() {
     }
   }, [router, setUserToken]);
 
-  const userToken = useAuthStore((state) => state.userToken);
-  const mutation = useMutation({
-    mutationKey: ['verifyPhone'],
-    mutationFn: () => postVerifyPhone({ phoneNumber: '010-3844-7955', userToken }),
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.error('휴대폰 인증번호 요청 실패', error);
-    },
-  });
+
 
   return (
     <>
