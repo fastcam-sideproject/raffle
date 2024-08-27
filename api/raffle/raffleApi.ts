@@ -24,6 +24,20 @@ async function getRaffleData({ queryKey }: { queryKey: [string, string] }) {
   }
 }
 
+const getRaffleDataDetail = async (raffleId: string) => {
+  try {
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/free/detail/${raffleId}`);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`데이터를 불러오는데 실패했습니다: ${error.message}`);
+    } else {
+      throw new Error('데이터를 불러오는데 실패했습니다. 알 수 없는 오류가 발생했습니다.');
+    }
+  }
+};
+
 async function postPurchaseRaffle({
   raffleId,
   userToken,
@@ -48,4 +62,4 @@ async function postPurchaseRaffle({
   }
 }
 
-export { getRaffleData, postPurchaseRaffle };
+export { getRaffleData, getRaffleDataDetail, postPurchaseRaffle };

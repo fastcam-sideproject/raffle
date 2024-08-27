@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { ItemProps } from '../../lib/types/item';
 import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
 import Button from '../../lib/common/Button';
@@ -11,19 +12,22 @@ export default function ItemStyle({
   totalCount,
   raffleId,
 }: ItemProps) {
-  const percentageComplete = Math.round((currentCount / totalCount) * 100);
+  const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
+
   const handlePurchasePage = navigateToPurchasePage({ raffleId });
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
-      <Image
-        priority
-        width={100}
-        height={100}
-        src={imageUrl}
-        alt="추첨할 상품 이미지"
-        className="w-full h-80 rounded object-contain"
-      />
+      <Link href={`shop/detail/${raffleId}`}>
+        <Image
+          priority
+          width={100}
+          height={100}
+          src={imageUrl}
+          alt="추첨할 상품 이미지"
+          className="w-full h-80 rounded object-contain"
+        />
+      </Link>
       <div className="bg-gray-50 p-4 w-full rounded">
         <div>
           <h4 className="text-lg font-bold">{name}</h4>
