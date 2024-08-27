@@ -45,3 +45,4 @@ jobs:
             npm install
             npm run build
             sudo nohup npm run start &
+            exit
