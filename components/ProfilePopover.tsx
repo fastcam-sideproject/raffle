@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import {  useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAuthStore from '../lib/store/useAuthStore';
 import { getTickets } from '../api/user/ticketsApi';
