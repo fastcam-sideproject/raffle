@@ -1,6 +1,6 @@
-import {  useEffect, useRef } from 'react';
-import useAuthStore from '../lib/store/useAuthStore';
+import { useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import useAuthStore from '../lib/store/useAuthStore';
 import { getTickets } from '../api/user/ticketsApi';
 
 export default function ProfilePopover({ onClose }: { onClose: () => void }) {
@@ -14,13 +14,10 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
     onClose();
   };
 
-
-
-  const {data } = useQuery({
+  const { data } = useQuery({
     queryKey: ['getTickets'],
     queryFn: () => getTickets(userToken),
-  })
-
+  });
 
   return (
     <div
@@ -28,11 +25,10 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
       className="absolute top-14 right-3 w-28 bg-white border border-gray-200 rounded shadow-lg"
     >
       <ul>
-      <li>
-          <div className='flex gap-2 justify-center py-2 px-4 w-full '>
-
-          <img src="/image/ticket.svg" alt="사용자 응모권 갯수" />
-          <span>{data}개</span>
+        <li>
+          <div className="flex gap-2 justify-center py-2 px-4 w-full ">
+            <img src="/image/ticket.svg" alt="사용자 응모권 갯수" />
+            <span>{data}개</span>
           </div>
         </li>
         <li>
@@ -44,7 +40,6 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
             로그아웃
           </button>
         </li>
-        
       </ul>
     </div>
   );
