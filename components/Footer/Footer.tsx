@@ -26,9 +26,11 @@ function Footer() {
         </div>
         <div className="flex flex-col gap-8">
           <span className="text-gray-300">Help</span>
+          <Link href="/privacy-policies" className="font-bold">
+            개인 정보 처리 방침
+          </Link>
           <span>Payment Option</span>
           <span>Returns</span>
-          <span>Privacy Policies</span>
         </div>
         <div className="flex flex-col gap-4">
           <span className="text-gray-300">Kakao Pay</span>
