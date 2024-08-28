@@ -21,8 +21,8 @@ export default function ItemStyle({
       <Link href={`shop/detail/${raffleId}`}>
         <Image
           priority
-          width={100}
-          height={100}
+          width={400}
+          height={400}
           src={imageUrl}
           alt="추첨할 상품 이미지"
           className="w-full h-80 rounded object-contain"
