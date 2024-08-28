@@ -1,5 +1,6 @@
 export type AuthStore = {
   userToken: string;
-  setUserToken: (userToken: string) => void;
+  refreshToken: string;
+  setUserToken: (userToken: string, refreshToken:string) => void;
   logout: () => void;
 };
