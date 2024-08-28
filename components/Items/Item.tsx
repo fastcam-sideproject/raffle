@@ -5,9 +5,32 @@ import useRaffleData from '../../lib/hooks/useRaffleData';
 import { FilterProps, ItemData } from '../../lib/types/item';
 import NoUserToken from '../ErrorPages/NoUserToken';
 import ErrorPage from '../ErrorPages/ErrorPage';
+import { useQuery } from '@tanstack/react-query';
+import { getRaffleFreeItem, getRaffleNotFreeItem } from '../../api/raffle/raffleApi';
+import useAuthStore from '../../lib/store/useAuthStore';
 
 export default function Item({ filter }: FilterProps) {
   const { data, isLoading, isError, error, userToken } = useRaffleData();
+
+  /**
+   * 유료 상품 API 호출
+   * @param userToken
+   */
+  // const userToken = useAuthStore((state) => state.userToken);
+  // const { data } = useQuery({
+  //   queryKey: ['RaffleItemsNotFree'],
+  //   queryFn: () => getRaffleNotFreeItem(userToken),
+  // });
+
+  /**
+   * 무료 상품 API 호출
+   * @param userToken
+   */
+  // const userToken = useAuthStore((state) => state.userToken);
+  // const { data } = useQuery({
+  //   queryKey: ['RaffleItemsFree'],
+  //   queryFn: () => getRaffleFreeItem(userToken),
+  // });
 
   const filteredData = data
     ? data.filter((itemData: ItemData) => {
@@ -29,7 +52,6 @@ export default function Item({ filter }: FilterProps) {
   }
 
   if (isError) {
-    // eslint-disable-next-line no-console
     console.error(error.toString());
     return (
       <div className="col-span-4">
@@ -63,6 +85,18 @@ export default function Item({ filter }: FilterProps) {
           />
         ),
       )}
+      {/* {data.map((items: any) => (
+        <ItemStyle
+          key={items.item.id}
+          name={items.item.name}
+          category={items.item.category}
+          imageUrl={items.item.imageUrl}
+          currentCount={items.currentCount}
+          totalCount={items.totalCount}
+          raffleId={items.item.id}
+          filter={filter}
+        />
+      ))} */}
     </>
   );
 }
