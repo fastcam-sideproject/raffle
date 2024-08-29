@@ -65,7 +65,7 @@ export default function RootLayout({
     <html lang="ko">
       <head>
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7372592599478425"
-     crossorigin="anonymous"></script>
+     crossOrigin="anonymous"></script>
       </head>
       <body className={`${pretendard.className} text-gray-900`}>
         <ReactQueryProviders>
