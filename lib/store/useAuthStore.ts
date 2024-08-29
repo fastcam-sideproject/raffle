@@ -6,13 +6,16 @@ const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
       userToken: '',
-      setUserToken: (userToken) => {
+      refreshToken: '',
+      setUserToken: (userToken, refreshToken) => {
         sessionStorage.setItem('access_token', userToken);
-        set({ userToken });
+        sessionStorage.setItem('refresh_token', refreshToken);
+        set({ userToken, refreshToken });
       },
       logout: () => {
         sessionStorage.removeItem('access_token');
-        set({ userToken: '' });
+        sessionStorage.removeItem('refresh_token');
+        set({ userToken: '', refreshToken: '' });
       },
     }),
     {

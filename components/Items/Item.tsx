@@ -1,20 +1,13 @@
 'use client';
 
-import ItemStyle from './ItemStyle';
 import useRaffleData from '../../lib/hooks/useRaffleData';
-import { FilterProps, ItemData } from '../../lib/types/item';
 import NoUserToken from '../ErrorPages/NoUserToken';
 import ErrorPage from '../ErrorPages/ErrorPage';
+import ItemStyle from './ItemStyle';
+import { FilterProps, ItemData } from '../../lib/types/item';
 
 export default function Item({ filter }: FilterProps) {
   const { data, isLoading, isError, error, userToken } = useRaffleData();
-
-  const filteredData = data
-    ? data.filter((itemData: ItemData) => {
-        if (filter === 'ALL') return true;
-        return itemData.status === filter;
-      })
-    : [];
 
   if (!userToken) {
     return (
@@ -29,8 +22,7 @@ export default function Item({ filter }: FilterProps) {
   }
 
   if (isError) {
-    // eslint-disable-next-line no-console
-    console.error(error.toString());
+    console.error(error?.toString());
     return (
       <div className="col-span-4">
         <ErrorPage />
@@ -38,28 +30,43 @@ export default function Item({ filter }: FilterProps) {
     );
   }
 
+  const filteredData = data
+    ? data.filter((itemData: ItemData) => {
+        switch (filter) {
+          case 'ALL':
+            return itemData.isFree && itemData.status === 'ACTIVE';
+          case 'FREE':
+            return itemData.isFree && itemData.status === 'ACTIVE';
+          case 'NOT_FREE':
+            return !itemData.isFree && itemData.status === 'ACTIVE';
+          case 'COMPLETED':
+            return itemData.status === 'COMPLETED';
+          default:
+            return false;
+        }
+      })
+    : [];
+
   return (
     <>
       {filteredData.map(
         (itemData: {
+          status: string;
+          id: string;
+          item: { name: string; category: number; imageUrl: string };
           currentCount: number;
           totalCount: number;
-          item: {
-            id: string;
-            name: string;
-            category: number;
-            imageUrl: string;
-          };
         }) => (
           <ItemStyle
-            key={itemData.item.id}
+            key={itemData.id}
             name={itemData.item.name}
             category={itemData.item.category}
             imageUrl={itemData.item.imageUrl}
             currentCount={itemData.currentCount}
             totalCount={itemData.totalCount}
-            raffleId={itemData.item.id}
+            raffleId={itemData.id}
             filter={filter}
+            status={itemData.status}
           />
         ),
       )}

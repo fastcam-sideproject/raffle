@@ -1,6 +1,5 @@
 import { sendEmail } from '../email';
 
-// eslint-disable-next-line import/prefer-default-export
 export async function POST(request: Request) {
   const body = await request.json();
   return sendEmail(body)

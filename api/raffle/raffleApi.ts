@@ -1,7 +1,6 @@
 import baseURL from '../baseURL';
 
-async function getRaffleData({ queryKey }: { queryKey: [string, string] }) {
-  const [, userToken] = queryKey;
+async function getRaffleData(userToken: string) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/all`, {
       method: 'GET',
@@ -62,4 +61,46 @@ async function postPurchaseRaffle({
   }
 }
 
-export { getRaffleData, getRaffleDataDetail, postPurchaseRaffle };
+async function getRaffleNotFreeItem(userToken: string) {
+  try {
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/not_free`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('raffle item 가져오기 실패');
+    }
+    return response.json();
+  } catch (error) {
+    console.error('raffle item 가져오기 실패', error);
+  }
+}
+
+async function getRaffleFreeItem(userToken: string) {
+  try {
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/free`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('raffle item 가져오기 실패');
+    }
+    return response.json();
+  } catch (error) {
+    console.error('raffle item 가져오기 실패', error);
+  }
+}
+
+export {
+  getRaffleData,
+  getRaffleDataDetail,
+  postPurchaseRaffle,
+  getRaffleNotFreeItem,
+  getRaffleFreeItem,
+};
