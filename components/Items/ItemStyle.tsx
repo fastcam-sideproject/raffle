@@ -32,15 +32,19 @@ export default function ItemStyle({
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
-      <Link href={`shop/detail/${raffleId}`} onClick={handleImageClick}>
+      <Link href={`shop/detail/${raffleId}`} onClick={handleImageClick} className="relative group">
         <Image
           priority
           width={400}
           height={400}
           src={imageUrl}
           alt="추첨할 상품 이미지"
-          className="w-full h-80 rounded object-contain"
+          className="w-full h-80 rounded object-contain transition duration-300 group-hover:blur-sm"
         />
+
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded opacity-0 group-hover:opacity-100 transition duration-300">
+          <span className="text-white text-lg font-semibold">상세보기</span>
+        </div>
       </Link>
       <div className="bg-gray-50 p-4 w-full rounded">
         <div>

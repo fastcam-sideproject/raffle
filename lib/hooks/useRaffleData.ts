@@ -10,9 +10,10 @@ export default function useRaffleData(filter = 'ALL') {
     queryFn: async () => {
       const data = await getRaffleData(userToken);
       // console.log('Fetched Raffle Data:', data);
-      if (filter === 'ALL') {
-        return data;
-      }
+      // if (filter === 'ALL') {
+      //   return data;
+      // }
+
       if (Array.isArray(data) && data.length > 0) {
         const freeItems = data.filter((item) => item.isFree);
         const notFreeItems = data.filter((item) => !item.isFree);

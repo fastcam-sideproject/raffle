@@ -34,7 +34,7 @@ export default function Item({ filter }: FilterProps) {
     ? data.filter((itemData: ItemData) => {
         switch (filter) {
           case 'ALL':
-            return itemData.status === 'ACTIVE';
+            return itemData.isFree && itemData.status === 'ACTIVE';
           case 'FREE':
             return itemData.isFree && itemData.status === 'ACTIVE';
           case 'NOT_FREE':
