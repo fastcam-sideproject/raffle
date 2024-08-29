@@ -2,20 +2,35 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 import GoogleLoginButton from '../GoogleLoginButton';
-
 import ProfilePopover from '../ProfilePopover';
 import useAuthStore from '../../lib/store/useAuthStore';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getTickets } from '../../api/user/ticketsApi';
 
 export default function HeaderNav() {
-  const userToken = useAuthStore((state) => state.userToken);
-  const [isPopverOpen, setIsPopverOpen] = useState(false);
-  const [toggle, setToggle] = useState(false);
+  const [isPopverOpen, setIsPopverOpen] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(false);
 
+  const userToken = useAuthStore((state) => state.userToken);
   const pathName = usePathname();
-  const hideHeaderRoutes = /^\/purchase\/\w+$/;
+
+  /**
+   * 사용자 응모권 갯수를 나타내는 useQuery
+   */
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['getTickets'],
+    queryFn: () => getTickets(userToken),
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error: {error instanceof Error ? error.message : String(error)}</div>;
+  }
 
   const handleProfileClick = () => {
     setIsPopverOpen(!isPopverOpen);
@@ -32,10 +47,6 @@ export default function HeaderNav() {
   const closeMenu = () => {
     setToggle(false);
   };
-
-  if (hideHeaderRoutes.test(pathName)) {
-    return null;
-  }
 
   return (
     <header className="w-full bg-slate-100 sticky top-0 border-solid border-b-1 border-indigo-900 shadow-custom-light z-[1000]">
@@ -92,6 +103,12 @@ export default function HeaderNav() {
           </li>
         </ul>
         <ul className="flex gap-3 items-center">
+          <li>
+            <div className="flex gap-2 justify-center py-2 px-4 w-full ">
+              <img src="/image/ticket.svg" alt="사용자 응모권 갯수" />
+              <span className="font-bold">{data}</span>
+            </div>
+          </li>
           <button
             type="button"
             className="hidden max-sm:flex hover:cursor-pointer"
