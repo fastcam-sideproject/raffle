@@ -1,8 +1,10 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ItemProps } from '../../lib/types/item';
 import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
 import Button from '../../lib/common/Button';
+import { useState } from 'react';
 
 export default function ItemStyle({
   name,
@@ -11,14 +13,26 @@ export default function ItemStyle({
   currentCount,
   totalCount,
   raffleId,
+  status,
 }: ItemProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
-
   const handlePurchasePage = navigateToPurchasePage({ raffleId });
+
+  const handleImageClick = (event: React.MouseEvent) => {
+    if (status === 'COMPLETED') {
+      event.preventDefault();
+      setIsModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
-      <Link href={`shop/detail/${raffleId}`}>
+      <Link href={`shop/detail/${raffleId}`} onClick={handleImageClick}>
         <Image
           priority
           width={400}
@@ -42,7 +56,7 @@ export default function ItemStyle({
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
-          onClick={percentageComplete !== 100 ? handlePurchasePage : undefined}
+          onClick={percentageComplete !== 100 ? handlePurchasePage : handleImageClick}
         />
 
         <div>
@@ -58,6 +72,21 @@ export default function ItemStyle({
           />
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded shadow-lg w-96">
+            <h2 className="text-xl font-bold mb-4 text-center">이벤트가 종료되었습니다.</h2>
+            <p className="text-center">
+              해당 이벤트는 이미 완료되었습니다. <br />
+              다음 기회에 도전해보세요!
+            </p>
+            <button className="mt-4 px-4 py-2 bg-primary text-white rounded" onClick={closeModal}>
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
     </li>
   );
 }

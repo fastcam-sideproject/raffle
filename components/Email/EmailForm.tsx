@@ -64,7 +64,6 @@ function EmailForm() {
       openPopUp('메일이 성공적으로 발송되었습니다.');
     } catch (error) {
       openPopUp('메일 전송에 실패했습니다. 다시 시도해주세요.');
-      // eslint-disable-next-line no-console
       console.error(error);
     } finally {
       setLoading(false);

@@ -1,7 +1,6 @@
 import baseURL from '../baseURL';
 
-async function getRaffleData({ queryKey }: { queryKey: [string, string] }) {
-  const [, userToken] = queryKey;
+async function getRaffleData(userToken: string) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/all`, {
       method: 'GET',
