@@ -16,12 +16,15 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18"
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
       - name: Build project
+        env:
+          NEXT_APP_EMAIL: ${{ secrets.NEXT_APP_EMAIL }}
+          NEXT_APP_PWD: ${{ secrets.NEXT_APP_PWD }}
         run: npm run build
 
       - name: Transfer files to EC2
