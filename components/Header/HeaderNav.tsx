@@ -19,18 +19,14 @@ export default function HeaderNav() {
 
   /**
    * 사용자 응모권 갯수를 나타내는 useQuery
+   * enalbed: userToken이 존재할 때만 요청을 보냄
    */
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['getTickets'],
     queryFn: () => getTickets(userToken),
+    enabled: !!userToken,
   });
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isError) {
-    return <div>Error: {error instanceof Error ? error.message : String(error)}</div>;
-  }
+  if (isLoading) return <div>Loading...</div>;
 
   const handleProfileClick = () => {
     setIsPopverOpen(!isPopverOpen);
@@ -104,10 +100,12 @@ export default function HeaderNav() {
         </ul>
         <ul className="flex gap-3 items-center">
           <li>
-            <div className="flex gap-2 justify-center py-2 px-4 w-full ">
-              <img src="/image/ticket.svg" alt="사용자 응모권 갯수" />
-              <span className="font-bold">{data}</span>
-            </div>
+            {userToken && (
+              <div className="flex gap-2 justify-center py-2 px-4 w-full">
+                <img src="/image/ticket.svg" alt="사용자 응모권 갯수" />
+                <span className="font-bold">{data}</span>
+              </div>
+            )}
           </li>
           <button
             type="button"
