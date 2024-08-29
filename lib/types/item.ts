@@ -1,4 +1,5 @@
 export interface ItemData {
+  isFree: boolean;
   id: number;
   totalCount: number;
   currentCount: number;
@@ -27,6 +28,7 @@ export interface ItemProps {
   currentCount: number;
   totalCount: number;
   raffleId: string;
+  status: string;
 }
 
 export interface ItemManualProps {
