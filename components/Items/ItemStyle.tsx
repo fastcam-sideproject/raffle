@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ItemProps } from '../../lib/types/item';
 import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
 import Button from '../../lib/common/Button';
+import { ItemProps } from '../../lib/types/item';
 import { useState } from 'react';
 
 export default function ItemStyle({
