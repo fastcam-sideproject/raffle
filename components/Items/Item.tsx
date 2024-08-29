@@ -31,7 +31,7 @@ export default function Item({ filter }: FilterProps) {
   //   queryKey: ['RaffleItemsFree'],
   //   queryFn: () => getRaffleFreeItem(userToken),
   // });
-
+  console.log(data);
   const filteredData = data
     ? data.filter((itemData: ItemData) => {
         if (filter === 'ALL') return true;
@@ -64,6 +64,7 @@ export default function Item({ filter }: FilterProps) {
     <>
       {filteredData.map(
         (itemData: {
+          id: string;
           currentCount: number;
           totalCount: number;
           item: {
@@ -74,13 +75,13 @@ export default function Item({ filter }: FilterProps) {
           };
         }) => (
           <ItemStyle
-            key={itemData.item.id}
+            key={itemData.id}
             name={itemData.item.name}
             category={itemData.item.category}
             imageUrl={itemData.item.imageUrl}
             currentCount={itemData.currentCount}
             totalCount={itemData.totalCount}
-            raffleId={itemData.item.id}
+            raffleId={itemData.id}
             filter={filter}
           />
         ),
