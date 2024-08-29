@@ -22,7 +22,6 @@ export default function Item({ filter }: FilterProps) {
   }
 
   if (isError) {
-    console.error(error?.toString());
     return (
       <div className="col-span-4">
         <ErrorPage />
