@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import Footer from '../components/Footer/Footer';
 import ReactQueryProviders from '../lib/hooks/useReactQuery';
+import Script from 'next/script';
 
 const pretendard = localFont({
   src: [
@@ -63,10 +64,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7372592599478425"
-     crossOrigin="anonymous"></script>
-      </head>
+    <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7372592599478425"
+        crossOrigin="anonymous"
+    />
       <body className={`${pretendard.className} text-gray-900`}>
         <ReactQueryProviders>
           {children}
