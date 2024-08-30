@@ -13,15 +13,21 @@ function Footer() {
             alt="Logo"
             className="w-36 h-auto"
           />
-          <span className="text-gray-300">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque cum quia corrupti!
-          </span>
+          <div className="text-gray-300 text-[0.7rem]">
+            상호 : 올포래플
+            <br />
+            대표자 명 : 김시환 <br />
+            사업자 등록번호 : 580 - 46 - 01046
+            <br />
+            문의 이 메일 : <Link href="/contact">allyouraffle.info@gmail.com</Link>
+            <br />
+            사업장 소재지 : 경기도 용인시 기흥구 서그내로 46 - 14
+          </div>
         </div>
         <div className="flex flex-col gap-8">
           <span className="text-gray-300">Links</span>
           <Link href="/">Home</Link>
           <Link href="/shop">Shop</Link>
-          <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
         </div>
         <div className="flex flex-col gap-8">

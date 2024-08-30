@@ -79,15 +79,6 @@ export default function HeaderNav() {
               Shop
             </Link>
           </li>
-          <li className="sm:border-none border-solid border-2 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center">
-            <Link
-              href="/about"
-              className={`p-2 w-full text-center ${pathName === '/about' ? 'text-blue-700 font-bold' : 'text-gray-500'}`}
-              onClick={closeMenu}
-            >
-              About
-            </Link>
-          </li>
           <li className="sm:border-none border-solid border-2 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center ">
             <Link
               href="/contact"

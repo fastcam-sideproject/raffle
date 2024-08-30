@@ -7,7 +7,7 @@ import ItemStyle from './ItemStyle';
 import { FilterProps, ItemData } from '../../lib/types/item';
 
 export default function Item({ filter }: FilterProps) {
-  const { data, isLoading, isError, error, userToken } = useRaffleData();
+  const { data, isLoading, isError, userToken } = useRaffleData();
 
   if (!userToken) {
     return (
@@ -50,6 +50,7 @@ export default function Item({ filter }: FilterProps) {
     <>
       {filteredData.map(
         (itemData: {
+          winner: string;
           status: string;
           id: string;
           item: { name: string; category: number; imageUrl: string };
@@ -66,6 +67,7 @@ export default function Item({ filter }: FilterProps) {
             raffleId={itemData.id}
             filter={filter}
             status={itemData.status}
+            winner={itemData.winner}
           />
         ),
       )}
