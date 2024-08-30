@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://allyouraffle.co.kr'),
   title: {
     template: 'All You Raffle | %s',
-    default: 'All You Raffle',
+    default: 'All You Raffle | 광고 보시고 당첨의 행운을 잡으세요!',
   },
   icons: {
     icon: '/image/favicon.ico',
