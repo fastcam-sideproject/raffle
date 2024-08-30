@@ -17,7 +17,7 @@ export default function RaffleItemConfirmationModal({
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-[1000]">
       <div className="w-11/12 md:w-4/5 lg:w-3/5 flex flex-col items-center bg-white rounded shadow-lg">
-        <div className=" w-full rounded-t bg-primary  text-white flex justify-center p-6">
+        <div className="w-full rounded-t bg-primary text-white flex justify-center p-6">
           <h2 className="text-2xl font-semibold">응모 완료</h2>
         </div>
         <div className="flex flex-col p-6 gap-6">
@@ -27,7 +27,7 @@ export default function RaffleItemConfirmationModal({
             alt={`${itemName} 이미지`}
             width={400}
             height={400}
-            className="w-full h-80"
+            className="w-full h-80 lg:h-60 md:h-48"
           />
           <h3 className="font-semibold text-center text-xl">{itemName}</h3>
           <Button
