@@ -109,7 +109,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
             height={200}
             src={image.imageUrl}
             alt={`${detailData.item.name} image ${image.id}`}
-            className="w-[100%] sm:w-[70%] h-auto"
+            className="w-[100%] sm:w-[70%] h-auto mb-10"
           />
         ),
       )}
