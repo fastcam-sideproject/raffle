@@ -1,10 +1,11 @@
 'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
 import Button from '../../lib/common/Button';
 import { ItemProps } from '../../lib/types/item';
 import { useState } from 'react';
+import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 
 export default function ItemStyle({
   name,
@@ -15,9 +16,12 @@ export default function ItemStyle({
   raffleId,
   status,
 }: ItemProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
+    useState<boolean>(false);
+
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
-  const handlePurchasePage = navigateToPurchasePage({ raffleId });
+  // const handlePurchasePage = useNavigateToPurchasePage({ raffleId });
 
   const handleImageClick = (event: React.MouseEvent) => {
     if (status === 'COMPLETED') {
@@ -28,6 +32,15 @@ export default function ItemStyle({
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleEnterRaffle = () => {
+    setIsRaffleConfirmationModalOpen(true);
+    console.log('응모하기');
+  };
+
+  const handleCloseRaffleConfirmationModal = () => {
+    setIsRaffleConfirmationModalOpen(false);
   };
 
   return (
@@ -60,7 +73,7 @@ export default function ItemStyle({
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
-          onClick={percentageComplete !== 100 ? handlePurchasePage : handleImageClick}
+          onClick={percentageComplete !== 100 ? handleEnterRaffle : handleImageClick}
         />
 
         <div>
@@ -91,6 +104,13 @@ export default function ItemStyle({
           </div>
         </div>
       )}
+
+      <RaffleItemConfirmationModal
+        isOpen={isRaffleConfirmationModalOpen}
+        onClose={handleCloseRaffleConfirmationModal}
+        itemName={name}
+        itemImageUrl={imageUrl}
+      />
     </li>
   );
 }

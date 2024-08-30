@@ -17,6 +17,8 @@ export default function HeaderNav() {
   const userToken = useAuthStore((state) => state.userToken);
   const pathName = usePathname();
 
+  console.log('header');
+
   /**
    * 사용자 응모권 갯수를 나타내는 useQuery
    * !!enabled: userToken이 존재할 때만 실행
