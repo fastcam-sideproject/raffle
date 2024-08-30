@@ -1,10 +1,13 @@
 'use client';
+
+import { ItemProps } from '../../lib/types/item';
+import { use, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
 import Button from '../../lib/common/Button';
-import { ItemProps } from '../../lib/types/item';
-import { useState } from 'react';
+import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
+import ItemComplete from './ItemComplete';
+import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 
 export default function ItemStyle({
   name,
@@ -14,21 +17,66 @@ export default function ItemStyle({
   totalCount,
   raffleId,
   status,
+  winner,
 }: ItemProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
-  const handlePurchasePage = navigateToPurchasePage({ raffleId });
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
+    useState<boolean>(false);
+  const [detailData, setDetailData] = useState({
+    currentCount,
+    totalCount,
+  });
+
+  const percentageComplete = parseFloat(
+    ((detailData.currentCount / detailData.totalCount) * 100).toFixed(2),
+  );
+  // const handlePurchasePage = useNavigateToPurchasePage({ raffleId });
+
+  /**
+   * 상품 데이터를 가져와서 detailData에 저장하는 함수
+   * @param id
+   */
+  const fetchGetRaffleDataDetail = async (id: string) => {
+    try {
+      const data = await getRaffleDataDetail(id);
+      setDetailData(data);
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const handleImageClick = (event: React.MouseEvent) => {
     if (status === 'COMPLETED') {
       event.preventDefault();
-      setIsModalOpen(true);
+      setIsModalOpen(!isModalOpen);
     }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  /**
+   * 응모하기 버튼 클릭 시 실행되는 함수
+   */
+  const handleEnterRaffle = () => {
+    setIsRaffleConfirmationModalOpen(true);
   };
+
+  const handleCloseRaffleConfirmationModal = () => {
+    setIsRaffleConfirmationModalOpen(false);
+  };
+
+  /**
+   * 응모 성공 후 데이터를 fetchGetRaffleDataDetail 함수를 통해 다시 가져오는 함수
+   */
+  const handlePurchaseSuccess = () => {
+    fetchGetRaffleDataDetail(raffleId);
+  };
+
+  /**
+   * 컴포넌트가 마운트될 때와 raffleId가 변경될 때마다
+   * fetchGetRaffleDataDetail 함수를 호출하여 상품 데이터를 갱신한다.
+   */
+  useEffect(() => {
+    fetchGetRaffleDataDetail(raffleId);
+  }, [raffleId]);
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
@@ -55,12 +103,12 @@ export default function ItemStyle({
           type="button"
           ariaLabel={percentageComplete === 100 ? '결과 확인' : '응모하기'}
           label={percentageComplete === 100 ? '결과 확인' : '응모하기'}
-          width=""
-          fontSize=""
+          width="auto"
+          fontSize="base"
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
-          onClick={percentageComplete !== 100 ? handlePurchasePage : handleImageClick}
+          onClick={percentageComplete !== 100 ? handleEnterRaffle : handleImageClick}
         />
 
         <div>
@@ -76,21 +124,17 @@ export default function ItemStyle({
           />
         </div>
       </div>
-
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-4 text-center">이벤트가 종료되었습니다.</h2>
-            <p className="text-center">
-              해당 이벤트는 이미 완료되었습니다. <br />
-              다음 기회에 도전해보세요!
-            </p>
-            <button className="mt-4 px-4 py-2 bg-primary text-white rounded" onClick={closeModal}>
-              닫기
-            </button>
-          </div>
-        </div>
+        <ItemComplete onClose={handleImageClick} winner={winner} imageUrl={imageUrl} name={name} />
       )}
+      <RaffleItemConfirmationModal
+        isOpen={isRaffleConfirmationModalOpen}
+        onClose={handleCloseRaffleConfirmationModal}
+        itemName={name}
+        itemImageUrl={imageUrl}
+        itemId={raffleId}
+        onPurchaseSuccess={handlePurchaseSuccess}
+      />
     </li>
   );
 }

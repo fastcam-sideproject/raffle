@@ -27,8 +27,6 @@ export default function Home() {
     }
   }, [router, setUserToken]);
 
-
-
   return (
     <>
       <HeaderNav />

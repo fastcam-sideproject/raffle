@@ -1,14 +1,14 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import GoogleLoginButton from '../GoogleLoginButton';
-import ProfilePopover from '../ProfilePopover';
-import useAuthStore from '../../lib/store/useAuthStore';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getTickets } from '../../api/user/ticketsApi';
+import GoogleLoginButton from '../GoogleLoginButton';
+import ProfilePopover from '../ProfilePopover';
+import useAuthStore from '../../lib/store/useAuthStore';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function HeaderNav() {
   const [isPopverOpen, setIsPopverOpen] = useState<boolean>(false);
@@ -19,7 +19,7 @@ export default function HeaderNav() {
 
   /**
    * 사용자 응모권 갯수를 나타내는 useQuery
-   * enalbed: userToken이 존재할 때만 요청을 보냄
+   * !!enabled: userToken이 존재할 때만 실행
    */
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['getTickets'],
@@ -77,15 +77,6 @@ export default function HeaderNav() {
               onClick={closeMenu}
             >
               Shop
-            </Link>
-          </li>
-          <li className="sm:border-none border-solid border-2 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center">
-            <Link
-              href="/about"
-              className={`p-2 w-full text-center ${pathName === '/about' ? 'text-blue-700 font-bold' : 'text-gray-500'}`}
-              onClick={closeMenu}
-            >
-              About
             </Link>
           </li>
           <li className="sm:border-none border-solid border-2 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center ">

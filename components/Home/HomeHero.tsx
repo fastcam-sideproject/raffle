@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import TicketPlusOne from '../TicketPlusOne';
 
 export default function HomeHero() {
   return (
@@ -11,6 +12,9 @@ export default function HomeHero() {
         <button type="button" className="bg-primary text-white px-6 py-3 rounded-full shadow-2xl">
           <Link href="/shop">Get Started</Link>
         </button>
+        <div className="pt-4">
+          <TicketPlusOne />
+        </div>
       </div>
     </section>
   );
