@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import './globals.css';
 import Footer from '../components/Footer/Footer';
 import ReactQueryProviders from '../lib/hooks/useReactQuery';
+import './globals.css';
 
 const pretendard = localFont({
   src: [
@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   title: {
     template: 'All You Raffle | %s',
     default: 'All You Raffle',
+  },
+  icons: {
+    icon: '/image/favicon.ico',
   },
   description: '광고 보시고 당첨의 행운을 잡으세요!',
   openGraph: {
