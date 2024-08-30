@@ -1,8 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
 import useAuthStore from '../../lib/store/useAuthStore';
+import { getTickets } from '../../api/user/ticketsApi';
 
 type RaffleItemConfirmationModalProps = {
   isOpen: boolean;
@@ -34,9 +35,19 @@ export default function RaffleItemConfirmationModal({
     },
   });
 
+  const { data: ticketsCount } = useQuery({
+    queryKey: ['getTickets'],
+    queryFn: () => getTickets(userToken),
+    enabled: !!userToken,
+  });
+
   const handlePurchaseTicket = () => {
-    mutate.mutate();
-    onClose();
+    if (ticketsCount > 0) {
+      mutate.mutate();
+      onClose();
+    } else {
+      alert('응모권이 부족합니다.');
+    }
   };
 
   if (!isOpen) return null;
