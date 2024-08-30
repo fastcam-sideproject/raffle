@@ -7,8 +7,18 @@ import Image from 'next/image';
 import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 
+type DeatilData = {
+  item: {
+    name: string;
+    imageUrl: string;
+    imageList: { id: string | null | undefined; imageUrl: string | StaticImport }[];
+  };
+  totalCount: number;
+  currentCount: number;
+};
+
 export default function ItemDetail({ params: { id } }: { params: { id: string } }) {
-  const [detailData, setDetailData] = useState({
+  const [detailData, setDetailData] = useState<DeatilData>({
     item: {
       name: '',
       imageUrl: '',
