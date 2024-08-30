@@ -9,6 +9,7 @@ export default function useRaffleData(filter = 'ALL') {
     queryKey: queryKey,
     queryFn: async () => {
       const data = await getRaffleData(userToken);
+
       // console.log('Fetched Raffle Data:', data);
       // if (filter === 'ALL') {
       //   return data;

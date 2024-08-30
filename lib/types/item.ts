@@ -29,6 +29,7 @@ export interface ItemProps {
   totalCount: number;
   raffleId: string;
   status: string;
+  winner: string;
 }
 
 export interface ItemManualProps {

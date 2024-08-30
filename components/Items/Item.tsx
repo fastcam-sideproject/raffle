@@ -50,6 +50,7 @@ export default function Item({ filter }: FilterProps) {
     <>
       {filteredData.map(
         (itemData: {
+          winner: string;
           status: string;
           id: string;
           item: { name: string; category: number; imageUrl: string };
@@ -66,6 +67,7 @@ export default function Item({ filter }: FilterProps) {
             raffleId={itemData.id}
             filter={filter}
             status={itemData.status}
+            winner={itemData.winner}
           />
         ),
       )}
