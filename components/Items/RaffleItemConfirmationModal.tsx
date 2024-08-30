@@ -1,17 +1,44 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
+import useAuthStore from '../../lib/store/useAuthStore';
+
+type RaffleItemConfirmationModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  itemName: string;
+  itemImageUrl: string;
+  itemId: string;
+};
 
 export default function RaffleItemConfirmationModal({
   isOpen,
   onClose,
   itemName,
   itemImageUrl,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  itemName: string;
-  itemImageUrl: string;
-}) {
+  itemId,
+}: RaffleItemConfirmationModalProps) {
+  const userToken = useAuthStore((state) => state.userToken);
+  const queryClient = useQueryClient();
+  const mutate = useMutation({
+    mutationKey: ['purchaseTicket'],
+    mutationFn: () => postPurchaseTicketOne(userToken, itemId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getTickets'] });
+      alert('응모가 완료되었습니다.');
+    },
+    onError: (error) => {
+      alert('응모에 실패했습니다.');
+      throw error;
+    },
+  });
+
+  const handlePurchaseTicket = () => {
+    mutate.mutate();
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -32,7 +59,7 @@ export default function RaffleItemConfirmationModal({
           <h3 className="font-semibold text-center text-xl">{itemName}</h3>
           <Button
             className="bg-primary hover:bg-blue-500 px-8 py-3"
-            onClick={onClose}
+            onClick={handlePurchaseTicket}
             label="확인"
             type="button"
             ariaLabel="확인"

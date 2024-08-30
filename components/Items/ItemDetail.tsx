@@ -37,16 +37,16 @@ export default async function ItemDetail({ params: { id } }: { params: { id: str
           </div>
 
           <div />
-          <Link href={`/purchase/${id}`}>
-            <Button
-              type="button"
-              ariaLabel="응모하기"
-              label="응모하기"
-              fontSize=""
-              width=""
-              className="w-full bg-primary hover:bg-blue-500 sm:relative sticky top-0"
-            />
-          </Link>
+          {/* <Link href={`/purchase/${id}`}> */}
+          <Button
+            type="button"
+            ariaLabel="응모하기"
+            label="응모하기"
+            fontSize=""
+            width=""
+            className="w-full bg-primary hover:bg-blue-500 sm:relative sticky top-0"
+          />
+          {/* </Link> */}
         </div>
       </div>
       {detailData.item.imageList.map(

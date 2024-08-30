@@ -36,7 +36,6 @@ export default function ItemStyle({
 
   const handleEnterRaffle = () => {
     setIsRaffleConfirmationModalOpen(true);
-    console.log('응모하기');
   };
 
   const handleCloseRaffleConfirmationModal = () => {
@@ -104,12 +103,12 @@ export default function ItemStyle({
           </div>
         </div>
       )}
-
       <RaffleItemConfirmationModal
         isOpen={isRaffleConfirmationModalOpen}
         onClose={handleCloseRaffleConfirmationModal}
         itemName={name}
         itemImageUrl={imageUrl}
+        itemId={raffleId}
       />
     </li>
   );
