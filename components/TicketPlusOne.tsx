@@ -32,7 +32,7 @@ export default function TicketPlusOne() {
     <>
       <Button
         type="button"
-        label="티켓 추가하기"
+        label="광고 보고 응모권 추가하기"
         width="auto"
         fontSize="base"
         className="bg-primary hover:bg-blue-500"

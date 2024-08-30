@@ -5,7 +5,7 @@ import Item from './Item';
 import ItemManual from './ItemManual';
 import Button from '../../lib/common/Button';
 
-function ItemGrid() {
+export default function ItemGrid() {
   const [filter, setFilter] = useState<'ALL' | 'FREE' | 'NOT_FREE' | 'COMPLETED'>('ALL');
   const [isManualOpen, setIsManualOpen] = useState(false);
 
@@ -63,5 +63,3 @@ function ItemGrid() {
     </>
   );
 }
-
-export default ItemGrid;

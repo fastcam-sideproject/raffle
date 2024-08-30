@@ -30,7 +30,7 @@ export default function ItemManual({ onClose }: ItemManualProps) {
           ariaLabel="닫기"
           label="닫기"
           fontSize=""
-          width=""
+          width="auto"
           onClick={onClose}
           className="bg-primary w-1/6 hover:bg-blue-500"
         />

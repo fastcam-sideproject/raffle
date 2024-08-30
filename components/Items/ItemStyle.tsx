@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import navigateToPurchasePage from '../../lib/utils/navigateToPurchasePage';
-import Button from '../../lib/common/Button';
 import { ItemProps } from '../../lib/types/item';
 import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Button from '../../lib/common/Button';
+import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import ItemComplete from './ItemComplete';
 
 export default function ItemStyle({
@@ -18,15 +18,26 @@ export default function ItemStyle({
   status,
   winner,
 }: ItemProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
+    useState<boolean>(false);
+
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
-  const handlePurchasePage = navigateToPurchasePage({ raffleId });
+  // const handlePurchasePage = useNavigateToPurchasePage({ raffleId });
 
   const handleImageClick = (event: React.MouseEvent) => {
     if (status === 'COMPLETED') {
       event.preventDefault();
       setIsModalOpen(!isModalOpen);
     }
+  };
+
+  const handleEnterRaffle = () => {
+    setIsRaffleConfirmationModalOpen(true);
+  };
+
+  const handleCloseRaffleConfirmationModal = () => {
+    setIsRaffleConfirmationModalOpen(false);
   };
 
   return (
@@ -54,12 +65,12 @@ export default function ItemStyle({
           type="button"
           ariaLabel={percentageComplete === 100 ? '결과 확인' : '응모하기'}
           label={percentageComplete === 100 ? '결과 확인' : '응모하기'}
-          width=""
-          fontSize=""
+          width="auto"
+          fontSize="base"
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
-          onClick={percentageComplete !== 100 ? handlePurchasePage : handleImageClick}
+          onClick={percentageComplete !== 100 ? handleEnterRaffle : handleImageClick}
         />
 
         <div>
@@ -78,6 +89,13 @@ export default function ItemStyle({
       {isModalOpen && (
         <ItemComplete onClose={handleImageClick} winner={winner} imageUrl={imageUrl} name={name} />
       )}
+      <RaffleItemConfirmationModal
+        isOpen={isRaffleConfirmationModalOpen}
+        onClose={handleCloseRaffleConfirmationModal}
+        itemName={name}
+        itemImageUrl={imageUrl}
+        itemId={raffleId}
+      />
     </li>
   );
 }
