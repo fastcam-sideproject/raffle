@@ -1,7 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
+import Image from 'next/image';
 import Button from '../../lib/common/Button';
 
 export default async function ItemDetail({ params: { id } }: { params: { id: string } }) {

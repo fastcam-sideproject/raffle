@@ -1,10 +1,10 @@
 'use client';
 
+import { ItemProps } from '../../lib/types/item';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../../lib/common/Button';
-import { ItemProps } from '../../lib/types/item';
-import { useState } from 'react';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 
 export default function ItemStyle({
@@ -67,8 +67,8 @@ export default function ItemStyle({
           type="button"
           ariaLabel={percentageComplete === 100 ? '결과 확인' : '응모하기'}
           label={percentageComplete === 100 ? '결과 확인' : '응모하기'}
-          width=""
-          fontSize=""
+          width="auto"
+          fontSize="base"
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
           } text-white rounded float-right max-md:float-none max-md:w-full`}
