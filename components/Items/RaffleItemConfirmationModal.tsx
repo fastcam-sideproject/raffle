@@ -45,7 +45,7 @@ export default function RaffleItemConfirmationModal({
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-[1000]">
       <div className="w-11/12 md:w-4/5 lg:w-3/5 flex flex-col items-center bg-white rounded shadow-lg">
         <div className="w-full rounded-t bg-primary text-white flex justify-center p-6">
-          <h2 className="text-2xl font-semibold">응모 완료</h2>
+          <h2 className="text-2xl font-semibold">{itemName} 응모하기</h2>
         </div>
         <div className="flex flex-col p-6 gap-6">
           <Image
@@ -63,6 +63,15 @@ export default function RaffleItemConfirmationModal({
             label="확인"
             type="button"
             ariaLabel="확인"
+            fontSize="base"
+            width="auto"
+          />
+          <Button
+            className="bg-gray-300 hover:bg-gray-400 px-8 py-3"
+            onClick={onClose}
+            label="닫기"
+            type="button"
+            ariaLabel="닫기"
             fontSize="base"
             width="auto"
           />
