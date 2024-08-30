@@ -7,7 +7,7 @@ import ItemStyle from './ItemStyle';
 import { FilterProps, ItemData } from '../../lib/types/item';
 
 export default function Item({ filter }: FilterProps) {
-  const { data, isLoading, isError, error, userToken } = useRaffleData();
+  const { data, isLoading, isError, userToken } = useRaffleData();
 
   if (!userToken) {
     return (
