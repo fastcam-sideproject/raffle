@@ -38,12 +38,12 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL('https://allyouraffle.co.kr'),
   title: {
-    template: 'All Your Raffle | %s',
-    default: 'All Your Raffle',
+    template: 'All You Raffle | %s',
+    default: 'All You Raffle',
   },
   description: '광고 보시고 당첨의 행운을 잡으세요!',
   openGraph: {
-    title: 'All Your Raffle',
+    title: 'All You Raffle',
     description: '광고 보시고 당첨의 행운을 잡으세요!',
     type: 'website',
     url: 'https://allyouraffle.co.kr',
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
   },
   twitter: {
-    title: 'All Your Raffle',
+    title: 'All You Raffle',
     description: '광고 보시고 당첨의 행운을 잡으세요!',
   },
 };
