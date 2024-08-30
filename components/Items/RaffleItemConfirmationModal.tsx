@@ -57,24 +57,26 @@ export default function RaffleItemConfirmationModal({
             className="w-full h-80 lg:h-60 md:h-48"
           />
           <h3 className="font-semibold text-center text-xl">{itemName}</h3>
-          <Button
-            className="bg-primary hover:bg-blue-500 px-8 py-3"
-            onClick={handlePurchaseTicket}
-            label="확인"
-            type="button"
-            ariaLabel="확인"
-            fontSize="base"
-            width="auto"
-          />
-          <Button
-            className="bg-gray-300 hover:bg-gray-400 px-8 py-3"
-            onClick={onClose}
-            label="닫기"
-            type="button"
-            ariaLabel="닫기"
-            fontSize="base"
-            width="auto"
-          />
+          <div className="flex justify-between">
+            <Button
+              className="bg-primary hover:bg-blue-500 px-8 py-3"
+              onClick={handlePurchaseTicket}
+              label="확인"
+              type="button"
+              ariaLabel="확인"
+              fontSize="base"
+              width="auto"
+            />
+            <Button
+              className="bg-gray-300 hover:bg-gray-400 px-8 py-3"
+              onClick={onClose}
+              label="닫기"
+              type="button"
+              ariaLabel="닫기"
+              fontSize="base"
+              width="auto"
+            />
+          </div>
         </div>
       </div>
     </div>
