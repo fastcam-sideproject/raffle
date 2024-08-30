@@ -14,7 +14,7 @@ function Footer() {
             className="w-36 h-auto"
           />
           <div className="text-gray-300 text-[0.7rem]">
-            상호 : 올포래플
+            상호 : 올유래플
             <br />
             대표자 명 : 김시환 <br />
             사업자 등록번호 : 580 - 46 - 01046
