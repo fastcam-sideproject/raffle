@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
-import { useState } from 'react';
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
 import useAuthStore from '../../lib/store/useAuthStore';
@@ -12,6 +12,7 @@ type RaffleItemConfirmationModalProps = {
   itemName: string;
   itemImageUrl: string;
   itemId: string;
+  onPurchaseSuccess: () => void;
 };
 
 export default function RaffleItemConfirmationModal({
@@ -20,6 +21,7 @@ export default function RaffleItemConfirmationModal({
   itemName,
   itemImageUrl,
   itemId,
+  onPurchaseSuccess,
 }: RaffleItemConfirmationModalProps) {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const userToken = useAuthStore((state) => state.userToken);
@@ -31,6 +33,7 @@ export default function RaffleItemConfirmationModal({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getTickets'] });
       alert('응모가 완료되었습니다.');
+      onPurchaseSuccess();
     },
     onError: (error) => {
       alert('응모에 실패했습니다.');

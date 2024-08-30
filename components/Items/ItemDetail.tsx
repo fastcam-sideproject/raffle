@@ -39,10 +39,6 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
     }
   };
 
-  if (!detailData) {
-    return <div>loading...</div>;
-  }
-
   useEffect(() => {
     fetchGetRaffleDataDetail(id);
   }, [id]);
@@ -54,7 +50,19 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
     setIsRaffleConfirmationModalOpen(false);
   };
 
+  /**
+   * 응모 성공 후 데이터를 다시 가져오는 함수
+   * @returns void
+   */
+  const handlePurchaseSuccess = () => {
+    fetchGetRaffleDataDetail(id);
+  };
+
   const percentageComplete = ((detailData.currentCount / detailData.totalCount) * 100).toFixed(2);
+
+  if (!detailData) {
+    return <div>loading...</div>;
+  }
 
   return (
     <section className="flex flex-col justify-center items-center">
@@ -100,6 +108,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
         itemName={detailData.item.name}
         itemImageUrl={detailData.item.imageUrl}
         itemId={id}
+        onPurchaseSuccess={handlePurchaseSuccess}
       />
       {detailData.item.imageList.map(
         (image: { id: string | null | undefined; imageUrl: string | StaticImport }) => (

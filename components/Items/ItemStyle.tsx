@@ -1,12 +1,13 @@
 'use client';
 
 import { ItemProps } from '../../lib/types/item';
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import ItemComplete from './ItemComplete';
+import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 
 export default function ItemStyle({
   name,
@@ -21,9 +22,28 @@ export default function ItemStyle({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
     useState<boolean>(false);
+  const [detailData, setDetailData] = useState({
+    currentCount,
+    totalCount,
+  });
 
-  const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
+  const percentageComplete = parseFloat(
+    ((detailData.currentCount / detailData.totalCount) * 100).toFixed(2),
+  );
   // const handlePurchasePage = useNavigateToPurchasePage({ raffleId });
+
+  /**
+   * 상품 데이터를 가져와서 detailData에 저장하는 함수
+   * @param id
+   */
+  const fetchGetRaffleDataDetail = async (id: string) => {
+    try {
+      const data = await getRaffleDataDetail(id);
+      setDetailData(data);
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const handleImageClick = (event: React.MouseEvent) => {
     if (status === 'COMPLETED') {
@@ -32,6 +52,9 @@ export default function ItemStyle({
     }
   };
 
+  /**
+   * 응모하기 버튼 클릭 시 실행되는 함수
+   */
   const handleEnterRaffle = () => {
     setIsRaffleConfirmationModalOpen(true);
   };
@@ -39,6 +62,21 @@ export default function ItemStyle({
   const handleCloseRaffleConfirmationModal = () => {
     setIsRaffleConfirmationModalOpen(false);
   };
+
+  /**
+   * 응모 성공 후 데이터를 fetchGetRaffleDataDetail 함수를 통해 다시 가져오는 함수
+   */
+  const handlePurchaseSuccess = () => {
+    fetchGetRaffleDataDetail(raffleId);
+  };
+
+  /**
+   * 컴포넌트가 마운트될 때와 raffleId가 변경될 때마다
+   * fetchGetRaffleDataDetail 함수를 호출하여 상품 데이터를 갱신한다.
+   */
+  useEffect(() => {
+    fetchGetRaffleDataDetail(raffleId);
+  }, [raffleId]);
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
@@ -95,6 +133,7 @@ export default function ItemStyle({
         itemName={name}
         itemImageUrl={imageUrl}
         itemId={raffleId}
+        onPurchaseSuccess={handlePurchaseSuccess}
       />
     </li>
   );
