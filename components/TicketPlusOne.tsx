@@ -1,3 +1,5 @@
+'use client';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postTicketsPlusOne } from '../api/user/ticketsApi';
 import Button from '../lib/common/Button';
