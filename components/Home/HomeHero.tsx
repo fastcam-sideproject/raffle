@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import TicketPlusOneButton from '../TicketPlusOneButton';
+import TicketPlusOneButton from '../Button/TicketPlusOneButton';
 
 export default function HomeHero() {
   return (

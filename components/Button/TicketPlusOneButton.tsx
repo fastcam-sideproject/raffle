@@ -1,9 +1,9 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postTicketsPlusOne } from '../api/user/ticketsApi';
-import Button from '../lib/common/Button';
-import useAuthStore from '../lib/store/useAuthStore';
+import { postTicketsPlusOne } from '../../api/user/ticketsApi';
+import useAuthStore from '../../lib/store/useAuthStore';
+import Button from '../../lib/common/Button';
 
 export default function TicketPlusOneButton() {
   const userToken = useAuthStore((state) => state.userToken);
