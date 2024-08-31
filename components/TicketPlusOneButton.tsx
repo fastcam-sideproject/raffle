@@ -5,7 +5,7 @@ import { postTicketsPlusOne } from '../api/user/ticketsApi';
 import Button from '../lib/common/Button';
 import useAuthStore from '../lib/store/useAuthStore';
 
-export default function TicketPlusOne() {
+export default function TicketPlusOneButton() {
   const userToken = useAuthStore((state) => state.userToken);
   const queryClient = useQueryClient();
 

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import TicketPlusOne from '../TicketPlusOne';
+import TicketPlusOneButton from '../TicketPlusOneButton';
 
 export default function HomeHero() {
   return (
@@ -13,7 +13,7 @@ export default function HomeHero() {
           <Link href="/shop">Get Started</Link>
         </button>
         <div className="pt-4">
-          <TicketPlusOne />
+          <TicketPlusOneButton />
         </div>
       </div>
     </section>
