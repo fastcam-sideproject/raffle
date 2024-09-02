@@ -27,9 +27,9 @@ export default function ItemStyle({
     totalCount,
   });
 
-  const percentageComplete = parseFloat(
-    ((detailData.currentCount / detailData.totalCount) * 100).toFixed(2),
-  );
+  const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
+
+  console.log(percentageComplete);
   // const handlePurchasePage = useNavigateToPurchasePage({ raffleId });
 
   /**
