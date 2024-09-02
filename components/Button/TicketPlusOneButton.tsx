@@ -22,7 +22,7 @@ export default function TicketPlusOneButton() {
     },
     onError: (error: Error) => {
       alert('티켓 추가 실패');
-      console.error('티켓 추가 실패', error);
+      throw error;
     },
   });
 
@@ -31,15 +31,13 @@ export default function TicketPlusOneButton() {
   };
 
   return (
-    <>
-      <Button
-        type="button"
-        label="광고 보고 응모권 추가하기"
-        width="auto"
-        fontSize="base"
-        className="bg-primary hover:bg-blue-500"
-        onClick={handleOnClick}
-      />
-    </>
+    <Button
+      type="button"
+      label="광고 보고 응모권 추가하기"
+      width="auto"
+      fontSize="base"
+      className="bg-primary hover:bg-blue-500"
+      onClick={handleOnClick}
+    />
   );
 }

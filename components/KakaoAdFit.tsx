@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { KakaoAdFitProps } from '../lib/types/kakaoAdFit';
+import { KakaoAdFitProps } from '../lib/types/advertisement';
 
 export function KakaoAdFit({ unit, width, height, disabled }: KakaoAdFitProps) {
   const scriptElementWrapper = useRef<HTMLDivElement>(null);
