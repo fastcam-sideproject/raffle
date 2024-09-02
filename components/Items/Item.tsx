@@ -2,20 +2,11 @@
 
 import { FilterProps, ItemData } from '../../lib/types/item';
 import useRaffleData from '../../lib/hooks/useRaffleData';
-import NoUserToken from '../ErrorPages/NoUserToken';
 import ErrorPage from '../ErrorPages/ErrorPage';
 import ItemStyle from './ItemStyle';
 
 export default function Item({ filter }: FilterProps) {
-  const { data, isLoading, isError, userToken } = useRaffleData();
-
-  if (!userToken) {
-    return (
-      <div className="col-span-4">
-        <NoUserToken />
-      </div>
-    );
-  }
+  const { data, isLoading, isError } = useRaffleData();
 
   if (isLoading) {
     return <div>Loading...</div>;

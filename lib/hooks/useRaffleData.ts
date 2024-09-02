@@ -34,7 +34,6 @@ export default function useRaffleData(filter = 'ALL') {
       return data;
     },
 
-    enabled: !!userToken,
     staleTime: 1000 * 60 * 5,
   });
 

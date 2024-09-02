@@ -8,6 +8,8 @@ import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import ItemComplete from './ItemComplete';
 import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
+import useAuthStore from '../../lib/store/useAuthStore';
+import ItemLoginModal from './ItemLoginModal';
 
 export default function ItemStyle({
   name,
@@ -20,17 +22,15 @@ export default function ItemStyle({
   winner,
 }: ItemProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
     useState<boolean>(false);
   const [detailData, setDetailData] = useState({
     currentCount,
     totalCount,
   });
-
+  const userToken = useAuthStore((state) => state.userToken);
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
-
-  console.log(percentageComplete);
-  // const handlePurchasePage = useNavigateToPurchasePage({ raffleId });
 
   /**
    * 상품 데이터를 가져와서 detailData에 저장하는 함수
@@ -56,11 +56,19 @@ export default function ItemStyle({
    * 응모하기 버튼 클릭 시 실행되는 함수
    */
   const handleEnterRaffle = () => {
-    setIsRaffleConfirmationModalOpen(true);
+    if (!userToken) {
+      setIsLoginModalOpen(true);
+    } else {
+      setIsRaffleConfirmationModalOpen(true);
+    }
   };
 
   const handleCloseRaffleConfirmationModal = () => {
-    setIsRaffleConfirmationModalOpen(false);
+    if (!userToken) {
+      setIsLoginModalOpen(false);
+    } else {
+      setIsRaffleConfirmationModalOpen(false);
+    }
   };
 
   /**
@@ -127,6 +135,7 @@ export default function ItemStyle({
       {isModalOpen && (
         <ItemComplete onClose={handleImageClick} winner={winner} imageUrl={imageUrl} name={name} />
       )}
+      {isLoginModalOpen && <ItemLoginModal onClose={handleCloseRaffleConfirmationModal} />}
       <RaffleItemConfirmationModal
         isOpen={isRaffleConfirmationModalOpen}
         onClose={handleCloseRaffleConfirmationModal}
