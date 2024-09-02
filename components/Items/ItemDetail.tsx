@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
+import useAuthStore from '../../lib/store/useAuthStore';
+import ItemLoginModal from './ItemLoginModal';
 
 type DeatilData = {
   item: {
@@ -18,6 +20,8 @@ type DeatilData = {
 };
 
 export default function ItemDetail({ params: { id } }: { params: { id: string } }) {
+  const userToken = useAuthStore((state) => state.userToken);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<DeatilData>({
     item: {
       name: '',
@@ -44,10 +48,18 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
   }, [id]);
 
   const handleOpenModal = () => {
-    setIsRaffleConfirmationModalOpen(true);
+    if (!userToken) {
+      setIsLoginModalOpen(true);
+    } else {
+      setIsRaffleConfirmationModalOpen(true);
+    }
   };
   const handleOpenClose = () => {
-    setIsRaffleConfirmationModalOpen(false);
+    if (!userToken) {
+      setIsLoginModalOpen(false);
+    } else {
+      setIsRaffleConfirmationModalOpen(false);
+    }
   };
 
   /**
@@ -124,6 +136,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
           />
         ),
       )}
+      {isLoginModalOpen && <ItemLoginModal onClose={handleOpenClose} />}
     </section>
   );
 }
