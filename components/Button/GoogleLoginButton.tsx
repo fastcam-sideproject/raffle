@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import baseURL from '../api/baseURL';
+import baseURL from '../../api/baseURL';
 
 export default function GoogleLoginButton() {
   const router = useRouter();

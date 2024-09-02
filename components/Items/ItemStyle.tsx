@@ -1,7 +1,7 @@
 'use client';
 
 import { ItemProps } from '../../lib/types/item';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../../lib/common/Button';
