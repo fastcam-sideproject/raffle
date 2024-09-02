@@ -4,3 +4,7 @@ export type KakaoAdFitProps = {
   height: string;
   disabled?: boolean;
 };
+
+export type AdvertisementProps = {
+  onClose: () => void;
+};
