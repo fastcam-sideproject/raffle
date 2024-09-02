@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Shop',
 };
 
-function Page() {
+export default function ShopPage() {
   return (
     <>
       {/* <AdvertisementStyle /> */}
@@ -16,5 +16,3 @@ function Page() {
     </>
   );
 }
-
-export default Page;
