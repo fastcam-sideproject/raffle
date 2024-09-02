@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Item from './Item';
 import ItemManual from './ItemManual';
 import Button from '../../lib/common/Button';
+import { KakaoAdFit } from '../KakaoAdFit';
 
 export default function ItemGrid() {
   const [filter, setFilter] = useState<'ALL' | 'FREE' | 'NOT_FREE' | 'COMPLETED'>('ALL');
@@ -15,7 +16,7 @@ export default function ItemGrid() {
 
   return (
     <>
-      <div className="flex items-center justify-between w-11/12 mb-8 px-10">
+      <nav className="flex w-full items-center justify-between m-4 p-4">
         <ul className="flex gap-4">
           {/* <button
             type="button"
@@ -56,10 +57,20 @@ export default function ItemGrid() {
           className="bg-primary hover:bg-blue-500"
         />
         {isManualOpen && <ItemManual onClose={handleManualOpen} />}
-      </div>
-      <ul className="w-4/5 grid grid-cols-4 gap-4 items-center max-lg:grid-cols-2 max-sm:grid-cols-1">
-        <Item key={filter} filter={filter} />
-      </ul>
+      </nav>
+      <section className="flex gap-4 max-lg:flex-col max-lg:items-center">
+        <aside className="lg:hidden">
+          <KakaoAdFit unit="DAN-qvc3rvDUKVUobMDZ" width="300" height="250" disabled={false} />
+        </aside>
+
+        <aside className="max-lg:hidden">
+          <KakaoAdFit unit="DAN-OUyn7VXgiTbP3fFn" width="160" height="600" disabled={false} />
+        </aside>
+
+        <ul className="grid grid- grid-cols-4 gap-4 items-center max-lg:grid-cols-2 max-sm:grid-cols-1">
+          <Item key={filter} filter={filter} />
+        </ul>
+      </section>
     </>
   );
 }
