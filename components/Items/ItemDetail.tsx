@@ -68,13 +68,15 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
     <section className="flex flex-col justify-center items-center">
       <h1 className="hidden">상세페이지</h1>
       <div className="w-[100%] flex flex-col sm:w-[75%] sm:grid sm:grid-cols-2 justify-between gap-8 items-center p-8">
-        <Image
-          width={400}
-          height={400}
-          src={detailData.item.imageUrl}
-          alt={detailData.item.name}
-          className="object-contain"
-        />
+        {detailData.item.imageUrl && (
+          <Image
+            width={400}
+            height={400}
+            src={detailData.item.imageUrl}
+            alt={`${detailData.item.name} 이미지`}
+            className="object-contain"
+          />
+        )}
         <div className="w-[100%] flex flex-col gap-4">
           <h2 className="font-semibold text-[1.2rem]">{detailData.item.name}</h2>
           <div className="border-solid border-[1px] border-primary p-4">
