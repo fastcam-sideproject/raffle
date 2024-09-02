@@ -1,5 +1,5 @@
 import PrivacyPolicies from '../../components/Footer/PrivacyPolicies';
 
-export default function Page() {
+export default function PrivacyPoliciesPage() {
   return <PrivacyPolicies />;
 }

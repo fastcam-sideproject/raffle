@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Contact',
 };
 
-function Page() {
+export default function ContactPage() {
   return (
     <>
       <Banner />
@@ -17,5 +17,3 @@ function Page() {
     </>
   );
 }
-
-export default Page;
