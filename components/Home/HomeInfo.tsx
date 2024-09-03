@@ -1,8 +1,24 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+import useAuthStore from '../../lib/store/useAuthStore';
+import { getRaffleData } from '../../api/raffle/raffleApi';
+
 export default function HomeInfo() {
+  const userToken = useAuthStore((state) => state.userToken);
+
+  const { data = [] } = useQuery({
+    queryKey: ['RaffleItems'],
+    queryFn: async () => await getRaffleData(userToken),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const completedCount = data.filter((item: any) => item.status === 'COMPLETED').length;
+
   return (
-    <section className="py-16 bg-white">
-      <div className="bg-gray-100 p-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <section className="my-16 bg-blue-50 w-full">
+      <div className="flex justify-center items-center gap-10 bg-blue-50 p-6">
+        <div className=" flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-4 w-[90%]">
           <div className="col-span-2 bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-lg font-bold mb-4">공지사항</h2>
             <ul className="space-y-2">
@@ -27,7 +43,7 @@ export default function HomeInfo() {
 
           <div className="bg-white p-4 rounded-lg shadow-md">
             <h3 className="text-sm font-semibold">누적 당첨자 수</h3>
-            <p className="text-gray-600">10,000,000 명</p>
+            <p className="text-gray-600">{completedCount}명</p>
           </div>
 
           <div className="bg-white p-4 rounded-lg shadow-md">
