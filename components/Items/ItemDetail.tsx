@@ -8,6 +8,9 @@ import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
+import { getTickets } from '../../api/user/ticketsApi';
 
 type DeatilData = {
   item: {
@@ -20,7 +23,6 @@ type DeatilData = {
 };
 
 export default function ItemDetail({ params: { id } }: { params: { id: string } }) {
-  const userToken = useAuthStore((state) => state.userToken);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<DeatilData>({
     item: {
@@ -33,6 +35,29 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
   });
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
     useState<boolean>(false);
+
+  const userToken = useAuthStore((state) => state.userToken);
+  const queryClient = useQueryClient();
+
+  const mutate = useMutation({
+    mutationKey: ['purchaseTicket'],
+    mutationFn: () => postPurchaseTicketOne(userToken, id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getTickets'] });
+      handlePurchaseSuccess();
+      setIsRaffleConfirmationModalOpen(true);
+    },
+    onError: (error) => {
+      alert('응모에 실패했습니다.');
+      throw error;
+    },
+  });
+
+  const { data: ticketsCount } = useQuery({
+    queryKey: ['getTickets'],
+    queryFn: () => getTickets(userToken),
+    enabled: !!userToken,
+  });
 
   const fetchGetRaffleDataDetail = async (id: string) => {
     try {
@@ -47,13 +72,18 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
     fetchGetRaffleDataDetail(id);
   }, [id]);
 
-  const handleOpenModal = () => {
+  const handleEnterRaffle = () => {
     if (!userToken) {
       setIsLoginModalOpen(true);
     } else {
-      setIsRaffleConfirmationModalOpen(true);
+      if (ticketsCount > 0) {
+        mutate.mutate();
+      } else {
+        alert('응모권이 부족합니다.');
+      }
     }
   };
+
   const handleOpenClose = () => {
     if (!userToken) {
       setIsLoginModalOpen(false);
@@ -64,7 +94,6 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
 
   /**
    * 응모 성공 후 데이터를 다시 가져오는 함수
-   * @returns void
    */
   const handlePurchaseSuccess = () => {
     fetchGetRaffleDataDetail(id);
@@ -111,7 +140,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
             label="응모하기"
             fontSize="base"
             width="auto"
-            onClick={handleOpenModal}
+            onClick={handleEnterRaffle}
             className="w-full bg-primary hover:bg-blue-500 sm:relative sticky top-0"
           />
         </div>
@@ -121,8 +150,6 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
         onClose={handleOpenClose}
         itemName={detailData.item.name}
         itemImageUrl={detailData.item.imageUrl}
-        itemId={id}
-        onPurchaseSuccess={handlePurchaseSuccess}
       />
       {detailData.item.imageList.map(
         (image: { id: string | null | undefined; imageUrl: string | StaticImport }) => (
