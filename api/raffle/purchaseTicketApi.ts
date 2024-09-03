@@ -1,3 +1,5 @@
+import baseUrl from "../baseURL";
+
 /**
  * 응모 상품 구매하기
  * @param userToken
