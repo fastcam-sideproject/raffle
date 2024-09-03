@@ -1,3 +1,4 @@
+// ItemPopular.tsx
 import { useQuery } from '@tanstack/react-query';
 import { getPopularRaffleData } from '../../api/raffle/raffleApi';
 import ItemStyle from './ItemStyle';
@@ -6,7 +7,7 @@ import { PopularItem } from '../../lib/types/item';
 export default function ItemPopular() {
   const { data, isLoading, isError, error } = useQuery<PopularItem[]>({
     queryKey: ['RafflePopular'],
-    queryFn: () => getPopularRaffleData(),
+    queryFn: async () => await getPopularRaffleData(),
     staleTime: 1000 * 60 * 5,
   });
 
@@ -21,29 +22,20 @@ export default function ItemPopular() {
       </h1>
       <div className="flex flex-col justify-center items-center bg-[url('/image/background/gift_bg.jpg')] bg-no-repeat bg-left-top bg-cover">
         <ul className="grid grid-cols-5 items-center max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2 p-8 w-[90%]">
-          {data.map(
-            (itemData: {
-              winner: string;
-              status: string;
-              id: string;
-              item: { name: string; category: number; imageUrl: string };
-              currentCount: number;
-              totalCount: number;
-            }) => (
-              <ItemStyle
-                key={itemData.id}
-                name={itemData.item.name}
-                category={itemData.item.category}
-                imageUrl={itemData.item.imageUrl}
-                currentCount={itemData.currentCount}
-                totalCount={itemData.totalCount}
-                raffleId={itemData.id}
-                status={itemData.status}
-                winner={itemData.winner}
-                filter={''}
-              />
-            ),
-          )}
+          {data?.map((itemData: PopularItem) => (
+            <ItemStyle
+              key={itemData.id}
+              name={itemData.item.name}
+              category={itemData.item.category}
+              imageUrl={itemData.item.imageUrl}
+              currentCount={itemData.currentCount}
+              totalCount={itemData.totalCount}
+              raffleId={itemData.id}
+              status={itemData.status}
+              winner={itemData.winner}
+              filter={''}
+            />
+          ))}
         </ul>
       </div>
     </>
