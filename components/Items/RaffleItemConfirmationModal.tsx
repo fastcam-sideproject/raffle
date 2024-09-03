@@ -1,12 +1,6 @@
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
-
-type RaffleItemConfirmationModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  itemName: string;
-  itemImageUrl: string;
-};
+import { RaffleItemConfirmationModalProps } from '../../lib/types/item';
 
 export default function RaffleItemConfirmationModal({
   isOpen,

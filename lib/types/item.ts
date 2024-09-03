@@ -49,3 +49,20 @@ export type RaffleItem = {
     imageUrl: string;
   };
 };
+
+export type RaffleItemConfirmationModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  itemName: string;
+  itemImageUrl: string;
+};
+
+export type DeatilItem = {
+  item: {
+    name: string;
+    imageUrl: string;
+    imageList: [];
+  };
+  totalCount: number;
+  currentCount: number;
+};

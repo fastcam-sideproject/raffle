@@ -3,29 +3,19 @@
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 import { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
+import { getTickets } from '../../api/user/ticketsApi';
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
-import { getTickets } from '../../api/user/ticketsApi';
-
-type DeatilData = {
-  item: {
-    name: string;
-    imageUrl: string;
-    imageList: { id: string | null | undefined; imageUrl: string | StaticImport }[];
-  };
-  totalCount: number;
-  currentCount: number;
-};
+import { DeatilItem } from '../../lib/types/item';
 
 export default function ItemDetail({ params: { id } }: { params: { id: number } }) {
-  console.log(id);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const [detailData, setDetailData] = useState<DeatilData>({
+  const [detailData, setDetailData] = useState<DeatilItem>({
     item: {
       name: '',
       imageUrl: '',
