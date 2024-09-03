@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Button from '../../lib/common/Button';
 import Advertisement from '../Advertisement/Advertisement';
 import useAuthStore from '../../lib/store/useAuthStore';
+import ItemPopular from '../Items/ItemPopular';
 
 export default function HomeHero() {
   const [isShowAdvertisement, setIsShowAdvertisement] = useState<boolean>(false);
@@ -25,8 +26,8 @@ export default function HomeHero() {
   }, [isShowAdvertisement]);
 
   return (
-    <section className="h-screen flex items-center justify-center bg-[url('/image/background/gift_bg.jpg')] bg-no-repeat bg-cover">
-      <div className="text-center">
+    <section className="min-h-[20rem] flex items-center justify-center bg-[url('/image/background/gift_bg.jpg')] bg-no-repeat bg-left-top bg-cover">
+      <div className="flex flex-col justify-center items-center">
         <h2 className="text-5xl font-bold mb-4 text-shadow-white-shadow">
           All You Raffle 에 오신것을 환영합니다
         </h2>

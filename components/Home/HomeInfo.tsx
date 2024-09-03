@@ -1,20 +1,43 @@
 export default function HomeInfo() {
   return (
     <section className="py-16 bg-white">
-      <div className="container mx-auto p-4">
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-blue-50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4">Shop</h3>
-            <p className="text-gray-800">쿠폰을 구매하고 행운을 받아가세요</p>
+      <div className="bg-gray-100 p-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="col-span-2 bg-white p-4 rounded-lg shadow-md">
+            <h2 className="text-lg font-bold mb-4">공지사항</h2>
+            <ul className="space-y-2">
+              <li className="flex justify-between text-gray-700">
+                <span>래플 응모시 주의 사항</span>
+                <span className="text-sm text-gray-500">2024.09.06</span>
+              </li>
+              <li className="flex justify-between text-gray-700">
+                <span>즐거운 한가위 보내세요!</span>
+                <span className="text-sm text-gray-500">2024.09.06</span>
+              </li>
+              <li className="flex justify-between text-gray-700">
+                <span>추석 기간 배송 공지</span>
+                <span className="text-sm text-gray-500">2024.09.06</span>
+              </li>
+            </ul>
           </div>
-          <div className="bg-blue-50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4">About</h3>
-            <p className="text-gray-800">저희 팀 소개 입니다</p>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <h3 className="text-sm font-semibold">고 객 센 터</h3>
+            <p className="text-gray-600">0000 - 0000</p>
           </div>
-          <div className="bg-blue-50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4">Contact</h3>
-            <p className="text-gray-800">문의가 있으면 문의 주세요</p>
+
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <h3 className="text-sm font-semibold">누적 당첨자 수</h3>
+            <p className="text-gray-600">10,000,000 명</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <h3 className="text-sm font-semibold">응모내역 & 당첨결과</h3>
+            <p className="text-gray-600">내 주문내역 및 당첨결과를 확인해보세요.</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <h3 className="text-sm font-semibold">마이 페이지</h3>
+            <p className="text-gray-600">내 정보를 확인하고 변경하세요</p>
           </div>
         </div>
       </div>
