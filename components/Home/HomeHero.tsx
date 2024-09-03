@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Button from '../../lib/common/Button';
 import Advertisement from '../Advertisement/Advertisement';
 import useAuthStore from '../../lib/store/useAuthStore';
-import ItemPopular from '../Items/ItemPopular';
 
 export default function HomeHero() {
   const [isShowAdvertisement, setIsShowAdvertisement] = useState<boolean>(false);
@@ -26,15 +25,15 @@ export default function HomeHero() {
   }, [isShowAdvertisement]);
 
   return (
-    <section className="min-h-[20rem] flex items-center justify-center bg-[url('/image/background/gift_bg.jpg')] bg-no-repeat bg-left-top bg-cover">
+    <section className="min-h-[20rem] flex items-center justify-center bg-blue-50">
       <div className="flex flex-col justify-center items-center">
-        <h2 className="text-5xl font-bold mb-4 text-shadow-white-shadow">
+        <h2 className="text-3xl font-bold mb-4 text-shadow-white-shadow">
           All You Raffle 에 오신것을 환영합니다
         </h2>
         <p className="text-xl mb-6 text-shadow-white-shadow">행운을 받아가세요!</p>
-        <button type="button" className="bg-primary text-white px-6 py-3 rounded-full shadow-2xl">
+        {/* <button type="button" className="bg-primary text-white px-6 py-3 rounded-full shadow-2xl">
           <Link href="/shop">Get Started</Link>
-        </button>
+        </button> */}
         <div className="pt-4">
           <Button
             label="광고 보고 응모권 추가하기"

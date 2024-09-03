@@ -1,7 +1,7 @@
 export default function HomeInfo() {
   return (
-    <section className="py-16 bg-white">
-      <div className="bg-gray-100 p-6">
+    <section className="py-16 bg-white w-full">
+      <div className="bg-gray-100 p-6 w-[80%]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="col-span-2 bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-lg font-bold mb-4">공지사항</h2>

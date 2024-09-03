@@ -13,7 +13,7 @@ function ItemPopular() {
   return (
     <>
       <h1 className="px-8 py-4 font-semibold">인기 래플</h1>
-      <ul className="grid grid-cols-5 gap-4 p-8">
+      <ul className="grid grid-cols-5 items-center max-lg:grid-cols-2 max-sm:grid-cols-1 gap-4 p-8 bg-[url('/image/background/gift_bg.jpg')] bg-no-repeat bg-left-top bg-cover">
         {data.map(
           (itemData: {
             winner: string;

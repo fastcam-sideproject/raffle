@@ -98,7 +98,7 @@ export default function ItemStyle({
           height={400}
           src={imageUrl}
           alt="추첨할 상품 이미지"
-          className="w-full h-80 rounded object-contain transition duration-300 group-hover:blur-sm"
+          className="w-full h-40 rounded object-contain transition duration-300 group-hover:blur-sm"
         />
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded opacity-0 group-hover:opacity-100 transition duration-300">
           <span className="text-white text-lg font-semibold">상세보기</span>
