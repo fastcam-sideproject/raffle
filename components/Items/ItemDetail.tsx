@@ -22,7 +22,8 @@ type DeatilData = {
   currentCount: number;
 };
 
-export default function ItemDetail({ params: { id } }: { params: { id: string } }) {
+export default function ItemDetail({ params: { id } }: { params: { id: number } }) {
+  console.log(id);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<DeatilData>({
     item: {
@@ -59,7 +60,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: string } 
     enabled: !!userToken,
   });
 
-  const fetchGetRaffleDataDetail = async (id: string) => {
+  const fetchGetRaffleDataDetail = async (id: number) => {
     try {
       const data = await getRaffleDataDetail(id);
       setDetailData(data);
