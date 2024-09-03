@@ -87,7 +87,10 @@ export default function ItemStyle({
   };
 
   return (
-    <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
+    <li
+      id={raffleId}
+      className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light bg-white "
+    >
       <Link href={`shop/detail/${raffleId}`} onClick={handleImageClick} className="relative group">
         <Image
           priority
@@ -106,6 +109,18 @@ export default function ItemStyle({
           <h4 className="text-lg font-bold">{name}</h4>
           <span className="text-gray-400">카테고리{category}</span>
         </div>
+        <div>
+          <span className="text-lg font-semibold">{percentageComplete}%</span>
+          <span>{percentageComplete === 100 ? '진행중' : '완료'}</span>
+        </div>
+        <div className="w-full bg-gray-300 rounded-full h-3 overflow-hidden ">
+          <div
+            className={`h-full transition-all duration-300 ${
+              percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
+            }`}
+            style={{ width: `${percentageComplete}%` }}
+          />
+        </div>
         <Button
           type="button"
           ariaLabel={percentageComplete === 100 ? '결과 확인' : '응모하기'}
@@ -114,21 +129,9 @@ export default function ItemStyle({
           fontSize="base"
           className={`mt-2 px-2 py-1 ${
             percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
-          } text-white rounded float-right max-md:float-none max-md:w-full`}
+          } text-white rounded w-full`}
           onClick={percentageComplete !== 100 ? handleEnterRaffle : handleImageClick}
         />
-        <div>
-          <span className="text-lg font-semibold">{percentageComplete}%</span>
-          <span>{percentageComplete === 100 ? '진행중' : '완료'}</span>
-        </div>
-        <div className="mt-6 w-full bg-gray-300 rounded-full h-3 overflow-hidden ">
-          <div
-            className={`h-full transition-all duration-300 ${
-              percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
-            }`}
-            style={{ width: `${percentageComplete}%` }}
-          />
-        </div>
       </div>
       {isModalOpen && (
         <ItemComplete onClose={handleImageClick} winner={winner} imageUrl={imageUrl} name={name} />
