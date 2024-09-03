@@ -1,5 +1,3 @@
-import baseURL from '../baseURL';
-
 /**
  * 응모 상품 구매하기
  * @param userToken
@@ -7,7 +5,7 @@ import baseURL from '../baseURL';
  */
 export async function postPurchaseTicketOne(userToken: string, raffleId: number) {
   try {
-    const response = await fetch(`${baseURL}/api/v1/raffle/purchase_ticket_one/${raffleId}`, {
+    const response = await fetch(`${baseUrl}/api/v1/raffle/purchase_ticket_one/${raffleId}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${userToken}`,

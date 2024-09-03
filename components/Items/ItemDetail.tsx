@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
+import { DeatilItem } from '../../lib/types/item';
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
-import { DeatilItem } from '../../lib/types/item';
 
 export default function ItemDetail({ params: { id } }: { params: { id: number } }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
