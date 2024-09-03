@@ -1,13 +1,15 @@
 'use client';
 
 import { ItemProps } from '../../lib/types/item';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
+import { getTickets } from '../../api/user/ticketsApi';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import ItemComplete from './ItemComplete';
-import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
 
@@ -25,25 +27,32 @@ export default function ItemStyle({
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
     useState<boolean>(false);
-  const [detailData, setDetailData] = useState({
-    currentCount,
-    totalCount,
-  });
+
   const userToken = useAuthStore((state) => state.userToken);
+  const queryClient = useQueryClient();
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
 
-  /**
-   * 상품 데이터를 가져와서 detailData에 저장하는 함수
-   * @param id
-   */
-  const fetchGetRaffleDataDetail = async (id: string) => {
-    try {
-      const data = await getRaffleDataDetail(id);
-      setDetailData(data);
-    } catch (error) {
+  const mutate = useMutation({
+    mutationKey: ['purchaseTicket'],
+    mutationFn: () => postPurchaseTicketOne(userToken, raffleId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getTickets'] });
+    },
+    onError: (error) => {
+      alert('응모에 실패했습니다.');
       throw error;
-    }
-  };
+    },
+  });
+
+  /**
+   * 응모권 데이터를 가져오는 query 함수
+   */
+  const { data: ticketsCount } = useQuery({
+    queryKey: ['getTickets'],
+    queryFn: () => getTickets(userToken),
+    enabled: !!userToken,
+    staleTime: 1000 * 60,
+  });
 
   const handleImageClick = (event: React.MouseEvent) => {
     if (status === 'COMPLETED') {
@@ -53,13 +62,19 @@ export default function ItemStyle({
   };
 
   /**
-   * 응모하기 버튼 클릭 시 실행되는 함수
+   * 응모하기 버튼 클릭 시 실행되어 응모권이 있을 경우 응모권 사용 후 응모 성공 모달을 띄우는 함수
+   * 응모권이 없을 경우 alert 창을 띄운다.
    */
   const handleEnterRaffle = () => {
     if (!userToken) {
       setIsLoginModalOpen(true);
     } else {
-      setIsRaffleConfirmationModalOpen(true);
+      if (ticketsCount > 0) {
+        mutate.mutate();
+        setIsRaffleConfirmationModalOpen(true);
+      } else {
+        alert('응모권이 부족합니다.');
+      }
     }
   };
 
@@ -70,21 +85,6 @@ export default function ItemStyle({
       setIsRaffleConfirmationModalOpen(false);
     }
   };
-
-  /**
-   * 응모 성공 후 데이터를 fetchGetRaffleDataDetail 함수를 통해 다시 가져오는 함수
-   */
-  const handlePurchaseSuccess = () => {
-    fetchGetRaffleDataDetail(raffleId);
-  };
-
-  /**
-   * 컴포넌트가 마운트될 때와 raffleId가 변경될 때마다
-   * fetchGetRaffleDataDetail 함수를 호출하여 상품 데이터를 갱신한다.
-   */
-  useEffect(() => {
-    fetchGetRaffleDataDetail(raffleId);
-  }, [raffleId]);
 
   return (
     <li id={raffleId} className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light">
@@ -97,7 +97,6 @@ export default function ItemStyle({
           alt="추첨할 상품 이미지"
           className="w-full h-80 rounded object-contain transition duration-300 group-hover:blur-sm"
         />
-
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded opacity-0 group-hover:opacity-100 transition duration-300">
           <span className="text-white text-lg font-semibold">상세보기</span>
         </div>
@@ -118,7 +117,6 @@ export default function ItemStyle({
           } text-white rounded float-right max-md:float-none max-md:w-full`}
           onClick={percentageComplete !== 100 ? handleEnterRaffle : handleImageClick}
         />
-
         <div>
           <span className="text-lg font-semibold">{percentageComplete}%</span>
           <span>{percentageComplete === 100 ? '진행중' : '완료'}</span>
@@ -141,8 +139,6 @@ export default function ItemStyle({
         onClose={handleCloseRaffleConfirmationModal}
         itemName={name}
         itemImageUrl={imageUrl}
-        itemId={raffleId}
-        onPurchaseSuccess={handlePurchaseSuccess}
       />
     </li>
   );
