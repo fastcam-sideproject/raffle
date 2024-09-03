@@ -1,14 +1,18 @@
-// ItemPopular.tsx
 import { useQuery } from '@tanstack/react-query';
 import { getPopularRaffleData } from '../../api/raffle/raffleApi';
 import ItemStyle from './ItemStyle';
+import { PopularItem } from '../../lib/types/item';
 
-function ItemPopular() {
-  const { data = [] } = useQuery({
+export default function ItemPopular() {
+  const { data, isLoading, isError, error } = useQuery<PopularItem[]>({
     queryKey: ['RafflePopular'],
-    queryFn: async () => await getPopularRaffleData(),
+    queryFn: () => getPopularRaffleData(),
     staleTime: 1000 * 60 * 5,
   });
+
+  if (isLoading) return <p>Loading...</p>;
+
+  if (isError) return <p>Error: {error instanceof Error ? error.message : error}</p>;
 
   return (
     <>
@@ -45,5 +49,3 @@ function ItemPopular() {
     </>
   );
 }
-
-export default ItemPopular;

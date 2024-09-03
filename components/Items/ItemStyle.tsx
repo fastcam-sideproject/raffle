@@ -88,7 +88,7 @@ export default function ItemStyle({
 
   return (
     <li
-      id={raffleId}
+      id={raffleId.toString()}
       className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light bg-white "
     >
       <Link href={`shop/detail/${raffleId}`} onClick={handleImageClick} className="relative group">

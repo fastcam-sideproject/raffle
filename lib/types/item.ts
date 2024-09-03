@@ -16,6 +16,11 @@ export interface ItemData {
   };
 }
 
+export type PopularItem = ItemData & {
+  winner: string;
+  status: string;
+};
+
 export interface FilterProps {
   filter: string;
 }
@@ -27,7 +32,7 @@ export interface ItemProps {
   imageUrl: string;
   currentCount: number;
   totalCount: number;
-  raffleId: string;
+  raffleId: number;
   status: string;
   winner: string;
 }
@@ -43,4 +48,21 @@ export type RaffleItem = {
     description: string;
     imageUrl: string;
   };
+};
+
+export type RaffleItemConfirmationModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  itemName: string;
+  itemImageUrl: string;
+};
+
+export type DeatilItem = {
+  item: {
+    name: string;
+    imageUrl: string;
+    imageList: [];
+  };
+  totalCount: number;
+  currentCount: number;
 };

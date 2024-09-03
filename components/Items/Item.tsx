@@ -43,7 +43,7 @@ export default function Item({ filter }: FilterProps) {
         (itemData: {
           winner: string;
           status: string;
-          id: string;
+          id: number;
           item: { name: string; category: number; imageUrl: string };
           currentCount: number;
           totalCount: number;

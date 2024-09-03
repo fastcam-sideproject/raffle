@@ -1,9 +1,9 @@
 import { PurchaseAddress } from '../../lib/types/purchase';
-import baseURL from '../baseURL';
+import baseUrl from '../baseURL';
 
 export async function postAddress(addressData: PurchaseAddress, useToken: string) {
   try {
-    const response = await fetch(`${baseURL}/api/v1/user/set_address`, {
+    const response = await fetch(`${baseUrl}/api/v1/user/set_address`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${useToken}`,
