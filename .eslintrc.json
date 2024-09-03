@@ -1,90 +1,62 @@
-// {
-//   "parser": "@typescript-eslint/parser",
-//   "parserOptions": {
-//     "ecmaVersion": 2020,
-//     "sourceType": "module",
-//     "ecmaFeatures": {
-//       "jsx": true
-//     },
-//     "project": "./tsconfig.json"
-//   },
-//   "extends": [
-//     "next/core-web-vitals",
-//     "airbnb",
-//     "airbnb/hooks",
-//     "plugin:@typescript-eslint/recommended",
-//     "plugin:prettier/recommended",
-//     "plugin:storybook/recommended"
-//   ],
-//   "plugins": [
-//     "@typescript-eslint",
-//     "prettier"
-//   ],
-//   "rules": {
-//     "prettier/prettier": [
-//       "error",
-//       {
-//         "endOfLine": "auto"
-//       }
-//     ],
-//     "react/react-in-jsx-scope": "off",
-//     "react/jsx-props-no-spreading": "off",
-//     "eslint-disable no-console": "off",
-//     "jsx-a11y/anchor-is-valid": [
-//       "error",
-//       {
-//         "components": [
-//           "Link"
-//         ],
-//         "specialLink": [
-//           "hrefLeft",
-//           "hrefRight"
-//         ],
-//         "aspects": [
-//           "invalidHref",
-//           "preferButton"
-//         ]
-//       }
-//     ],
-//     "import/extensions": [
-//       "error",
-//       "ignorePackages",
-//       {
-//         "ts": "never",
-//         "tsx": "never",
-//         "js": "never",
-//         "jsx": "never"
-//       }
-//     ],
-//     "import/no-extraneous-dependencies": [
-//       "error",
-//       {
-//         "devDependencies": [
-//           "**/*.test.ts",
-//           "**/*.test.tsx",
-//           "**/setupTests.ts"
-//         ]
-//       }
-//     ],
-//     "react/jsx-filename-extension": [
-//       1,
-//       {
-//         "extensions": [
-//           ".tsx"
-//         ]
-//       }
-//     ]
-//   },
-//   "settings": {
-//     "import/resolver": {
-//       "node": {
-//         "extensions": [
-//           ".js",
-//           ".jsx",
-//           ".ts",
-//           ".tsx"
-//         ]
-//       }
-//     }
-//   }
-// }
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es2020": true
+  },
+  "extends": ["next", "prettier", "next/core-web-vitals"],
+  "rules": {
+    "import/extensions": ["off"],
+    "import/prefer-default-export": "off",
+    "no-plusplus": "off",
+    "semi": ["error", "always"],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [".tsx", ".jsx"]
+      }
+    ],
+    "import/no-extraneous-dependencies": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["external", "internal"]
+      }
+    ],
+    "react/jsx-indent-props": ["error", "first"],
+    "no-restricted-globals": "off",
+    "react/jsx-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-wrap-multilines": "off",
+    "no-unused-vars": "off",
+    "no-proto": "off",
+    "camelcase": "off",
+    "class-methods-use-this": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "max-classes-per-file": "off",
+    "max-len": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "no-undef": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "no-useless-escape": "off",
+    "no-await-in-loop": "off",
+    "react/no-array-index-key": "off",
+    "react/no-unused-prop-types": "off",
+    "react/require-default-props": "off",
+    "react/function-component-definition": "off",
+    "react/react-in-jsx-scope": "off",
+    "no-console": "off",
+    "no-alert": "off",
+    "import/no-unresolved": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "react-refresh/only-export-components": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "consistent-return": "off"
+  }
+}
