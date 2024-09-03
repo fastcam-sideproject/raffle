@@ -45,7 +45,7 @@ async function getPopularRaffleData() {
   }
 }
 
-async function getRaffleDataDetail(raffleId: string) {
+async function getRaffleDataDetail(raffleId: number) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/active/free/detail/${raffleId}`);
     const json = await response.json();

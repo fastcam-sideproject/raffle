@@ -5,7 +5,7 @@ import baseURL from '../baseURL';
  * @param userToken
  * @param raffleId
  */
-export async function postPurchaseTicketOne(userToken: string, raffleId: string) {
+export async function postPurchaseTicketOne(userToken: string, raffleId: number) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/purchase_ticket_one/${raffleId}`, {
       method: 'POST',
