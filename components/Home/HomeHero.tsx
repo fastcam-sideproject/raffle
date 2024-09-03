@@ -27,10 +27,10 @@ export default function HomeHero() {
     <>
       <section className="min-h-[20rem] flex flex-col items-center justify-center bg-blue-50">
         <div className="flex flex-col justify-center items-center">
-          <h2 className="text-3xl font-bold mb-4 text-shadow-white-shadow">
+          <h2 className="text-lg md:text-3xl font-bold mb-4 text-shadow-white-shadow">
             All You Raffle 에 오신것을 환영합니다
           </h2>
-          <p className="text-xl mb-6 text-shadow-white-shadow">행운을 받아가세요!</p>
+          <p className="md:text-xl mb-6 text-shadow-white-shadow">행운을 받아가세요!</p>
           {/* <button type="button" className="bg-primary text-white px-6 py-3 rounded-full shadow-2xl">
         <Link href="/shop">Get Started</Link>
       </button> */}

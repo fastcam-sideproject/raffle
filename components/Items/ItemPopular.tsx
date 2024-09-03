@@ -7,7 +7,7 @@ import { PopularItem } from '../../lib/types/item';
 export default function ItemPopular() {
   const { data, isLoading, isError, error } = useQuery<PopularItem[]>({
     queryKey: ['RafflePopular'],
-    queryFn: async () => await getPopularRaffleData(),
+    queryFn: () => getPopularRaffleData(),
     staleTime: 1000 * 60 * 5,
   });
 
