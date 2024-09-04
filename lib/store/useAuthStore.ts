@@ -8,19 +8,23 @@ const useAuthStore = create<AuthStore>()(
       userToken: '',
       refreshToken: '',
       setUserToken: (userToken, refreshToken) => {
-        sessionStorage.setItem('access_token', userToken);
-        sessionStorage.setItem('refresh_token', refreshToken);
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('access_token', userToken);
+          sessionStorage.setItem('refresh_token', refreshToken);
+        }
         set({ userToken, refreshToken });
       },
       logout: () => {
-        sessionStorage.removeItem('access_token');
-        sessionStorage.removeItem('refresh_token');
+        if (typeof window !== 'undefined') {
+          sessionStorage.removeItem('access_token');
+          sessionStorage.removeItem('refresh_token');
+        }
         set({ userToken: '', refreshToken: '' });
       },
     }),
     {
       name: 'auth-storage',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: typeof window !== 'undefined' ? createJSONStorage(() => sessionStorage) : undefined,
     },
   ),
 );

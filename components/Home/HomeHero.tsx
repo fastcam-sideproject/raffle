@@ -31,15 +31,12 @@ export default function HomeHero() {
             All You Raffle 에 오신것을 환영합니다
           </h2>
           <p className="md:text-xl mb-6 text-shadow-white-shadow">행운을 받아가세요!</p>
-          {/* <button type="button" className="bg-primary text-white px-6 py-3 rounded-full shadow-2xl">
-        <Link href="/shop">Get Started</Link>
-      </button> */}
           <div className="pt-4">
             <Button
               label="광고 보고 응모권 추가하기"
               width="auto"
               fontSize="base"
-              className="bg-primary hover:bg-blue-500"
+              className="text-white font-bold bg-primary hover:bg-blue-500"
               type="button"
               onClick={handleShowAdvertisement}
             />

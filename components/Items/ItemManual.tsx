@@ -32,7 +32,7 @@ export default function ItemManual({ onClose }: ItemManualProps) {
           fontSize=""
           width="auto"
           onClick={onClose}
-          className="bg-primary w-1/6 hover:bg-blue-500"
+          className="text-white font-bold bg-primary w-1/6 hover:bg-blue-500"
         />
       </section>
     </main>
