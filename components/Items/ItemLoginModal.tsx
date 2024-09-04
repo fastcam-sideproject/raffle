@@ -10,10 +10,10 @@ export default function ItemLoginModal({ onClose }: any) {
           type="button"
           ariaLabel="닫기"
           label="닫기"
-          fontSize=""
-          width=""
+          fontSize="base"
+          width="1/6"
           onClick={onClose}
-          className="bg-primary w-1/6 hover:bg-blue-500"
+          className="text-white font-bold bg-primary hover:bg-blue-500"
         />
       </section>
     </main>

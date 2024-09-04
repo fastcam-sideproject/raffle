@@ -22,7 +22,7 @@ export default function ItemPopular() {
       </h1>
       <div className="flex flex-col justify-center items-center bg-[url('/image/background/gift_bg.jpg')] bg-no-repeat bg-left-top bg-cover">
         <ul className="grid grid-cols-5 items-center max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2 p-8 w-[90%]">
-          {data?.map((itemData: PopularItem) => (
+          {data?.map((itemData) => (
             <ItemStyle
               key={itemData.id}
               name={itemData.item.name}
