@@ -7,8 +7,6 @@ import useAuthStore from '../../lib/store/useAuthStore';
 import { getMyPage } from '../../api/user/mypageApi';
 import { UserData } from '../../lib/types/user';
 
-
-
 export default function MyPage() {
     const userToken = useAuthStore((state) => state.userToken);
 
@@ -44,7 +42,7 @@ export default function MyPage() {
                 <div className="flex flex-col gap-4 items-center">
                     <button className="w-2/3 flex items-center justify-between  py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100">
                         <div  className='flex gap-2'>
-                        <Image src='/image/profile.svg' alt='유저의 프로필 아이콘' width={20} height={20}/>
+                        <Image src='/icon/profile.svg' alt='유저의 프로필 아이콘' width={20} height={20}/>
                         <h4 className='text-lg'>회원 정보</h4>
                         </div>
                         <span>&gt;</span>
