@@ -23,6 +23,7 @@
         "groups": ["external", "internal"]
       }
     ],
+    "@next/next/no-img-element": "off",
     "react/jsx-indent-props": ["error", "first"],
     "no-restricted-globals": "off",
     "react/jsx-curly-newline": "off",
