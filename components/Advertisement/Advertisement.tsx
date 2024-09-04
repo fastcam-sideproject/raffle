@@ -61,7 +61,7 @@ export default function Advertisement({ onClose }: AdvertisementProps) {
           {isButtonEnabled ? (
             <Button
               label="리워드 받기"
-              className="bg-primary hover:bg-blue-500"
+              className=" text-white font-semibold bg-primary hover:bg-blue-500"
               onClick={handleCloseButton}
               type="button"
               width="auto"
