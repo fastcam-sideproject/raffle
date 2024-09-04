@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import ShippingInfo from '../../../../components/payment/ShippingInfo';
-import RaffleInfo from '../../../../components/payment/RaffleInfo';
-import FinalPaymentSummary from '../../../../components/payment/FinalPaymentSummary';
-import OrdererInfo from '../../../../components/payment/OrdererInfo';
+import RaffleInfo from '../../../components/payment/RaffleInfo';
+import OrdererInfo from '../../../components/payment/OrdererInfo';
+import ShippingInfo from '../../../components/payment/ShippingInfo';
+import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
 
 export default function PurchasePage({
   params,

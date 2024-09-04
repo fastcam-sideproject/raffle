@@ -9,11 +9,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Banner />
-      <section className="flex flex-col justify-center items-center m-8">
-        <h2 className="font-bold">문의 하기</h2>
-        <EmailForm />
-      </section>
+      <EmailForm />
     </>
   );
 }

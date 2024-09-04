@@ -16,12 +16,12 @@ export default function ItemGrid() {
 
   return (
     <>
-      <section className="flex gap-4  max-lg:flex-col max-lg:items-center relative">
-        <aside className="max-lg:hidden absolute top-[7.5rem] -left-[15%]">
+      <section className="flex gap-4 max-lg:flex-col max-lg:items-center relative">
+        <aside className="hidden absolute top-[7.5rem] -left-[15%] lg:flex">
           <KakaoAdFit unit="DAN-OUyn7VXgiTbP3fFn" width="160" height="600" disabled={false} />
         </aside>
 
-        <ul>
+        <ul className="w-auto">
           <nav className="flex w-full justify-between items-center my-4 py-4 px-4">
             <ul className="flex gap-4">
               {/* <button
@@ -64,10 +64,13 @@ export default function ItemGrid() {
             />
             {isManualOpen && <ItemManual onClose={handleManualOpen} />}
           </nav>
-          <ul className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1">
+          <ul className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
             <Item key={filter} filter={filter} />
           </ul>
         </ul>
+        <aside className="hidden absolute top-[7.5rem] -right-[28%] lg:flex">
+          <KakaoAdFit unit="DAN-qvc3rvDUKVUobMDZ" width="300" height="250" disabled={false} />
+        </aside>
       </section>
     </>
   );
