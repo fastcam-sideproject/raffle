@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import useAuthStore from '../../lib/store/useAuthStore';
 import { getRaffleData } from '../../api/raffle/raffleApi';
+import { KakaoAdFit } from '../KakaoAdFit';
 
 export default function HomeInfo() {
   const userToken = useAuthStore((state) => state.userToken);
@@ -18,7 +19,10 @@ export default function HomeInfo() {
   return (
     <section className="my-16 bg-blue-50 w-full">
       <div className="flex justify-center items-center gap-10 bg-blue-50 p-6">
-        <div className=" flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-4 w-[90%]">
+        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[auto,1fr,1fr,auto] lg:gap-4 w-[90%]">
+          <h1 className="col-span-4 border-solid border-b-2 border-blue-700 text-2xl font-semibold">
+            알려드립니다
+          </h1>
           <div className="col-span-2 bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-lg font-bold mb-4">공지사항</h2>
             <ul className="space-y-2">
@@ -55,6 +59,10 @@ export default function HomeInfo() {
             <h3 className="text-sm font-semibold">마이 페이지</h3>
             <p className="text-gray-600">내 정보를 확인하고 변경하세요</p>
           </div>
+
+          <aside className="lg:col-start-4 lg:row-start-2 lg:col-span-1 lg:row-span-2 flex justify-end">
+            <KakaoAdFit unit="DAN-OUyn7VXgiTbP3fFn" width="160" height="600" disabled={false} />
+          </aside>
         </div>
       </div>
     </section>
