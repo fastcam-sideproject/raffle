@@ -10,7 +10,7 @@ export async function getMyPage(userToken: string) {
       },
     });
     if (!response.ok) {
-      throw new Error('마이페이지 불러오기 실패');
+      console.error('마이페이지 불러오기 실패', response);
     }
     return response.json();
   } catch (error) {
