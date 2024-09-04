@@ -3,11 +3,11 @@
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+import Link from 'next/link';
 import { getTickets } from '../../api/user/ticketsApi';
 import ProfilePopover from '../ProfilePopover';
 import useAuthStore from '../../lib/store/useAuthStore';
-import Image from 'next/image';
-import Link from 'next/link';
 import GoogleLoginButton from '../Button/GoogleLoginButton';
 
 export default function HeaderNav() {

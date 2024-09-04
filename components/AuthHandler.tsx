@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import useAuthStore from '../lib/store/useAuthStore';
 import { useRouter } from 'next/navigation';
+import useAuthStore from '../lib/store/useAuthStore';
 
 export default function AuthHandler() {
   const router = useRouter();
