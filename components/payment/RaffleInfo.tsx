@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { RaffleItem } from '../../lib/types/item';
 import useRaffleData from '../../lib/hooks/useRaffleData';
-import Image from 'next/image';
 
 export default function RaffleInfo({ id }: { id: string }) {
   const [raffleItem, setRaffleItem] = useState<RaffleItem>({

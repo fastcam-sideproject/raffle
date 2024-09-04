@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { KakaoAdFit } from '../KakaoAdFit';
 import { postTicketsPlusOne } from '../../api/user/ticketsApi';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Button from '../../lib/common/Button';
 import useAuthStore from '../../lib/store/useAuthStore';
 import { AdvertisementProps } from '../../lib/types/advertisement';

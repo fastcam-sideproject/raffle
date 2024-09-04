@@ -1,13 +1,13 @@
 'use client';
 
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
+import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
 import { DeatilItem } from '../../lib/types/item';
-import Image from 'next/image';
 import Button from '../../lib/common/Button';
 import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import useAuthStore from '../../lib/store/useAuthStore';

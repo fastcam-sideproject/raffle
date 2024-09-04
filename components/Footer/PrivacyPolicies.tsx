@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 export default function PrivacyPolicies() {
   return (
     <section className="flex flex-col justify-center items-center">
