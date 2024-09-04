@@ -17,11 +17,11 @@ export default function ItemPopular() {
 
   return (
     <>
-      <h1 className="w-full border-solid border-b-2 border-blue-700 text-2xl px-10 py-4 font-semibold">
-        인기 래플
-      </h1>
       <div className="flex flex-col justify-center items-center bg-[url('/image/background/gift_bg.jpg')] bg-no-repeat bg-left-top bg-cover">
         <ul className="grid items-center lg:grid-cols-5 sm:grid-cols-2 grid-cols-1 gap-2 p-8 w-[90%]">
+          <h1 className="col-span-full border-solid border-b-2 border-blue-700 text-2xl font-semibold">
+            인기 래플
+          </h1>
           {data?.map((itemData) => (
             <ItemStyle
               key={itemData.id}
