@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ItemGrid from '../../components/Items/ItemGrid';
+import ItemGrid from '../../../components/Items/ItemGrid';
 
 export const metadata: Metadata = {
   title: 'Shop',

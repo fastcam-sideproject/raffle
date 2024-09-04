@@ -1,6 +1,6 @@
 import HeaderNav from '../../components/Header/HeaderNav';
 
-export default function ContactLayout({ children }: { children: React.ReactNode }) {
+export default function CommonLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <HeaderNav />

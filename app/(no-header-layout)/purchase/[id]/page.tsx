@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import ShippingInfo from '../../../components/payment/ShippingInfo';
-import RaffleInfo from '../../../components/payment/RaffleInfo';
-import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
-import OrdererInfo from '../../../components/payment/OrdererInfo';
+import ShippingInfo from '../../../../components/payment/ShippingInfo';
+import RaffleInfo from '../../../../components/payment/RaffleInfo';
+import FinalPaymentSummary from '../../../../components/payment/FinalPaymentSummary';
+import OrdererInfo from '../../../../components/payment/OrdererInfo';
 
 export default function PurchasePage({
   params,
@@ -42,11 +42,11 @@ export default function PurchasePage({
             <h2 className="text-xl font-semibold mb-4">결제하기</h2>
             <div className="flex gap-2">
               <input type="checkbox" className=" text-black py-2 rounded-md" />
-              <img
+              {/* <img
                 src="/image/payment_icon_kakao.svg"
                 alt="카카오페이 결제 아이콘"
                 className="w-20 h-8"
-              />
+              /> */}
             </div>
           </section>
 

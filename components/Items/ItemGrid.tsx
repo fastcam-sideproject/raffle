@@ -21,8 +21,8 @@ export default function ItemGrid() {
           <KakaoAdFit unit="DAN-OUyn7VXgiTbP3fFn" width="160" height="600" disabled={false} />
         </aside>
 
-        <ul className="grid grid-cols-4 gap-4 items-center max-lg:grid-cols-2 max-sm:grid-cols-1">
-          <nav className="col-span-4 flex justify-between w-full items-center my-4 py-4 px-4">
+        <ul>
+          <nav className="flex w-full justify-between items-center my-4 py-4 px-4">
             <ul className="flex gap-4">
               {/* <button
             type="button"
@@ -64,7 +64,9 @@ export default function ItemGrid() {
             />
             {isManualOpen && <ItemManual onClose={handleManualOpen} />}
           </nav>
-          <Item key={filter} filter={filter} />
+          <ul className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1">
+            <Item key={filter} filter={filter} />
+          </ul>
         </ul>
       </section>
     </>
