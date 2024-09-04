@@ -93,7 +93,7 @@ export default function HeaderNav() {
           <li>
             {userToken && (
               <div className="flex gap-2 justify-center py-2 px-4 w-full">
-                <Image src="/icon/ticket.svg" alt="사용자 응모권 갯수" width={35} height={35} />
+                <img src="/icon/ticket.svg" alt="사용자 응모권 갯수"  />
                 <span className="font-bold">{data}</span>
               </div>
             )}
@@ -108,11 +108,10 @@ export default function HeaderNav() {
           {userToken ? (
             <div>
               <button type="button" className="py-2 px-4" onClick={handleProfileClick}>
-                <Image
+                <img
                   src="/icon/profile.svg"
                   alt="로그인한 사용자 프로필 아이콘"
-                  width={25}
-                  height={25}
+                  className='w-6 h-auto'
                 />
               </button>
               {isPopverOpen && <ProfilePopover onClose={handleClosePopver} />}
