@@ -24,7 +24,7 @@ export default function Button({
       disabled={disabled}
       aria-label={ariaLabel}
       aria-describedby={ariaDescribedBy}
-      className={`${backgroundColor} text-white font-bold py-2 px-2 rounded 
+      className={`${backgroundColor} py-2 px-2 rounded 
         ${widthClass} ${fontSizeClass} ${className}`}
     >
       {label}

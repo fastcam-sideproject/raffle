@@ -52,9 +52,9 @@ export default function ItemGrid() {
           fontSize="1rem"
           label="래플 이용 방법 "
           type="button"
-          width=""
+          width="auto"
           onClick={handleManualOpen}
-          className="bg-primary hover:bg-blue-500"
+          className="text-white font-bold bg-primary hover:bg-blue-500"
         />
         {isManualOpen && <ItemManual onClose={handleManualOpen} />}
       </nav>

@@ -141,8 +141,8 @@ export default function EmailForm() {
           label={loading ? '잠시만 기다려주세요' : '메일 보내기'}
           ariaLabel={loading ? '잠시만 기다려주세요' : '메일 보내기'}
           fontSize="lg"
-          width="full"
-          className={`bg-primary ${loading ? 'cursor-not-allowed bg-gray-500' : 'hover:bg-blue-500'}`}
+          width="auto"
+          className={`text-white font-bold bg-primary ${loading ? 'cursor-not-allowed bg-gray-500' : 'hover:bg-blue-500'}`}
         />
         {isPopUpOpen && <EmailPopUp onClose={closePopUp}>{popUpMessage}</EmailPopUp>}
       </form>
