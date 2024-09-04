@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import Footer from '../components/Footer/Footer';
 import ReactQueryProviders from '../lib/hooks/useReactQuery';
-import Script from 'next/script';
 import './globals.css';
 
 const pretendard = localFont({
