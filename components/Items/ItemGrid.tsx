@@ -60,7 +60,7 @@ export default function ItemGrid() {
               type="button"
               width="auto"
               onClick={handleManualOpen}
-              className="bg-primary hover:bg-blue-500"
+              className="text-white font-bold bg-primary hover:bg-blue-500"
             />
             {isManualOpen && <ItemManual onClose={handleManualOpen} />}
           </nav>
