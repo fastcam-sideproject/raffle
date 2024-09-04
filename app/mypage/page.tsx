@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import useAuthStore from '../../../lib/store/useAuthStore';
-import { getMyPage } from '../../../api/user/mypageApi';
-import { UserData } from '../../../lib/types/user';
+import useAuthStore from '../../lib/store/useAuthStore';
+import { UserData } from '../../lib/types/user';
+import { getMyPage } from '../../api/user/mypageApi';
 
 export default function MyPage() {
   const userToken = useAuthStore((state) => state.userToken);
