@@ -7,9 +7,7 @@ import useAuthStore from '../../lib/store/useAuthStore';
 import { UserData } from '../../lib/types/user';
 import { getMyInfo } from '../../api/user/myInfo';
 
-export const metadata: Metadata = {
-  title: 'MyInfo',
-};
+
 
 
 export default function MyInfoPage() {
