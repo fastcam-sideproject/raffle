@@ -28,8 +28,8 @@ export default function MyInfoPage() {
   if (!userData) return <div>데이터가 없습니다.</div>;
 
   return (
-    <div className="flex flex-col items-center justify-center h-[70vh]">
-      <div className="w-full bg-white p-8 rounded shadow-md  max-w-2xl">
+    <main className="flex flex-col items-center justify-center h-[70vh]">
+      <section className="w-full bg-white p-8 rounded shadow-md  max-w-2xl">
         <div className="flex flex-col items-center mb-6">
           <div className="w-auto h-auto bg-gray-400 rounded-full p-5 mb-5 ">
             <img
@@ -64,7 +64,7 @@ export default function MyInfoPage() {
             <span>&gt;</span>
           </button>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
