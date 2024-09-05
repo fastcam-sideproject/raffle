@@ -16,7 +16,7 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
   };
 
   const handleMypageNavigation = () => {
-    router.push('/mypage');
+    router.push('/myInfo');
     onClose();
   };
 

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { getMyPage } from '../../api/user/mypageApi';
+import { getMyInfo } from '../../api/user/myInfo';
 
 export default function useOrdererInfo() {
   const [userToken, setUserToken] = useState<string | null>('');
@@ -16,7 +16,7 @@ export default function useOrdererInfo() {
     queryKey: ['ordererInfo'],
     queryFn: () => {
       if (userToken) {
-        return getMyPage(userToken);
+        return getMyInfo(userToken);
       }
       return Promise.reject(new Error('인증 토큰이 없습니다.'));
     },
