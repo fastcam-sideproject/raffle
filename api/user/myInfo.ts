@@ -1,6 +1,6 @@
 import baseUrl from '../baseURL';
 
-export async function getMyPage(userToken: string) {
+export async function getMyInfo(userToken: string) {
   try {
     const response = await fetch(`${baseUrl}/api/v1/user/mypage`, {
       method: 'GET',

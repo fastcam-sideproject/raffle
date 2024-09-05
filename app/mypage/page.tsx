@@ -2,11 +2,17 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Metadata } from 'next';
 import useAuthStore from '../../lib/store/useAuthStore';
 import { UserData } from '../../lib/types/user';
-import { getMyPage } from '../../api/user/mypageApi';
+import { getMyInfo } from '../../api/user/myInfo';
 
-export default function MyPage() {
+export const metadata: Metadata = {
+  title: 'MyInfo',
+};
+
+
+export default function MyInfoPage() {
   const userToken = useAuthStore((state) => state.userToken);
 
   const {
@@ -15,8 +21,8 @@ export default function MyPage() {
     isError,
     error,
   } = useQuery<UserData>({
-    queryKey: ['getMyPage'],
-    queryFn: () => getMyPage(userToken),
+    queryKey: ['getMyInfo'],
+    queryFn: () => getMyInfo(userToken),
     enabled: !!userToken,
   });
 
