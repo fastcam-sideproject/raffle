@@ -1,17 +1,16 @@
-// ItemPopular.tsx
-import { useQuery } from '@tanstack/react-query';
+'use client';
+
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { getPopularRaffleData } from '../../api/raffle/raffleApi';
 import ItemStyle from './ItemStyle';
 import { PopularItem } from '../../lib/types/item';
 
 export default function ItemPopular() {
-  const { data, isLoading, isError, error } = useQuery<PopularItem[]>({
+  const { data, isError, error } = useSuspenseQuery<PopularItem[]>({
     queryKey: ['RafflePopular'],
     queryFn: () => getPopularRaffleData(),
     staleTime: 1000 * 60 * 5,
   });
-
-  if (isLoading) return <p>Loading...</p>;
 
   if (isError) return <p>Error: {error instanceof Error ? error.message : error}</p>;
 

@@ -29,7 +29,7 @@ export default function RaffleItemConfirmationModal({
         </div>
         <div className="pb-6 flex flex-col sm:flex-row gap-4 sm:gap-20">
           <Button
-            className="bg-primary hover:bg-blue-500 px-8 py-3"
+            className="text-white font-bold bg-primary hover:bg-blue-500 px-8 py-3"
             onClick={onClose}
             label="확인"
             type="button"
