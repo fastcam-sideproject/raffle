@@ -27,16 +27,13 @@ async function postPhoneNumber({
 
 async function postVerifyPhone({
   phoneNumber,
-  userToken,
 }: {
   phoneNumber: string;
-  userToken: string;
 }) {
   try {
     const response = await fetch(`${baseUrl}/api/v1/login/verify_phone`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${userToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
