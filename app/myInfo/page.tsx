@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import useAuthStore from '../../lib/store/useAuthStore';
 import { UserData } from '../../lib/types/user';
 import { getMyInfo } from '../../api/user/myInfo';
-import { useRouter } from 'next/navigation';
 
 export default function MyInfoPage() {
   const userToken = useAuthStore((state) => state.userToken);
