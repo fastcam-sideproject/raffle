@@ -14,7 +14,7 @@ type AddressFormProps = {
   handleRegisterAddress: () => void;
 };
 
-export function AddressForm({
+export default function AddressForm({
   address,
   detailAddress,
   isPostcodeOpen,
@@ -86,5 +86,3 @@ export function AddressForm({
     </>
   );
 }
-
-export default AddressForm;

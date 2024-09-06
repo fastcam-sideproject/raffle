@@ -21,11 +21,11 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
     sigungu: '',
     query: '',
   });
-  const useToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore((state) => state.userToken);
 
   const mutation = useMutation({
     mutationKey: ['postAddress'],
-    mutationFn: (addressData: PurchaseAddress) => postAddress(addressData, useToken),
+    mutationFn: (addressData: PurchaseAddress) => postAddress(addressData, userToken),
     onSuccess: () => {
       alert('주소 등록 성공');
     },
