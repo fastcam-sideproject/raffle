@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
 import useAuthStore from '../../lib/store/useAuthStore';
 import { UserData } from '../../lib/types/user';
 import { getMyInfo } from '../../api/user/myInfo';
