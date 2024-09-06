@@ -35,7 +35,6 @@ export default function PurchasePage({
           <OrdererInfo />
           <ShippingInfo onAddressChange={handleAddressChange} />
         </div>
-
         <div className="space-y-4">
           <FinalPaymentSummary id={id} />
           <section className="border p-4 rounded-md">

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import useAuthStore from '../../lib/store/useAuthStore';
 import { UserData } from '../../lib/types/user';
 import { getMyInfo } from '../../api/user/myInfo';
@@ -46,10 +47,12 @@ export default function MyInfoPage() {
         </div>
         <ul className="w-full flex flex-col gap-4 items-center">
           <li className="w-full sm:w-2/3 flex items-center justify-between py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">
+          <Link href="/myInfo/memberInfo">
             <div className="flex gap-2">
               <img src="/icon/profile.svg" alt="유저의 프로필 아이콘"  className='w-4 sm:w-5 h-auto'/>
               <h4 className="text-base sm:text-lg">회원 정보</h4>
             </div>
+            </Link>
             <span>&gt;</span>
           </li>
           <li className="w-full sm:w-2/3 flex items-center justify-between py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">

@@ -6,14 +6,14 @@ const Input = ({
   value,
   onChange,
   name,
-  placeholder = '',
+  placeholder,
   required = false,
   disabled = false,
   width,
   fontSize,
   ariaLabel,
   ariaDescribedBy,
-  className = '',
+  className,
   errors,
 }: InputProps) => {
   const widthClass = `w-${width}`;
@@ -21,8 +21,8 @@ const Input = ({
   const errorId = `${name}-error`;
 
   return (
-    <div className={`${widthClass} flex flex-col gap-1 mb-6 `}>
-      <label htmlFor={name} className={`block text-gray-700 font-bold mb-2 ${fontSizeClass}`}>
+        <div className={`${widthClass} flex flex-col gap-1 mb-6`}>
+    <label htmlFor={name} className={`block text-gray-700 font-bold mb-2 ${fontSizeClass}`}>
         {label}
       </label>
       <input

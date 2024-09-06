@@ -43,7 +43,7 @@ export default function PhoneNumber() {
 
   const registerPhoneNumberMutation = useMutation({
     mutationKey: ['registerPhoneNumber'],
-    mutationFn: () => postPhoneNumber({ phoneNumber, userToken }),
+    mutationFn: () => postPhoneNumber({ phoneNumber }),
     onSuccess: (data) => {
       console.log('registerPhoneNumberMutation:', data);
       alert('전화번호가 등록되었습니다.');
@@ -120,7 +120,7 @@ export default function PhoneNumber() {
       <Button
         type="button"
         label="전화번호 등록"
-        width="auto"
+        width="1/3"
         fontSize="base"
         onClick={handleRegisterPhoneNumber}
         disabled={!isVerified}
