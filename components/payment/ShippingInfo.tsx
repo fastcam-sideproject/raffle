@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import DaumPostcode from 'react-daum-postcode';
 import { useMutation } from '@tanstack/react-query';
-import Input from '../../lib/common/Input';
-import Button from '../../lib/common/Button';
 import { postAddress } from '../../api/user/addressApi';
 import { PurchaseAddress, DaumPostcodeAddress, ShippingInfoProp } from '../../lib/types/purchase';
 import useAuthStore from '../../lib/store/useAuthStore';
 import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
+import AddressForm from '../AddressForm';
 
 export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
   const [address, setAddress] = useState<string>('');
@@ -23,11 +21,11 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
     sigungu: '',
     query: '',
   });
-  const useToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore((state) => state.userToken);
 
   const mutation = useMutation({
     mutationKey: ['postAddress'],
-    mutationFn: (addressData: PurchaseAddress) => postAddress(addressData, useToken),
+    mutationFn: (addressData: PurchaseAddress) => postAddress(addressData, userToken),
     onSuccess: () => {
       alert('주소 등록 성공');
     },
@@ -80,7 +78,6 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
       alert('주소를 입력해주세요');
       return;
     }
-
     const addressData: PurchaseAddress = {
       address: daumAddress.address,
       addressEnglish: daumAddress.addressEnglish,
@@ -109,8 +106,8 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
   }
 
   return (
-    <section className="border p-4 rounded-md">
-      <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
+    <section>
+      <h2 className="text-2xl font-semibold mb-4">배송 정보</h2>
       {data?.address?.address ? (
         <>
           <div className="text-lg">
@@ -122,63 +119,15 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
           </div>
         </>
       ) : (
-        <div>
-          <div className="flex items-center gap-3">
-            <Input
-              type="text"
-              label="우편번호"
-              value={address}
-              name="address"
-              placeholder="우편번호"
-              width="10/12"
-              fontSize="base"
-              disabled={true}
-              className="focus:outline-none focus:border-primary"
-            />
-            <Button
-              type="button"
-              label="우편번호 찾기"
-              onClick={() => setIsPostcodeOpen(true)}
-              width="auto"
-              fontSize="base"
-              className="bg-gray-400 hover:bg-gray-500"
-            />
-          </div>
-          <div className="flex items-center gap-3">
-            <Input
-              type="text"
-              label="상세 주소"
-              value={detailAddress}
-              onChange={handleOnChange}
-              name="detailAddress"
-              placeholder="상세 주소를 입력하세요"
-              width="10/12"
-              fontSize="base"
-              className="focus:outline-none focus:border-primary"
-            />
-            <Button
-              type="button"
-              label="배송주소 등록"
-              onClick={handleRegisterAddress}
-              width="auto"
-              fontSize="base"
-              className="bg-primary hover:bg-blue-500"
-            />
-          </div>
-        </div>
-      )}
-      {isPostcodeOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto h-full w-full">
-          <div className="relative top-20 w-1/3 h-3/5 mx-auto p-5 shadow-lg border bg-white">
-            <button className="absolute top-2 right-2" onClick={() => setIsPostcodeOpen(false)}>
-              닫기
-            </button>
-
-            <div className="mt-10">
-              <DaumPostcode onComplete={handleComplete} />
-            </div>
-          </div>
-        </div>
+        <AddressForm
+          address={address}
+          detailAddress={detailAddress}
+          isPostcodeOpen={isPostcodeOpen}
+          setIsPostcodeOpen={setIsPostcodeOpen}
+          handleComplete={handleComplete}
+          handleOnChange={handleOnChange}
+          handleRegisterAddress={handleRegisterAddress}
+        />
       )}
     </section>
   );

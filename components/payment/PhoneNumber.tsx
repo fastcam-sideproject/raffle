@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import useAuthStore from '../../lib/store/useAuthStore';
 import Button from '../../lib/common/Button';
 import Input from '../../lib/common/Input';
 import { postPhoneNumber, postVerifyPhone } from '../../api/user/phoneNumberApi';
+import useAuthStore from '../../lib/store/useAuthStore';
 
 export default function PhoneNumber() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [verificationCode, setVerificationCode] = useState<string>('');
   const [secretKey, setSecretKey] = useState<string>('');
   const [isVerified, setIsVerified] = useState<boolean>(false);
+
   const userToken = useAuthStore((state) => state.userToken);
 
   const verifyPhoneNumberMutation = useMutation({
@@ -27,10 +28,8 @@ export default function PhoneNumber() {
   const checkVerificationCode = () => {
     if (!phoneNumber) {
       alert('전화번호를 입력해주세요');
-      return;
     } else if (!verificationCode) {
       alert('인증번호를 입력해주세요');
-      return;
     }
 
     if (verificationCode === secretKey) {
@@ -44,8 +43,7 @@ export default function PhoneNumber() {
   const registerPhoneNumberMutation = useMutation({
     mutationKey: ['registerPhoneNumber'],
     mutationFn: () => postPhoneNumber({ phoneNumber, userToken }),
-    onSuccess: (data) => {
-      console.log('registerPhoneNumberMutation:', data);
+    onSuccess: () => {
       alert('전화번호가 등록되었습니다.');
     },
     onError: (error) => {
@@ -70,18 +68,19 @@ export default function PhoneNumber() {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex items-center gap-3">
+    <>
+      <label htmlFor="phoneNumber" className="text-gray-700 font-bold text-base">
+        전화번호
+      </label>
+      <div className="flex gap-2 pb-2">
         <Input
           type="text"
-          label="전화번호"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           name="phoneNumber"
-          placeholder="010-1234-5678"
-          width="9/12"
+          placeholder="전화번호 입력"
           fontSize="base"
-          disabled={isVerified}
+          width="9/12"
           className="focus:outline-none focus:border-primary"
         />
         <Button
@@ -91,13 +90,15 @@ export default function PhoneNumber() {
           fontSize="base"
           onClick={handleVerifyPhoneNumber}
           disabled={isVerified}
-          className="bg-primary hover:bg-blue-500"
+          className="text-white font-bold bg-primary hover:bg-blue-500 "
         />
       </div>
-      <div className="flex items-center gap-3">
+      <label htmlFor="verificationCode" className="text-gray-700 font-bold text-base">
+        인증번호
+      </label>
+      <div className="flex gap-2 pb-2">
         <Input
-          type="text"
-          label="인증번호"
+          type="number"
           value={verificationCode}
           onChange={(e) => setVerificationCode(e.target.value)}
           name="verificationCode"
@@ -114,18 +115,20 @@ export default function PhoneNumber() {
           fontSize="base"
           onClick={checkVerificationCode}
           disabled={isVerified}
-          className="bg-primary hover:bg-blue-500"
+          className="text-white font-bold bg-primary hover:bg-blue-500"
         />
       </div>
-      <Button
-        type="button"
-        label="전화번호 등록"
-        width="auto"
-        fontSize="base"
-        onClick={handleRegisterPhoneNumber}
-        disabled={!isVerified}
-        className="bg-primary hover:bg-blue-500"
-      />
-    </div>
+      <div className="flex justify-center mt-4">
+        <Button
+          type="button"
+          label="전화번호 등록"
+          width="1/3"
+          fontSize="base"
+          onClick={handleRegisterPhoneNumber}
+          disabled={!isVerified}
+          className="text-white font-bold bg-primary hover:bg-blue-500"
+        />
+      </div>
+    </>
   );
 }

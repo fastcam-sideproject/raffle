@@ -35,18 +35,17 @@ export default function PurchasePage({
           <OrdererInfo />
           <ShippingInfo onAddressChange={handleAddressChange} />
         </div>
-
         <div className="space-y-4">
           <FinalPaymentSummary id={id} />
           <section className="border p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-4">결제하기</h2>
             <div className="flex gap-2">
               <input type="checkbox" className=" text-black py-2 rounded-md" />
-              {/* <img
-                src="/image/payment_icon_kakao.svg"
+              <img
+                src="/icon/payment_icon_kakao.svg"
                 alt="카카오페이 결제 아이콘"
                 className="w-20 h-8"
-              /> */}
+              />
             </div>
           </section>
 

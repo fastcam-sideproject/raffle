@@ -11,8 +11,8 @@ async function postPhoneNumber({
     const response = await fetch(`${baseUrl}/api/v1/user/set_phoneNumber`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${userToken}`,
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${userToken}`,
       },
       body: JSON.stringify({
         phone_number: phoneNumber,
