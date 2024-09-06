@@ -6,9 +6,11 @@ import Link from 'next/link';
 import useAuthStore from '../../lib/store/useAuthStore';
 import { UserData } from '../../lib/types/user';
 import { getMyInfo } from '../../api/user/myInfo';
+import { useRouter } from 'next/navigation';
 
 export default function MyInfoPage() {
   const userToken = useAuthStore((state) => state.userToken);
+  const router = useRouter();
 
   const {
     data: userData,
@@ -20,6 +22,10 @@ export default function MyInfoPage() {
     queryFn: () => getMyInfo(userToken),
     enabled: !!userToken,
   });
+
+  const handleMemberInfoNavigation = () => {
+    router.push('/myInfo/memberInfo');
+  };
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -41,18 +47,23 @@ export default function MyInfoPage() {
           </div>
           <h2 className="text-xl font-semibold">{userData.name}</h2>
           <div className="flex gap-2">
-            <img src="/icon/email.svg" alt="유저의 이메일 아이콘"  className='w-4 sm:w-5 h-auto '/>
+            <img src="/icon/email.svg" alt="유저의 이메일 아이콘" className="w-4 sm:w-5 h-auto " />
             <p className="text-gray-600 text-sm sm:text-base">{userData.email}</p>
           </div>
         </div>
         <ul className="w-full flex flex-col gap-4 items-center">
-          <li className="w-full sm:w-2/3 flex items-center justify-between py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">
-          <Link href="/myInfo/memberInfo">
+          <li
+            className="w-full sm:w-2/3 flex items-center justify-between py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100 cursor-pointer"
+            onClick={handleMemberInfoNavigation}
+          >
             <div className="flex gap-2">
-              <img src="/icon/profile.svg" alt="유저의 프로필 아이콘"  className='w-4 sm:w-5 h-auto'/>
+              <img
+                src="/icon/profile.svg"
+                alt="유저의 프로필 아이콘"
+                className="w-4 sm:w-5 h-auto"
+              />
               <h4 className="text-base sm:text-lg">회원 정보</h4>
             </div>
-            </Link>
             <span>&gt;</span>
           </li>
           <li className="w-full sm:w-2/3 flex items-center justify-between py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">
@@ -60,7 +71,7 @@ export default function MyInfoPage() {
               <img
                 src="/icon/submissionHistory.svg"
                 alt="응모 이력 아이콘"
-                className='w-4 sm:w-5 h-auto'
+                className="w-4 sm:w-5 h-auto"
               />
               <h4 className="text-base sm:text-lg">응모 이력</h4>
             </div>
