@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import AddressForm from '../../../components/AddressForm';
 import PhoneNumber from '../../../components/payment/PhoneNumber';
 import useOrdererInfo from '../../../lib/hooks/useOrdererInfo';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import { DaumPostcodeAddress, PurchaseAddress } from '../../../lib/types/purchase';
 import { postAddress } from '../../../api/user/addressApi';
 import useAuthStore from '../../../lib/store/useAuthStore';
 import { getMyInfo } from '../../../api/user/myInfo';
 import { UserData } from '../../../lib/types/user';
+import Button from '../../../lib/common/Button';
+import PhoneNumberModal from '../../../components/PhoneNumberModal';
 
 export default function MemberInfoPage() {
   const [address, setAddress] = useState<string>('');
@@ -26,6 +28,7 @@ export default function MemberInfoPage() {
     sigungu: '',
     query: '',
   });
+  const [isPhoneNumberModalOpen, setIsPhoneNumberModalOpen] = useState<boolean>(false);
   const userToken = useAuthStore((state) => state.userToken);
 
   const { data, isLoading, isError } = useOrdererInfo();
@@ -85,7 +88,6 @@ export default function MemberInfoPage() {
   const handleRegisterAddress = () => {
     if (address === '' || detailAddress === '') {
       alert('주소를 입력해주세요');
-      return;
     }
     const addressData: PurchaseAddress = {
       address: daumAddress.address,
@@ -123,6 +125,14 @@ export default function MemberInfoPage() {
           <div className="flex gap-2">
             <span className="text-gray-700 font-bold text-lg">전화번호</span>
             <span className="text-lg">{data.phoneNumber}</span>
+            <Button
+              type="button"
+              label="수정"
+              width="auto"
+              fontSize="base"
+              onClick={() => setIsPhoneNumberModalOpen(true)}
+              className="text-white font-bold bg-primary hover:bg-blue-500"
+            />
           </div>
         ) : (
           <PhoneNumber />
@@ -150,6 +160,9 @@ export default function MemberInfoPage() {
           />
         )}
       </section>
+      {isPhoneNumberModalOpen && (
+        <PhoneNumberModal onClose={() => setIsPhoneNumberModalOpen(false)} />
+      )}
     </main>
   );
 }
