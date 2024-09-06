@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import Button from '../../lib/common/Button';
 import Input from '../../lib/common/Input';
 import { postPhoneNumber, postVerifyPhone } from '../../api/user/phoneNumberApi';
+import useAuthStore from '../../lib/store/useAuthStore';
 
 export default function PhoneNumber() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
@@ -10,9 +11,11 @@ export default function PhoneNumber() {
   const [secretKey, setSecretKey] = useState<string>('');
   const [isVerified, setIsVerified] = useState<boolean>(false);
 
+  const userToken = useAuthStore((state) => state.userToken);
+
   const verifyPhoneNumberMutation = useMutation({
     mutationKey: ['verifyPhoneNumber'],
-    mutationFn: () => postVerifyPhone({ phoneNumber }),
+    mutationFn: () => postVerifyPhone({ phoneNumber, userToken }),
     onSuccess: (data) => {
       setSecretKey(data.secretKey);
       alert('인증번호가 발송되었습니다.');
@@ -25,10 +28,8 @@ export default function PhoneNumber() {
   const checkVerificationCode = () => {
     if (!phoneNumber) {
       alert('전화번호를 입력해주세요');
-      return;
     } else if (!verificationCode) {
       alert('인증번호를 입력해주세요');
-      return;
     }
 
     if (verificationCode === secretKey) {
@@ -41,9 +42,8 @@ export default function PhoneNumber() {
 
   const registerPhoneNumberMutation = useMutation({
     mutationKey: ['registerPhoneNumber'],
-    mutationFn: () => postPhoneNumber({ phoneNumber }),
-    onSuccess: (data) => {
-      console.log('registerPhoneNumberMutation:', data);
+    mutationFn: () => postPhoneNumber({ phoneNumber, userToken }),
+    onSuccess: () => {
       alert('전화번호가 등록되었습니다.');
     },
     onError: (error) => {

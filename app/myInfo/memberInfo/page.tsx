@@ -4,10 +4,12 @@ import { useState } from 'react';
 import AddressForm from '../../../components/AddressForm';
 import PhoneNumber from '../../../components/payment/PhoneNumber';
 import useOrdererInfo from '../../../lib/hooks/useOrdererInfo';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { DaumPostcodeAddress, PurchaseAddress } from '../../../lib/types/purchase';
 import { postAddress } from '../../../api/user/addressApi';
 import useAuthStore from '../../../lib/store/useAuthStore';
+import { getMyInfo } from '../../../api/user/myInfo';
+import { UserData } from '../../../lib/types/user';
 
 export default function MemberInfoPage() {
   const [address, setAddress] = useState<string>('');
@@ -24,10 +26,9 @@ export default function MemberInfoPage() {
     sigungu: '',
     query: '',
   });
-
   const userToken = useAuthStore((state) => state.userToken);
 
-  console.log(address);
+  const { data, isLoading, isError } = useOrdererInfo();
 
   const mutation = useMutation({
     mutationKey: ['postAddress'],
@@ -39,6 +40,12 @@ export default function MemberInfoPage() {
       alert('주소 등록 실패');
       throw error;
     },
+  });
+
+  const { data: userData } = useQuery<UserData>({
+    queryKey: ['getMyInfo'],
+    queryFn: () => getMyInfo(userToken),
+    enabled: !!userToken,
   });
 
   /**
@@ -97,8 +104,6 @@ export default function MemberInfoPage() {
     mutation.mutate(addressData);
   };
 
-  const { data, isLoading, isError } = useOrdererInfo();
-
   if (isLoading) {
     return <p>로딩 중입니다.</p>;
   }
@@ -110,20 +115,27 @@ export default function MemberInfoPage() {
   return (
     <main className="flex flex-col items-center justify-center h-[70vh] p-4 sm:p-8">
       <section className="w-full bg-white p-8 rounded shadow-md  max-w-md sm:max-w-2xl">
-        <h1 className="text-3xl font-bold text-center mb-6">회원 정보</h1>
-        {data.phoneNumber ? <p>{data.phoneNumber}</p> : <PhoneNumber />}
-        {address && detailAddress ? (
+        <div className="flex gap-2 justify-center mb-8">
+          <img src="/icon/profile.svg" alt="유저의 프로필 아이콘" className="w-4 sm:w-7 h-auto" />
+          <h1 className="text-3xl font-bold text-center ">회원 정보</h1>
+        </div>
+        {data.phoneNumber ? (
+          <div className="flex gap-2">
+            <span className="text-gray-700 font-bold text-lg">전화번호</span>
+            <span className="text-lg">{data.phoneNumber}</span>
+          </div>
+        ) : (
+          <PhoneNumber />
+        )}
+        {userData ? (
           <>
-            <h2 className="text-2xl font-semibold mb-4">주소</h2>
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-2">
-                <span className="text-gray-700 font-bold text-base">우편주소</span>
-                <span className="text-base">{address}</span>
-              </div>
-              <div className="flex gap-2">
-                <span className="text-gray-700 font-bold text-base">상세 주소</span>
-                <span className="text-base">{detailAddress}</span>
-              </div>
+            <div className="flex gap-2">
+              <span className="text-gray-700 font-bold text-lg">우편주소</span>
+              <span className="text-lg">{userData.address.address}</span>
+            </div>
+            <div className="flex gap-2">
+              <span className="text-gray-700 font-bold text-lg">상세 주소</span>
+              <span className="text-lg">{userData.address.detail}</span>
             </div>
           </>
         ) : (
