@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import useAuthStore from '../../lib/store/useAuthStore';
 import Button from '../../lib/common/Button';
 import Input from '../../lib/common/Input';
 import { postPhoneNumber, postVerifyPhone } from '../../api/user/phoneNumberApi';
@@ -122,7 +121,7 @@ export default function PhoneNumber() {
       <div className="flex justify-center mt-4">
         <Button
           type="button"
-          label="등록"
+          label="전화번호 등록"
           width="1/3"
           fontSize="base"
           onClick={handleRegisterPhoneNumber}

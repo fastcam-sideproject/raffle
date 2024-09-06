@@ -23,7 +23,6 @@ export default function OrdererInfo() {
         <p>{data.name}</p>
         <p>{data.email}</p>
         {data.phoneNumber ? <p>{data.phoneNumber}</p> : <PhoneNumber />}
-        {/* <PhoneNumber /> */}
       </div>
     </section>
   );
