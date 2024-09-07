@@ -53,7 +53,7 @@ export default function usePhoneNumber() {
 
   const handleVerifyPhoneNumber = () => {
     if (!/^\d{3}-\d{3,4}-\d{4}$/.test(phoneNumber)) {
-      alert('-를 포함한 전화번호를 입력해주세요');
+      alert('전화번호를 입력해주세요');
       return;
     }
     verifyPhoneNumberMutation.mutate();
