@@ -8,9 +8,9 @@ import useAuthStore from '../../../lib/store/useAuthStore';
 import { getMyInfo } from '../../../api/user/myInfo';
 import { UserData } from '../../../lib/types/user';
 import Button from '../../../lib/common/Button';
-import PhoneNumberModal from '../../../components/PhoneNumberModal';
-import AddressModal from '../../../components/AddressModal';
 import { useAddress } from '../../../lib/hooks/useAddress';
+import PhoneNumberModal from '../../../components/Modal/PhoneNumberModal';
+import AddressModal from '../../../components/Modal/AddressModal';
 
 export default function MemberInfoPage() {
   const [isPhoneNumberModalOpen, setIsPhoneNumberModalOpen] = useState<boolean>(false);

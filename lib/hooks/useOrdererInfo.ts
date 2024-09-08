@@ -2,6 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { getMyInfo } from '../../api/user/myInfo';
 
+/**
+ * 사용자의 정보를 가져오는 커스텀 훅
+ * @returns 사용자 정보 및 인증토큰
+ */
 export default function useOrdererInfo() {
   const [userToken, setUserToken] = useState<string | null>('');
 

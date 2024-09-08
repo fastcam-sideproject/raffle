@@ -9,9 +9,9 @@ import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
 import { DeatilItem } from '../../lib/types/item';
 import Button from '../../lib/common/Button';
-import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
+import RaffleItemConfirmationModal from '../Modal/RaffleItemConfirmationModal';
 
 export default function ItemDetail({ params: { id } }: { params: { id: number } }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
