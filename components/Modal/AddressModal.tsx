@@ -24,7 +24,7 @@ export default function AddressModal({ onClose }: AddressModalProps) {
   };
 
   return (
-    <div className="h-full w-full fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto  flex items-center justify-center">
+    <div className="h-full w-full z-[1000] fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto  flex items-center justify-center">
       <div className="w-auto max-h-[90%] sm:w-[75%] md:w-[60%]  shadow-lg lg:w-[35%]  bg-white rounded p-8">
         <h2 className="text-lg sm:text-2xl font-bold mb-4">주소 수정</h2>
         <label htmlFor="address" className="text-gray-700 font-bold text-base">

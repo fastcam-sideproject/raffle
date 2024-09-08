@@ -12,6 +12,9 @@ import ItemComplete from './ItemComplete';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
 import RaffleItemConfirmationModal from '../Modal/RaffleItemConfirmationModal';
+import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
+import PhoneNumberModal from '../Modal/PhoneNumberModal';
+import AddressModal from '../Modal/AddressModal';
 
 export default function ItemStyle({
   name,
@@ -27,10 +30,14 @@ export default function ItemStyle({
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
     useState<boolean>(false);
+  const [isPhoneNumberModalOpen, setIsPhoneNumberModalOpen] = useState<boolean>(false);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState<boolean>(false);
 
   const userToken = useAuthStore((state) => state.userToken);
   const queryClient = useQueryClient();
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
+
+  const { data: userData } = useOrdererInfo();
 
   const mutate = useMutation({
     mutationKey: ['purchaseTicket'],
@@ -62,14 +69,22 @@ export default function ItemStyle({
   };
 
   /**
-   * 응모하기 버튼 클릭 시 실행되어 응모권이 있을 경우 응모권 사용 후 응모 성공 모달을 띄우는 함수
-   * 응모권이 없을 경우 alert 창을 띄운다.
+   * 응모하기 버튼 클릭 시 실행되는 함수
    */
   const handleEnterRaffle = () => {
     if (!userToken) {
       setIsLoginModalOpen(true);
     } else {
-      if (ticketsCount > 0) {
+      if (!userData) {
+        return;
+      }
+      if (!userData.phoneNumber) {
+        setIsPhoneNumberModalOpen(true);
+        return;
+      } else if (!userData.address.address || !userData.address.detail) {
+        setIsAddressModalOpen(true);
+        return;
+      } else if (ticketsCount > 0) {
         mutate.mutate();
         setIsRaffleConfirmationModalOpen(true);
       } else {
@@ -143,6 +158,10 @@ export default function ItemStyle({
         itemName={name}
         itemImageUrl={imageUrl}
       />
+      {isPhoneNumberModalOpen && (
+        <PhoneNumberModal onClose={() => setIsPhoneNumberModalOpen(false)} />
+      )}
+      {isAddressModalOpen && <AddressModal onClose={() => setIsAddressModalOpen(false)} />}
     </li>
   );
 }
