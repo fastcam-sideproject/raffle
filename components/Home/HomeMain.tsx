@@ -2,7 +2,6 @@
 
 import { Suspense } from 'react';
 import ItemPopular from '../Items/ItemPopular';
-import { KakaoAdFit } from '../KakaoAdFit';
 import HomeHero from './HomeHero';
 import HomeInfo from './HomeInfo';
 
@@ -11,10 +10,9 @@ export default function HomeMain() {
     <main>
       <HomeHero />
       <Suspense fallback={<div>Loading data...</div>}>
-      
-      <ItemPopular />
+        <ItemPopular />
       </Suspense>
-      
+
       <HomeInfo />
     </main>
   );
