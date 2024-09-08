@@ -1,7 +1,7 @@
 import DaumPostcodeEmbed from 'react-daum-postcode';
-import Button from '../lib/common/Button';
-import Input from '../lib/common/Input';
-import { useAddress } from '../lib/hooks/useAddress';
+import { useAddress } from '../../lib/hooks/useAddress';
+import Input from '../../lib/common/Input';
+import Button from '../../lib/common/Button';
 
 type AddressModalProps = {
   onClose: () => void;

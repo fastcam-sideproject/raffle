@@ -1,6 +1,6 @@
-import Input from '../lib/common/Input';
-import Button from '../lib/common/Button';
-import usePhoneNumber from '../lib/hooks/usePhoneNumber';
+import Button from '../../lib/common/Button';
+import Input from '../../lib/common/Input';
+import usePhoneNumber from '../../lib/hooks/usePhoneNumber';
 
 type PhoneNumberModalProps = {
   onClose: () => void;

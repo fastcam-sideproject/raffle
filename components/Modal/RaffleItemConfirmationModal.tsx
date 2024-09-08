@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Button from '../../lib/common/Button';
 import { RaffleItemConfirmationModalProps } from '../../lib/types/item';
+import Button from '../../lib/common/Button';
 
 export default function RaffleItemConfirmationModal({
   isOpen,

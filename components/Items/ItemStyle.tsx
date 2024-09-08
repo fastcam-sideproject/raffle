@@ -8,10 +8,10 @@ import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
 import { ItemProps } from '../../lib/types/item';
 import Button from '../../lib/common/Button';
-import RaffleItemConfirmationModal from './RaffleItemConfirmationModal';
 import ItemComplete from './ItemComplete';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
+import RaffleItemConfirmationModal from '../Modal/RaffleItemConfirmationModal';
 
 export default function ItemStyle({
   name,
