@@ -34,8 +34,8 @@ export default function MyInfoPage() {
   if (!userData) return <div>데이터가 없습니다.</div>;
 
   return (
-    <main className="flex flex-col items-center justify-center h-[70vh] p-4 sm:p-8">
-      <section className="w-full bg-white p-8 rounded shadow-md  max-w-md sm:max-w-2xl">
+    <main className="flex flex-col items-center justify-center h-[40rem] p-4 sm:p-8">
+      <section className="w-full bg-white p-8 rounded shadow-lg  max-w-md sm:max-w-xl">
         <div className="flex flex-col items-center mb-6">
           <div className="w-auto h-auto bg-gray-400 rounded-full p-5 mb-5">
             <img
@@ -47,7 +47,7 @@ export default function MyInfoPage() {
           <h2 className="text-xl font-semibold">{userData.name}</h2>
           <div className="flex gap-2">
             <img src="/icon/email.svg" alt="유저의 이메일 아이콘" className="w-4 sm:w-5 h-auto " />
-            <p className="text-gray-600 text-sm sm:text-base">{userData.email}</p>
+            <p className="text-gray-600 text-sm sm:text-lg">{userData.email}</p>
           </div>
         </div>
         <ul className="w-full flex flex-col gap-4 items-center">

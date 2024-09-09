@@ -1,6 +1,6 @@
-import Input from '../lib/common/Input';
-import Button from '../lib/common/Button';
-import usePhoneNumber from '../lib/hooks/usePhoneNumber';
+import Button from '../../lib/common/Button';
+import Input from '../../lib/common/Input';
+import usePhoneNumber from '../../lib/hooks/usePhoneNumber';
 
 type PhoneNumberModalProps = {
   onClose: () => void;
@@ -24,9 +24,9 @@ export default function PhoneNumberModal({ onClose }: PhoneNumberModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto h-full w-full flex items-center justify-center">
-      <div className="w-auto max-h-[90%] sm:w-[75%] md:w-[60%]  shadow-lg lg:w-[35%]  bg-white rounded p-8">
-        <h2 className="text-2xl font-bold mb-4">전화번호 수정</h2>
+    <div className="h-full w-full z-[1000] flex items-center justify-center fixed inset-0 bg-gray-600 bg-opacity-40 overflow-y-auto">
+      <div className="w-auto max-h-[90%] sm:w-[75%] md:w-[60%] shadow-lg lg:w-[35%]  bg-white rounded p-8">
+        <h2 className="text-lg sm:text-2xl font-bold mb-4">전화번호 수정</h2>
         <label htmlFor="phoneNumber" className="text-gray-700 font-bold text-base">
           전화번호
         </label>
@@ -43,12 +43,12 @@ export default function PhoneNumberModal({ onClose }: PhoneNumberModalProps) {
           />
           <Button
             type="button"
-            label="인증번호 요청"
+            label="인증요청"
             width="auto"
-            fontSize="base"
+            fontSize="sm"
             onClick={handleVerifyPhoneNumber}
             disabled={isVerified}
-            className="text-white font-bold bg-primary hover:bg-blue-500 "
+            className="sm:text-base text-white font-bold bg-primary hover:bg-blue-500 "
           />
         </div>
         <label htmlFor="verificationCode" className="text-gray-700 font-bold text-base">
@@ -68,12 +68,12 @@ export default function PhoneNumberModal({ onClose }: PhoneNumberModalProps) {
           />
           <Button
             type="button"
-            label="인증번호 확인"
+            label="확인"
             width="auto"
-            fontSize="base"
+            fontSize="sm"
             onClick={checkVerificationCode}
             disabled={isVerified}
-            className="text-white font-bold bg-primary hover:bg-blue-500"
+            className="sm:text-base text-white font-bold bg-primary hover:bg-blue-500"
           />
         </div>
         <div className="flex justify-center mt-4">
@@ -81,10 +81,10 @@ export default function PhoneNumberModal({ onClose }: PhoneNumberModalProps) {
             type="button"
             label="전화번호 등록"
             width="1/3"
-            fontSize="base"
+            fontSize="sm"
             onClick={handleRegisterAndClose}
             disabled={!isVerified}
-            className="text-white font-bold bg-primary hover:bg-blue-500"
+            className="sm:text-base text-white font-bold bg-primary hover:bg-blue-500"
           />
         </div>
         <div className="flex justify-center mt-4">
@@ -92,9 +92,9 @@ export default function PhoneNumberModal({ onClose }: PhoneNumberModalProps) {
             type="button"
             label="닫기"
             width="1/3"
-            fontSize="base"
+            fontSize="sm"
             onClick={onClose}
-            className="text-white font-bold bg-gray-500 hover:bg-gray-700"
+            className="sm:text-base text-white font-bold bg-gray-500 hover:bg-gray-700"
           />
         </div>
       </div>
