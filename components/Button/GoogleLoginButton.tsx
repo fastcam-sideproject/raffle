@@ -5,7 +5,7 @@ export default function GoogleLoginButton() {
   const router = useRouter();
 
   const handleLogin = () => {
-    router.push(`${baseURL}/test/login/google`);
+    router.push(`${baseURL}/oauth2/authorization/google`);
   };
 
   return (
