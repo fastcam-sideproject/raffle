@@ -11,11 +11,11 @@ import Button from '../../../lib/common/Button';
 import { useAddress } from '../../../lib/hooks/useAddress';
 import PhoneNumberModal from '../../../components/Modal/PhoneNumberModal';
 import AddressModal from '../../../components/Modal/AddressModal';
+import useMyInfo from '../../../lib/hooks/useMyInfo';
 
 export default function MemberInfoPage() {
   const [isPhoneNumberModalOpen, setIsPhoneNumberModalOpen] = useState<boolean>(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState<boolean>(false);
-  const userToken = useAuthStore((state) => state.userToken);
 
   const {
     address,
@@ -26,15 +26,7 @@ export default function MemberInfoPage() {
     handleOnChange,
     handleRegisterAddress,
   } = useAddress();
-  const {
-    data: userData,
-    isLoading,
-    isError,
-  } = useQuery<UserData>({
-    queryKey: ['getMyInfo'],
-    queryFn: () => getMyInfo(userToken),
-    enabled: !!userToken,
-  });
+  const { data: userData, isLoading, isError } = useMyInfo();
 
   if (isLoading) {
     return <div>Loading...</div>;
