@@ -1,5 +1,3 @@
-'use client';
-
 import { FilterProps, ItemData } from '../../lib/types/item';
 import useRaffleData from '../../lib/hooks/useRaffleData';
 import ErrorPage from '../ErrorPages/ErrorPage';
