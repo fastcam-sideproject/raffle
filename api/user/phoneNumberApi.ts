@@ -1,4 +1,4 @@
-import baseUrl from '../baseURL';
+import baseURL from '../baseURL';
 
 async function postPhoneNumber({
   phoneNumber,
@@ -8,7 +8,7 @@ async function postPhoneNumber({
   userToken: string;
 }) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/user/set_phoneNumber`, {
+    const response = await fetch(`${baseURL}/api/v1/user/set_phoneNumber`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ async function postVerifyPhone({
   userToken: string;
 }) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/login/verify_phone`, {
+    const response = await fetch(`${baseURL}/api/v1/login/verify_phone`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${userToken}`,

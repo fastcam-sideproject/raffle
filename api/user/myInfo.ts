@@ -1,8 +1,8 @@
-import baseUrl from '../baseURL';
+import baseURL from '../baseURL';
 
 export async function getMyInfo(userToken: string) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/user/mypage`, {
+    const response = await fetch(`${baseURL}/api/v1/user/mypage`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${userToken}`,
