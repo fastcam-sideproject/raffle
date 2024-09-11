@@ -2,11 +2,7 @@ import Button from '../../lib/common/Button';
 import Input from '../../lib/common/Input';
 import usePhoneNumber from '../../lib/hooks/usePhoneNumber';
 
-type PhoneNumberModalProps = {
-  onClose: () => void;
-};
-
-export default function PhoneNumberModal({ onClose }: PhoneNumberModalProps) {
+export default function PhoneNumberModal({ onClose }: { onClose: () => void }) {
   const {
     phoneNumber,
     verificationCode,

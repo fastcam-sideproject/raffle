@@ -132,7 +132,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
             fontSize="base"
             width="auto"
             onClick={handleEnterRaffle}
-            className="w-full bg-primary hover:bg-blue-500 sm:relative sticky top-0"
+            className="w-full text-white font-bold bg-primary hover:bg-blue-500 sm:relative sticky top-0"
           />
         </div>
       </div>

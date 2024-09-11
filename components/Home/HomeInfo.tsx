@@ -6,7 +6,7 @@ import { getRaffleData } from '../../api/raffle/raffleApi';
 import { KakaoAdFit } from '../KakaoAdFit';
 
 export default function HomeInfo() {
-  const userToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore<string>((state) => state.userToken);
 
   const { data = [] } = useQuery({
     queryKey: ['RaffleItems'],

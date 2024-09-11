@@ -8,7 +8,7 @@ import { KakaoAdFit } from '../KakaoAdFit';
 
 export default function ItemGrid() {
   const [filter, setFilter] = useState<'ALL' | 'FREE' | 'NOT_FREE' | 'COMPLETED'>('ALL');
-  const [isManualOpen, setIsManualOpen] = useState(false);
+  const [isManualOpen, setIsManualOpen] = useState<boolean>(false);
 
   const handleManualOpen = () => {
     setIsManualOpen(!isManualOpen);

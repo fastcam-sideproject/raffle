@@ -2,17 +2,7 @@ import React from 'react';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import Button from '../lib/common/Button';
 import Input from '../lib/common/Input';
-import { DaumPostcodeAddress } from '../lib/types/purchase';
-
-type AddressFormProps = {
-  address: string;
-  detailAddress: string;
-  isPostcodeOpen: boolean;
-  setIsPostcodeOpen: (value: boolean) => void;
-  handleComplete: (data: DaumPostcodeAddress) => void;
-  handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleRegisterAddress: () => void;
-};
+import { AddressFormProps } from '../lib/types/address';
 
 export default function AddressForm({
   address,

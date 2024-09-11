@@ -1,9 +1,8 @@
 'use client';
 
 import Button from '../../lib/common/Button';
-import { ItemManualProps } from '../../lib/types/item';
 
-export default function ItemManual({ onClose }: ItemManualProps) {
+export default function ItemManual({ onClose }: { onClose: () => void }) {
   return (
     <main className="fixed inset-0 z-[1050] bg-gray-600 bg-opacity-40 flex flex-col items-center justify-center">
       <section className="w-11/12 md:w-4/5 lg:w-3/5 h-auto max-h-[90%] flex flex-col gap-6 justify-center items-center bg-white rounded-lg p-4 md:p-6">
