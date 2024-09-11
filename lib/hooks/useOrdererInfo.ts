@@ -24,7 +24,7 @@ export default function useOrdererInfo() {
       }
       return Promise.reject(new Error('인증 토큰이 없습니다.'));
     },
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60,
   });
 
   return {
