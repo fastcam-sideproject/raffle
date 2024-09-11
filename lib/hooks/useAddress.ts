@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useAuthStore from '../store/useAuthStore';
 import { DaumPostcodeAddress, PurchaseAddress } from '../types/purchase';
 import { postAddress } from '../../api/user/addressApi';
@@ -31,11 +31,15 @@ export default function useAddress() {
     query: '',
   });
   const userToken = useAuthStore((state) => state.userToken);
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationKey: ['postAddress'],
     mutationFn: (addressData: PurchaseAddress) => postAddress(addressData, userToken),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['getMyInfo'],
+      });
       alert('주소 등록 성공');
     },
     onError: (error: Error) => {
