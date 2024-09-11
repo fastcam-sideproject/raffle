@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useAuthStore from '../store/useAuthStore';
 import { postPhoneNumber, postVerifyPhone } from '../../api/user/phoneNumberApi';
 
@@ -33,11 +33,15 @@ export default function usePhoneNumber() {
       console.error('휴대폰 인증번호 요청 실패', error);
     },
   });
+  const queryClient = useQueryClient();
 
   const registerPhoneNumberMutation = useMutation({
     mutationKey: ['registerPhoneNumber'],
     mutationFn: () => postPhoneNumber({ phoneNumber, userToken }),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['getMyInfo'],
+      });
       alert('전화번호가 등록되었습니다.');
     },
     onError: (error) => {
