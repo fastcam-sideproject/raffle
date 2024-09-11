@@ -1,20 +1,11 @@
-'use client';
-
-import { useQuery } from '@tanstack/react-query';
-import useAuthStore from '../../lib/store/useAuthStore';
-import { getRaffleData } from '../../api/raffle/raffleApi';
 import { KakaoAdFit } from '../KakaoAdFit';
+import useRaffleData from '../../lib/hooks/useRaffleData';
 
 export default function HomeInfo() {
-  const userToken = useAuthStore<string>((state) => state.userToken);
-
-  const { data = [] } = useQuery({
-    queryKey: ['RaffleItems'],
-    queryFn: async () => await getRaffleData(userToken),
-    staleTime: 1000 * 60 * 5,
-  });
-
-  const completedCount = data.filter((item: any) => item.status === 'COMPLETED').length;
+  const { data = [] } = useRaffleData();
+  const completedCount = data.filter(
+    (item: { status: string }) => item.status === 'COMPLETED',
+  ).length;
 
   return (
     <section className="my-16 bg-blue-50 w-full">

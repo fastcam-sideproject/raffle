@@ -1,17 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import AddressForm from '../../../components/AddressForm';
 import PhoneNumber from '../../../components/payment/PhoneNumber';
-import useAuthStore from '../../../lib/store/useAuthStore';
-import { getMyInfo } from '../../../api/user/myInfo';
-import { UserData } from '../../../lib/types/user';
 import Button from '../../../lib/common/Button';
-import { useAddress } from '../../../lib/hooks/useAddress';
 import PhoneNumberModal from '../../../components/Modal/PhoneNumberModal';
 import AddressModal from '../../../components/Modal/AddressModal';
 import useMyInfo from '../../../lib/hooks/useMyInfo';
+import useAddress from '../../../lib/hooks/useAddress';
 
 export default function MemberInfoPage() {
   const [isPhoneNumberModalOpen, setIsPhoneNumberModalOpen] = useState<boolean>(false);
