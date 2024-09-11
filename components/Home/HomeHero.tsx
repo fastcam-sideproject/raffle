@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import Button from '../../lib/common/Button';
 import Advertisement from '../Advertisement/Advertisement';
