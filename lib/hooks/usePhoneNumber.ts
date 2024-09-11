@@ -3,6 +3,17 @@ import { useMutation } from '@tanstack/react-query';
 import useAuthStore from '../store/useAuthStore';
 import { postPhoneNumber, postVerifyPhone } from '../../api/user/phoneNumberApi';
 
+/**
+ * 폰번호 관련 데이터를 처리하는 커스텀 훅
+ * @returns phoneNumber: string
+ * @returns verificationCode: string
+ * @returns isVerified: boolean
+ * @returns handlePhoneNumberChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+ * @returns setVerificationCode: (value: string) => void
+ * @returns checkVerificationCode: () => void
+ * @returns handleVerifyPhoneNumber: () => void
+ * @returns handleRegisterPhoneNumber: () => void
+ */
 export default function usePhoneNumber() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [verificationCode, setVerificationCode] = useState<string>('');

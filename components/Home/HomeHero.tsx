@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import Button from '../../lib/common/Button';
 import Advertisement from '../Advertisement/Advertisement';
@@ -7,7 +5,7 @@ import useAuthStore from '../../lib/store/useAuthStore';
 
 export default function HomeHero() {
   const [isShowAdvertisement, setIsShowAdvertisement] = useState<boolean>(false);
-  const userToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore<string>((state) => state.userToken);
 
   const handleShowAdvertisement = () => {
     if (userToken) {

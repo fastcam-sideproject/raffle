@@ -1,6 +1,6 @@
 import Button from '../../lib/common/Button';
 
-export default function ItemLoginModal({ onClose }: any) {
+export default function ItemLoginModal({ onClose }: { onClose: () => void }) {
   return (
     <main className="fixed inset-0 z-[1050] bg-gray-600 bg-opacity-40 flex flex-col items-center justify-center">
       <section className="w-[90%] max-h-[90%] sm:w-[75%] md:w-[60%] lg:w-[45%] flex flex-col gap-8 items-center bg-white rounded shadow-lg p-8">

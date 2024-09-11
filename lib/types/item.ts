@@ -37,10 +37,6 @@ export interface ItemProps {
   winner: string;
 }
 
-export interface ItemManualProps {
-  onClose: () => void;
-}
-
 export type RaffleItem = {
   ticketPrice: number;
   item: {
@@ -65,4 +61,11 @@ export type DeatilItem = {
   };
   totalCount: number;
   currentCount: number;
+};
+
+export type ItemCompleteProps = {
+  onClose: () => void;
+  winner: { nickname: string; phoneNumber: string; userId: string };
+  imageUrl: string;
+  name: string;
 };

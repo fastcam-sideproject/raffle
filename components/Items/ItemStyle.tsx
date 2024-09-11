@@ -12,9 +12,9 @@ import ItemComplete from './ItemComplete';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
 import RaffleItemConfirmationModal from '../Modal/RaffleItemConfirmationModal';
-import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
 import PhoneNumberModal from '../Modal/PhoneNumberModal';
 import AddressModal from '../Modal/AddressModal';
+import useMyInfo from '../../lib/hooks/useMyInfo';
 
 export default function ItemStyle({
   name,
@@ -37,7 +37,7 @@ export default function ItemStyle({
   const queryClient = useQueryClient();
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
 
-  const { data: userData } = useOrdererInfo();
+  const { data: userData } = useMyInfo();
 
   const mutate = useMutation({
     mutationKey: ['purchaseTicket'],

@@ -1,3 +1,3 @@
-const baseUrl = 'https://api.allyouraffle.co.kr';
+const baseURL = 'https://api.allyouraffle.co.kr';
 
-export default baseUrl;
+export default baseURL;

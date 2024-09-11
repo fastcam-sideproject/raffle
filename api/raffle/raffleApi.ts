@@ -1,8 +1,8 @@
-import baseUrl from '../baseURL';
+import baseURL from '../baseURL';
 
 async function getRaffleData(userToken: string) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/raffle/all`, {
+    const response = await fetch(`${baseURL}/api/v1/raffle/all`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${userToken}`,
@@ -25,7 +25,7 @@ async function getRaffleData(userToken: string) {
 
 async function getPopularRaffleData() {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/raffle/active/popular`, {
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/popular`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ async function getPopularRaffleData() {
 
 async function getRaffleDataDetail(raffleId: number) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/raffle/active/free/detail/${raffleId}`);
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/free/detail/${raffleId}`);
     const json = await response.json();
     return json;
   } catch (error) {
@@ -67,7 +67,7 @@ async function postPurchaseRaffle({
   userToken: string;
 }) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/raffle/purchase/${raffleId}`, {
+    const response = await fetch(`${baseURL}/api/v1/raffle/purchase/${raffleId}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${userToken}`,
@@ -85,7 +85,7 @@ async function postPurchaseRaffle({
 
 async function getRaffleNotFreeItem(userToken: string) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/raffle/active/not_free`, {
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/not_free`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${userToken}`,
@@ -107,7 +107,7 @@ async function getRaffleNotFreeItem(userToken: string) {
  */
 async function getRaffleFreeItem(userToken: string) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/raffle/active/free`, {
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/free`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${userToken}`,

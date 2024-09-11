@@ -1,8 +1,8 @@
-import baseUrl from '../baseURL';
+import baseURL from '../baseURL';
 
 export async function getMyInfo(userToken: string) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/user/mypage`, {
+    const response = await fetch(`${baseURL}/api/v1/user/mypage`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${userToken}`,
@@ -10,7 +10,7 @@ export async function getMyInfo(userToken: string) {
       },
     });
     if (!response.ok) {
-      console.error('마이페이지 불러오기 실패', response);
+      throw new Error(`마이페이지 불러오기 실패: ${response.statusText}`);
     }
     return response.json();
   } catch (error) {

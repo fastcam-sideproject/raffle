@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
-function Loading() {
+export default function Loading() {
   const text = 'All You Raffle';
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,5 +33,3 @@ function Loading() {
     </div>
   );
 }
-
-export default Loading;
