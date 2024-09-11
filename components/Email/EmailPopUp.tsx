@@ -1,10 +1,6 @@
 import React from 'react';
 import Button from '../../lib/common/Button';
-
-type EmailPopUpProps = {
-  onClose: () => void;
-  children: React.ReactNode;
-};
+import { EmailPopUpProps } from '../../lib/types/email';
 
 export default function EmailPopUp({ onClose, children }: EmailPopUpProps) {
   return (

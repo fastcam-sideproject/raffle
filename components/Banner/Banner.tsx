@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-function Banner() {
+export default function Banner() {
   const pathName = usePathname();
   const formattedPathName =
     pathName.replace('/', '').charAt(0).toUpperCase() + pathName.slice(2).toLocaleLowerCase();
@@ -16,5 +16,3 @@ function Banner() {
     </div>
   );
 }
-
-export default Banner;
