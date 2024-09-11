@@ -4,7 +4,7 @@ import useAuthStore from '../store/useAuthStore';
 import { DaumPostcodeAddress, PurchaseAddress } from '../types/purchase';
 import { postAddress } from '../../api/user/addressApi';
 
-export const useAddress = () => {
+export default function useAddress() {
   const [address, setAddress] = useState<string>('');
   const [detailAddress, setDetailAddress] = useState<string>('');
   const [isPostcodeOpen, setIsPostcodeOpen] = useState<boolean>(false);
@@ -95,4 +95,4 @@ export const useAddress = () => {
     handleOnChange,
     handleRegisterAddress,
   };
-};
+}
