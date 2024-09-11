@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { sendContactEmail } from '../../app/api/contact';
 import Button from '../../lib/common/Button';
 import EmailPopUp from './EmailPopUp';
-import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
 import { KakaoAdFit } from '../KakaoAdFit';
+import useMyInfo from '../../lib/hooks/useMyInfo';
 
 const initialContact = {
   from: '',
@@ -16,7 +16,7 @@ const initialContact = {
 };
 
 export default function EmailForm() {
-  const { data, isLoading } = useOrdererInfo();
+  const { data, isLoading } = useMyInfo();
   const [contact, setContact] = useState(initialContact);
   const [isPopUpOpen, setIsPopUpOpen] = useState<boolean>(false);
   const [popUpMessage, setPopUpMessage] = useState<string>('');

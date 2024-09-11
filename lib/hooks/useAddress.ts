@@ -4,6 +4,17 @@ import useAuthStore from '../store/useAuthStore';
 import { DaumPostcodeAddress, PurchaseAddress } from '../types/purchase';
 import { postAddress } from '../../api/user/addressApi';
 
+/**
+ * 우편주소 데이터를 처리하는 커스텀 훅
+ * @returns address: string
+ * @returns detailAddress: string
+ * @returns isPostcodeOpen: boolean
+ * @returns daumAddress: DaumPostcodeAddress
+ * @returns setIsPostcodeOpen: (value: boolean) => void
+ * @returns handleComplete: (data: DaumPostcodeAddress) => void
+ * @returns handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+ * @returns handleRegisterAddress: () => void
+ */
 export default function useAddress() {
   const [address, setAddress] = useState<string>('');
   const [detailAddress, setDetailAddress] = useState<string>('');
