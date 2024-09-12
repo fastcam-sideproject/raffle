@@ -20,6 +20,7 @@ export interface ItemData {
     possibleRaffle: boolean;
     id: number;
   };
+  winner: WinnerUser;
 }
 
 export type PopularItem = ItemData & {

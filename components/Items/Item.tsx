@@ -37,29 +37,20 @@ export default function Item({ filter }: FilterProps) {
 
   return (
     <>
-      {filteredData.map(
-        (itemData: {
-          winner: string;
-          status: string;
-          id: number;
-          item: { name: string; category: number; imageUrl: string };
-          currentCount: number;
-          totalCount: number;
-        }) => (
-          <ItemStyle
-            key={itemData.id}
-            name={itemData.item.name}
-            category={itemData.item.category}
-            imageUrl={itemData.item.imageUrl}
-            currentCount={itemData.currentCount}
-            totalCount={itemData.totalCount}
-            raffleId={itemData.id}
-            filter={filter}
-            status={itemData.status}
-            winner={itemData.winner}
-          />
-        ),
-      )}
+      {filteredData.map((itemData: ItemData) => (
+        <ItemStyle
+          key={itemData.id}
+          name={itemData.item.name}
+          category={itemData.item.category}
+          imageUrl={itemData.item.imageUrl}
+          currentCount={itemData.currentCount}
+          totalCount={itemData.totalCount}
+          raffleId={itemData.id}
+          filter={filter}
+          status={itemData.status}
+          winner={itemData.winner}
+        />
+      ))}
     </>
   );
 }
