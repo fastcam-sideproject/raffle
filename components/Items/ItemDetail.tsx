@@ -50,7 +50,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
     enabled: !!userToken,
   });
 
-  const fetchGetRaffleDataDetail = async (id: number) => {
+  const fetchGetRaffleDataDetail = async (id: number): Promise<void> => {
     try {
       const data = await getRaffleDataDetail(id);
       setDetailData(data);
