@@ -4,7 +4,7 @@ import baseURL from '../../api/baseURL';
 export default function GoogleLoginButton() {
   const router = useRouter();
 
-  const handleLogin = () => {
+  const handleLogin = (): void => {
     router.push(`${baseURL}/test/login/google`);
   };
 

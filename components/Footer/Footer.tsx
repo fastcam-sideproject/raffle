@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="w-full bg-gray-50">
       <div className="px-24 py-10 grid grid-cols-4 gap-12 max-md:flex max-md:flex-col max-md:p-10">
@@ -51,5 +51,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

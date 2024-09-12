@@ -1,3 +1,9 @@
+type WinnerUser = {
+  nickname: string;
+  phoneNumber: string;
+  userId: string;
+};
+
 export interface ItemData {
   isFree: boolean;
   id: number;
@@ -14,10 +20,11 @@ export interface ItemData {
     possibleRaffle: boolean;
     id: number;
   };
+  winner: WinnerUser;
 }
 
 export type PopularItem = ItemData & {
-  winner: string;
+  winner: WinnerUser;
   status: string;
 };
 
@@ -34,15 +41,18 @@ export interface ItemProps {
   totalCount: number;
   raffleId: number;
   status: string;
-  winner: string;
+  winner: WinnerUser;
 }
+
+type Item = {
+  name: string;
+  imageUrl: string;
+};
 
 export type RaffleItem = {
   ticketPrice: number;
-  item: {
-    name: string;
+  item: Item & {
     description: string;
-    imageUrl: string;
   };
 };
 
@@ -54,9 +64,7 @@ export type RaffleItemConfirmationModalProps = {
 };
 
 export type DeatilItem = {
-  item: {
-    name: string;
-    imageUrl: string;
+  item: Item & {
     imageList: [];
   };
   totalCount: number;
@@ -64,8 +72,8 @@ export type DeatilItem = {
 };
 
 export type ItemCompleteProps = {
-  onClose: () => void;
-  winner: { nickname: string; phoneNumber: string; userId: string };
+  onClose: (event: React.MouseEvent) => void;
+  winner: WinnerUser;
   imageUrl: string;
   name: string;
 };

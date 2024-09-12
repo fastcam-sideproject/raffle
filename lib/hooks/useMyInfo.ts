@@ -3,11 +3,12 @@ import { getMyInfo } from '../../api/user/myInfo';
 import useAuthStore from '../store/useAuthStore';
 
 /**
- * 사용자의 정보를 나타내는 커스텀 훅
- * @returns 사용자 정보 및 인증토큰 반환
+ * @description 사용자의 정보를 나타내는 커스텀 훅
+ * @returns {object} queryResult
+ * @returns {string} userToken
  */
 export default function useMyInfo() {
-  const userToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore<string>((state) => state.userToken);
 
   const queryResult = useQuery({
     queryKey: ['getMyInfo'],

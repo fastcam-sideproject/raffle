@@ -28,19 +28,19 @@ export default function HeaderNav() {
   });
   if (isLoading) return <div>Loading...</div>;
 
-  const handleProfileClick = () => {
+  const handleProfileClick = (): void => {
     setIsPopverOpen(!isPopverOpen);
   };
 
-  const handleClosePopver = () => {
+  const handleClosePopver = (): void => {
     setIsPopverOpen(false);
   };
 
-  const handleNavDropDown = () => {
+  const handleNavDropDown = (): void => {
     setToggle(!toggle);
   };
 
-  const closeMenu = () => {
+  const closeMenu = (): void => {
     setToggle(false);
   };
 

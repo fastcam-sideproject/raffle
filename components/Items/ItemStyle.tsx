@@ -33,7 +33,7 @@ export default function ItemStyle({
   const [isPhoneNumberModalOpen, setIsPhoneNumberModalOpen] = useState<boolean>(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState<boolean>(false);
 
-  const userToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore<string>((state) => state.userToken);
   const queryClient = useQueryClient();
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
 
@@ -61,7 +61,7 @@ export default function ItemStyle({
     staleTime: 1000 * 60,
   });
 
-  const handleImageClick = (event: React.MouseEvent) => {
+  const handleImageClick = (event: React.MouseEvent): void => {
     if (status === 'COMPLETED') {
       event.preventDefault();
       setIsModalOpen(!isModalOpen);
@@ -71,7 +71,7 @@ export default function ItemStyle({
   /**
    * 응모하기 버튼 클릭 시 실행되는 함수
    */
-  const handleEnterRaffle = () => {
+  const handleEnterRaffle = (): void => {
     if (!userToken) {
       setIsLoginModalOpen(true);
     } else {
@@ -93,7 +93,7 @@ export default function ItemStyle({
     }
   };
 
-  const handleCloseRaffleConfirmationModal = () => {
+  const handleCloseRaffleConfirmationModal = (): void => {
     if (!userToken) {
       setIsLoginModalOpen(false);
     } else {
