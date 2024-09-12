@@ -5,15 +5,15 @@ import { DaumPostcodeAddress, PurchaseAddress } from '../types/purchase';
 import { postAddress } from '../../api/user/addressApi';
 
 /**
- * 우편주소 데이터를 처리하는 커스텀 훅
- * @returns address: string
- * @returns detailAddress: string
- * @returns isPostcodeOpen: boolean
- * @returns daumAddress: DaumPostcodeAddress
- * @returns setIsPostcodeOpen: (value: boolean) => void
- * @returns handleComplete: (data: DaumPostcodeAddress) => void
- * @returns handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void
- * @returns handleRegisterAddress: () => void
+ * @description 우편주소 데이터를 처리하는 커스텀 훅
+ * @returns {string} address
+ * @returns {string} detailAddress
+ * @returns {boolean} isPostcodeOpen
+ * @returns {DaumPostcodeAddress} daumAddress
+ * @returns {function} setIsPostcodeOpen
+ * @returns {function} handleComplete
+ * @returns {function} handleOnChange
+ * @returns {function} handleRegisterAddress
  */
 export default function useAddress() {
   const [address, setAddress] = useState<string>('');
@@ -48,7 +48,7 @@ export default function useAddress() {
     },
   });
 
-  const handleComplete = (data: DaumPostcodeAddress) => {
+  const handleComplete = (data: DaumPostcodeAddress): void => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -74,7 +74,7 @@ export default function useAddress() {
     setIsPostcodeOpen(false);
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDetailAddress(event.target.value);
   };
 

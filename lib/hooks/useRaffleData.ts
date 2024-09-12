@@ -3,9 +3,9 @@ import { getRaffleData, getRaffleFreeItem, getRaffleNotFreeItem } from '../../ap
 import useAuthStore from '../store/useAuthStore';
 
 /**
- * 응모 상품들을 처리하는 커스텀 훅
- * @param filter 'ALL' | 'FREE' | 'NOT_FREE' | 'COMPLETED'
- * @returns queryResult
+ * @description 응모 상품들을 처리하는 커스텀 훅
+ * @param {string} filter
+ * @returns {object} queryResult
  */
 export default function useRaffleData(filter = 'ALL') {
   const userToken = useAuthStore((state) => state.userToken);
