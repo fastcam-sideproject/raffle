@@ -1,8 +1,8 @@
+import useMyInfo from '../../lib/hooks/useMyInfo';
 import PhoneNumber from './PhoneNumber';
-import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
 
 export default function OrdererInfo() {
-  const { data, isLoading, isError } = useOrdererInfo();
+  const { data, isLoading, isError } = useMyInfo();
 
   if (isLoading) {
     return <p>주문자 정보를 불러오는 중입니다.</p>;
@@ -19,7 +19,7 @@ export default function OrdererInfo() {
   return (
     <section className="border p-4 rounded-md">
       <h2 className="text-xl font-semibold mb-4">주문자 정보</h2>
-      <div className="space-y-2 text-lg">
+      <div className="space-y-1 text-lg">
         <p>{data.name}</p>
         <p>{data.email}</p>
         {data.phoneNumber ? <p>{data.phoneNumber}</p> : <PhoneNumber />}

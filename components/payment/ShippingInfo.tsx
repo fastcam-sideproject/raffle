@@ -3,8 +3,8 @@ import { useMutation } from '@tanstack/react-query';
 import { postAddress } from '../../api/user/addressApi';
 import { PurchaseAddress, DaumPostcodeAddress, ShippingInfoProp } from '../../lib/types/purchase';
 import useAuthStore from '../../lib/store/useAuthStore';
-import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
 import AddressForm from '../AddressForm';
+import useMyInfo from '../../lib/hooks/useMyInfo';
 
 export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
   const [address, setAddress] = useState<string>('');
@@ -35,7 +35,7 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
     },
   });
 
-  const { data, isLoading, error } = useOrdererInfo();
+  const { data, isLoading, error } = useMyInfo();
 
   /**
    * 우편번호 찾기 버튼 클릭시 실행되는 카카오 우편번호 API
@@ -106,18 +106,16 @@ export default function ShippingInfo({ onAddressChange }: ShippingInfoProp) {
   }
 
   return (
-    <section>
+    <section className="border p-4 rounded-md">
       <h2 className="text-2xl font-semibold mb-4">배송 정보</h2>
       {data?.address?.address ? (
-        <>
-          <div className="text-lg">
-            <p>{data.name}</p>
-            <p>{data.phoneNumber}</p>
-            <p>{data.address.address}</p>
-            <p>{data.address.detail}</p>
-            <p>{data.address.postalCode}</p>
-          </div>
-        </>
+        <div className="space-y-1 text-lg">
+          <p>{data.name}</p>
+          <p>{data.phoneNumber}</p>
+          <p>{data.address.address}</p>
+          <p>{data.address.detail}</p>
+          <p>{data.address.postalCode}</p>
+        </div>
       ) : (
         <AddressForm
           address={address}
