@@ -1,12 +1,12 @@
 import useMyInfo from '../../lib/hooks/useMyInfo';
 
 export default function ShippingInfo() {
-  const { data, isLoading, error } = useMyInfo();
+  const { data: userData, isLoading, error } = useMyInfo();
 
   if (isLoading) {
     return <p>배송 정보를 불러오는 중입니다.</p>;
   }
-  if (!data) {
+  if (!userData) {
     return <p>배송 정보가 없습니다.</p>;
   }
   if (error) {
@@ -15,14 +15,14 @@ export default function ShippingInfo() {
 
   return (
     <section className="border p-4 rounded-md">
-      <h2 className="text-2xl font-semibold mb-4">배송 정보</h2>
-      {data?.address?.address && (
+      <h2 className="text-xl font-semibold mb-4">배송 정보</h2>
+      {userData?.address?.address && (
         <div className="space-y-1 text-lg">
-          <p>{data.name}</p>
-          <p>{data.phoneNumber}</p>
-          <p>{data.address.address}</p>
-          <p>{data.address.detail}</p>
-          <p>{data.address.postalCode}</p>
+          <p>{userData.name}</p>
+          <p>{userData.phoneNumber}</p>
+          <p>{userData.address.address}</p>
+          <p>{userData.address.detail}</p>
+          <p>{userData.address.postalCode}</p>
         </div>
       )}
     </section>
