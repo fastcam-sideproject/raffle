@@ -22,7 +22,7 @@ export default function OrdererInfo() {
       <div className="space-y-1 text-lg">
         <p>{data.name}</p>
         <p>{data.email}</p>
-        {data.phoneNumber ? <p>{data.phoneNumber}</p> : <PhoneNumber />}
+        <p>{data.phoneNumber}</p>
       </div>
     </section>
   );

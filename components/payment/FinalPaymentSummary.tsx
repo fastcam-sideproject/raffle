@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { RaffleItem } from '../../lib/types/item';
 import useRaffleData from '../../lib/hooks/useRaffleData';
@@ -30,7 +32,6 @@ export default function FinalPaymentSummary({ id }: { id: string }) {
   if (isError || !raffleItem) {
     return <div>Error: {error ? error.message : 'Item not found'}</div>;
   }
-
 
   return (
     <section className="border p-4 rounded-md">

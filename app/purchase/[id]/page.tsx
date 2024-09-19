@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import RaffleInfo from '../../../components/payment/RaffleInfo';
 import OrdererInfo from '../../../components/payment/OrdererInfo';
 import ShippingInfo from '../../../components/payment/ShippingInfo';
@@ -14,16 +14,12 @@ export default function PurchasePage({
   };
 }) {
   const { id } = params;
-  const [address, setAddress] = useState<string>('');
-  console.log(address); // 우편번호 주소 + 상세주소 출력됨.
+
+  const router = useRouter();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('submit');
-  };
-
-  const handleAddressChange = (address: string) => {
-    setAddress(address);
+    router.push('/');
   };
 
   return (
@@ -33,7 +29,7 @@ export default function PurchasePage({
         <div className="space-y-4">
           <RaffleInfo id={id} />
           <OrdererInfo />
-          <ShippingInfo onAddressChange={handleAddressChange} />
+          <ShippingInfo />
         </div>
         <div className="space-y-4">
           <FinalPaymentSummary id={id} />
@@ -48,8 +44,7 @@ export default function PurchasePage({
               />
             </div>
           </section>
-
-          <section className="border  rounded-md">
+          <section className="border rounded-md">
             <div className="space-y-2 p-4">
               <label className="flex items-center space-x-2">
                 <input type="checkbox" />
