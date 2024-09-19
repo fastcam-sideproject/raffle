@@ -23,8 +23,8 @@ jobs:
 
       - name: Build project
         env:
-          NEXT_APP_EMAIL: ${{ secrets.NEXT_APP_EMAIL }}
-          NEXT_APP_PWD: ${{ secrets.NEXT_APP_PWD }}
+          NEXT_APP_EMAIL: ${{ secrets.NEXT_PUBLIC_EMAIL }}
+          NEXT_APP_PWD: ${{ secrets.NEXT_PUBLIC_PWD }}
         run: |
           echo "NEXT_APP_EMAIL: $NEXT_APP_EMAIL"
           echo "NEXT_APP_PWD: $NEXT_APP_PWD"

@@ -19,8 +19,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.NEXT_APP_EMAIL,
-    pass: process.env.NEXT_APP_PWD,
+    user: process.env.NEXT_PUBLIC_EMAIL,
+    pass: process.env.NEXT_PUBLIC_PWD,
   },
 });
 
@@ -30,7 +30,7 @@ export function sendEmail({ from, title, content, inquiryType }: ContactType) {
       ? '[All Your Raffle 1:1 문의]'
       : '[All Your Raffle 계정 삭제 문의]';
   const mailOptions: MailOptionType = {
-    to: process.env.NEXT_APP_EMAIL || '',
+    to: process.env.NEXT_PUBLIC_EMAIL || '',
     from: `${from}`,
     subject: `${subjectPrefix} ${title}`,
     html: `
