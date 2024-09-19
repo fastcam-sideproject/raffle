@@ -4,6 +4,7 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
@@ -14,6 +15,7 @@ import ItemLoginModal from './ItemLoginModal';
 import RaffleItemConfirmationModal from '../Modal/RaffleItemConfirmationModal';
 
 export default function ItemDetail({ params: { id } }: { params: { id: number } }) {
+  const router = useRouter();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<DeatilItem>({
     item: {
@@ -90,6 +92,10 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
     fetchGetRaffleDataDetail(id);
   };
 
+  const handleToPurchase = () => {
+    router.push(`/purchase/${id}`);
+  };
+
   const percentageComplete = ((detailData.currentCount / detailData.totalCount) * 100).toFixed(2);
 
   if (!detailData) {
@@ -132,6 +138,15 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
             fontSize="base"
             width="auto"
             onClick={handleEnterRaffle}
+            className="w-full text-white font-bold bg-primary hover:bg-blue-500 sm:relative sticky top-0"
+          />
+          <Button
+            type="button"
+            ariaLabel="결제하기"
+            label="결제하기"
+            width="auto"
+            fontSize="base"
+            onClick={handleToPurchase}
             className="w-full text-white font-bold bg-primary hover:bg-blue-500 sm:relative sticky top-0"
           />
         </div>
