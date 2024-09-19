@@ -9,22 +9,22 @@ const useAuthStore = create<AuthStore>()(
       refreshToken: '',
       setUserToken: (userToken, refreshToken) => {
         if (typeof window !== 'undefined') {
-          sessionStorage.setItem('access_token', userToken);
-          sessionStorage.setItem('refresh_token', refreshToken);
+          localStorage.setItem('access_token', userToken);
+          localStorage.setItem('refresh_token', refreshToken);
         }
         set({ userToken, refreshToken });
       },
       logout: () => {
         if (typeof window !== 'undefined') {
-          sessionStorage.removeItem('access_token');
-          sessionStorage.removeItem('refresh_token');
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
         }
         set({ userToken: '', refreshToken: '' });
       },
     }),
     {
       name: 'auth-storage',
-      storage: typeof window !== 'undefined' ? createJSONStorage(() => sessionStorage) : undefined,
+      storage: typeof window !== 'undefined' ? createJSONStorage(() => localStorage) : undefined,
     },
   ),
 );
