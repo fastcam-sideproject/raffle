@@ -4,7 +4,7 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
