@@ -1,8 +1,8 @@
-import baseUrl from '../baseURL';
+import baseURL from '../baseURL';
 
 export async function postRaffleItem(adminToken: string, data: FormData) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/item/create`, {
+    const response = await fetch(`${baseURL}/api/v1/item/create`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${adminToken}`,

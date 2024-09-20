@@ -1,15 +1,26 @@
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useAuthStore from '../store/useAuthStore';
 import { postPhoneNumber, postVerifyPhone } from '../../api/user/phoneNumberApi';
 
+/**
+ * @description 폰번호 관련 데이터를 처리하는 커스텀 훅
+ * @returns {string} phoneNumber
+ * @returns {string} verificationCode
+ * @returns {boolean} isVerified
+ * @returns {function} handlePhoneNumberChange
+ * @returns {function} setVerificationCode
+ * @returns {function} checkVerificationCode
+ * @returns {function} handleVerifyPhoneNumber
+ * @returns {function} handleRegisterPhoneNumber
+ */
 export default function usePhoneNumber() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [verificationCode, setVerificationCode] = useState<string>('');
   const [secretKey, setSecretKey] = useState<string>('');
   const [isVerified, setIsVerified] = useState<boolean>(false);
 
-  const userToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore<string>((state) => state.userToken);
 
   const verifyPhoneNumberMutation = useMutation({
     mutationKey: ['verifyPhoneNumber'],
@@ -22,11 +33,15 @@ export default function usePhoneNumber() {
       console.error('휴대폰 인증번호 요청 실패', error);
     },
   });
+  const queryClient = useQueryClient();
 
   const registerPhoneNumberMutation = useMutation({
     mutationKey: ['registerPhoneNumber'],
     mutationFn: () => postPhoneNumber({ phoneNumber, userToken }),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['getMyInfo'],
+      });
       alert('전화번호가 등록되었습니다.');
     },
     onError: (error) => {
@@ -34,7 +49,7 @@ export default function usePhoneNumber() {
     },
   });
 
-  const checkVerificationCode = () => {
+  const checkVerificationCode = (): void => {
     if (!phoneNumber) {
       alert('전화번호를 입력해주세요');
       return;
@@ -51,7 +66,7 @@ export default function usePhoneNumber() {
     }
   };
 
-  const handleVerifyPhoneNumber = () => {
+  const handleVerifyPhoneNumber = (): void => {
     if (!/^\d{3}-\d{3,4}-\d{4}$/.test(phoneNumber)) {
       alert('전화번호를 입력해주세요');
       return;
@@ -59,7 +74,7 @@ export default function usePhoneNumber() {
     verifyPhoneNumberMutation.mutate();
   };
 
-  const handleRegisterPhoneNumber = () => {
+  const handleRegisterPhoneNumber = (): void => {
     if (!isVerified) {
       alert('휴대폰 인증을 완료해주세요');
       return;
@@ -67,7 +82,7 @@ export default function usePhoneNumber() {
     registerPhoneNumberMutation.mutate();
   };
 
-  const formatPhoneNumber = (value: string) => {
+  const formatPhoneNumber = (value: string): string => {
     const cleaned = value.replace(/\D/g, '');
     let formatted = '';
 
@@ -81,7 +96,7 @@ export default function usePhoneNumber() {
     return formatted;
   };
 
-  const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const formattedPhoneNumber = formatPhoneNumber(event.target.value);
     setPhoneNumber(formattedPhoneNumber);
   };

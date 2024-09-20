@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-function ErrorPage() {
+export default function ErrorPage() {
   return (
     <section className="w-full flex flex-col justify-center items-center gap-10 my-8">
       <Image
@@ -24,5 +24,3 @@ function ErrorPage() {
     </section>
   );
 }
-
-export default ErrorPage;

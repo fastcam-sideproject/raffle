@@ -6,8 +6,15 @@ import Button from '../../lib/common/Button';
 import { postRaffleItem } from '../../api/raffle/adminApi';
 import useAuthStore from '../../lib/store/useAuthStore';
 
+type FormData = {
+  itemName: string;
+  itemCategory: string;
+  itemDescription: string;
+  itemImage: string;
+};
+
 export default function AdminDashboard() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     itemName: '',
     itemCategory: '',
     itemDescription: '',
@@ -15,7 +22,7 @@ export default function AdminDashboard() {
   });
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
-  const adminToken = useAuthStore((state) => state.userToken);
+  const adminToken = useAuthStore<string>((state) => state.userToken);
 
   const handleChange = (event: any) => {
     const { name, value, type, files } = event.target;

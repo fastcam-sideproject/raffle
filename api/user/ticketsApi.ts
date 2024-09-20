@@ -1,4 +1,4 @@
-import baseUrl from '../baseURL';
+import baseURL from '../baseURL';
 
 /**
  * 유저의 응모권 갯수 가져오기
@@ -6,7 +6,7 @@ import baseUrl from '../baseURL';
  */
 async function getTickets(userToken: string) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/user/tickets`, {
+    const response = await fetch(`${baseURL}/api/v1/user/tickets`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ async function getTickets(userToken: string) {
       },
     });
     if (!response.ok) {
-      console.error('응모권 불러오기 실패', response.status);
+      throw new Error('응모권 불러오기 실패');
     }
     return response.json();
   } catch (error) {
@@ -24,7 +24,7 @@ async function getTickets(userToken: string) {
 
 async function postTicketsPlusOne(userToken: string) {
   try {
-    const response = await fetch(`${baseUrl}/api/v1/user/tickets/plus_one`, {
+    const response = await fetch(`${baseURL}/api/v1/user/tickets/plus_one`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

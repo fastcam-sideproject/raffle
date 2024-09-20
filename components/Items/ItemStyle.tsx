@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
 import { ItemProps } from '../../lib/types/item';
@@ -12,9 +13,9 @@ import ItemComplete from './ItemComplete';
 import useAuthStore from '../../lib/store/useAuthStore';
 import ItemLoginModal from './ItemLoginModal';
 import RaffleItemConfirmationModal from '../Modal/RaffleItemConfirmationModal';
-import useOrdererInfo from '../../lib/hooks/useOrdererInfo';
 import PhoneNumberModal from '../Modal/PhoneNumberModal';
 import AddressModal from '../Modal/AddressModal';
+import useMyInfo from '../../lib/hooks/useMyInfo';
 
 export default function ItemStyle({
   name,
@@ -25,7 +26,9 @@ export default function ItemStyle({
   raffleId,
   status,
   winner,
+  filter,
 }: ItemProps) {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
@@ -33,11 +36,11 @@ export default function ItemStyle({
   const [isPhoneNumberModalOpen, setIsPhoneNumberModalOpen] = useState<boolean>(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState<boolean>(false);
 
-  const userToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore<string>((state) => state.userToken);
   const queryClient = useQueryClient();
   const percentageComplete = parseFloat(((currentCount / totalCount) * 100).toFixed(2));
 
-  const { data: userData } = useOrdererInfo();
+  const { data: userData } = useMyInfo();
 
   const mutate = useMutation({
     mutationKey: ['purchaseTicket'],
@@ -61,7 +64,7 @@ export default function ItemStyle({
     staleTime: 1000 * 60,
   });
 
-  const handleImageClick = (event: React.MouseEvent) => {
+  const handleImageClick = (event: React.MouseEvent): void => {
     if (status === 'COMPLETED') {
       event.preventDefault();
       setIsModalOpen(!isModalOpen);
@@ -71,7 +74,7 @@ export default function ItemStyle({
   /**
    * 응모하기 버튼 클릭 시 실행되는 함수
    */
-  const handleEnterRaffle = () => {
+  const handleEnterRaffle = (): void => {
     if (!userToken) {
       setIsLoginModalOpen(true);
     } else {
@@ -93,7 +96,7 @@ export default function ItemStyle({
     }
   };
 
-  const handleCloseRaffleConfirmationModal = () => {
+  const handleCloseRaffleConfirmationModal = (): void => {
     if (!userToken) {
       setIsLoginModalOpen(false);
     } else {
@@ -101,12 +104,20 @@ export default function ItemStyle({
     }
   };
 
+  const handleToPurchase = () => {
+    router.push(`/purchase/${raffleId}`);
+  };
+
   return (
     <li
       id={raffleId.toString()}
       className="p-4 w-full flex flex-col gap-4 rounded shadow-custom-light bg-white "
     >
-      <Link href={`shop/detail/${raffleId}`} onClick={handleImageClick} className="relative group">
+      <Link
+        href={{ pathname: `shop/detail/${raffleId}`, query: { filter } }}
+        onClick={handleImageClick}
+        className="relative group"
+      >
         <Image
           priority
           width={400}
@@ -136,17 +147,32 @@ export default function ItemStyle({
             style={{ width: `${percentageComplete}%` }}
           />
         </div>
-        <Button
-          type="button"
-          ariaLabel={percentageComplete === 100 ? '결과 확인' : '응모하기'}
-          label={percentageComplete === 100 ? '결과 확인' : '응모하기'}
-          width="auto"
-          fontSize="base"
-          className={`mt-2 px-2 py-1 ${
-            percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
-          } text-white rounded w-full`}
-          onClick={percentageComplete !== 100 ? handleEnterRaffle : handleImageClick}
-        />
+
+        {filter === 'NOT_FREE' ? (
+          <Button
+            type="button"
+            ariaLabel={percentageComplete === 100 ? '결과 확인' : '결제하기'}
+            label={percentageComplete === 100 ? '결과 확인' : '결제하기'}
+            width="auto"
+            fontSize="base"
+            className={`mt-2 px-2 py-1 ${
+              percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
+            } text-white rounded w-full`}
+            onClick={percentageComplete !== 100 ? handleToPurchase : handleImageClick}
+          />
+        ) : (
+          <Button
+            type="button"
+            ariaLabel={percentageComplete === 100 ? '결과 확인' : '응모하기'}
+            label={percentageComplete === 100 ? '결과 확인' : '응모하기'}
+            width="auto"
+            fontSize="base"
+            className={`mt-2 px-2 py-1 ${
+              percentageComplete === 100 ? 'bg-secondary' : 'bg-primary'
+            } text-white rounded w-full`}
+            onClick={percentageComplete !== 100 ? handleEnterRaffle : handleImageClick}
+          />
+        )}
       </div>
       {isModalOpen && (
         <ItemComplete onClose={handleImageClick} winner={winner} imageUrl={imageUrl} name={name} />

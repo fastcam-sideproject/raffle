@@ -2,6 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getRaffleData, getRaffleFreeItem, getRaffleNotFreeItem } from '../../api/raffle/raffleApi';
 import useAuthStore from '../store/useAuthStore';
 
+/**
+ * @description 응모 상품들을 처리하는 커스텀 훅
+ * @param {string} filter
+ * @returns {object} queryResult
+ */
 export default function useRaffleData(filter = 'ALL') {
   const userToken = useAuthStore((state) => state.userToken);
   const queryKey = ['RaffleItems', userToken, filter];
@@ -39,6 +44,5 @@ export default function useRaffleData(filter = 'ALL') {
 
   return {
     ...queryResult,
-    userToken,
   };
 }

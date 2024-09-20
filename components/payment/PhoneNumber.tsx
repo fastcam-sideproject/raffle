@@ -13,6 +13,7 @@ export default function PhoneNumber() {
     handleVerifyPhoneNumber,
     handleRegisterPhoneNumber,
   } = usePhoneNumber();
+
   return (
     <>
       <label htmlFor="phoneNumber" className="text-gray-700 font-bold text-base">

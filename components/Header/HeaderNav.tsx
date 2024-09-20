@@ -14,33 +14,33 @@ export default function HeaderNav() {
   const [isPopverOpen, setIsPopverOpen] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
 
-  const userToken = useAuthStore((state) => state.userToken);
+  const userToken = useAuthStore<string>((state) => state.userToken);
   const pathName = usePathname();
 
   /**
    * 사용자 응모권 갯수를 나타내는 useQuery
    * !!enabled: userToken이 존재할 때만 실행
    */
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['getTickets'],
     queryFn: () => getTickets(userToken),
     enabled: !!userToken,
   });
   if (isLoading) return <div>Loading...</div>;
 
-  const handleProfileClick = () => {
+  const handleProfileClick = (): void => {
     setIsPopverOpen(!isPopverOpen);
   };
 
-  const handleClosePopver = () => {
+  const handleClosePopver = (): void => {
     setIsPopverOpen(false);
   };
 
-  const handleNavDropDown = () => {
+  const handleNavDropDown = (): void => {
     setToggle(!toggle);
   };
 
-  const closeMenu = () => {
+  const closeMenu = (): void => {
     setToggle(false);
   };
 
@@ -93,7 +93,7 @@ export default function HeaderNav() {
           <li>
             {userToken && (
               <div className="flex gap-2 justify-center py-2 px-4 w-full">
-                <img src="/icon/ticket.svg" alt="사용자 응모권 갯수"  />
+                <img src="/icon/ticket.svg" alt="사용자 응모권 갯수" />
                 <span className="font-bold">{data}</span>
               </div>
             )}
@@ -111,7 +111,7 @@ export default function HeaderNav() {
                 <img
                   src="/icon/profile.svg"
                   alt="로그인한 사용자 프로필 아이콘"
-                  className='w-6 h-auto'
+                  className="w-6 h-auto"
                 />
               </button>
               {isPopverOpen && <ProfilePopover onClose={handleClosePopver} />}

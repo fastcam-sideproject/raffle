@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { RaffleItem } from '../../lib/types/item';
@@ -32,7 +34,7 @@ export default function RaffleInfo({ id }: { id: string }) {
   }
   return (
     <section className="border p-4 rounded-md">
-      <h2 className="text-xl font-semibold mb-4">응모 상품 정보</h2>
+      <h2 className="text-xl font-semibold mb-4">유료 상품 정보</h2>
       <div className="flex space-x-4 gap-4">
         {raffleItem.item.imageUrl ? (
           <Image

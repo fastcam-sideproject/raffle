@@ -4,7 +4,8 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
-import { getRaffleDataDetail } from '../../api/raffle/raffleApi';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { getNotFreeRaffleDataDetail, getRaffleDataDetail } from '../../api/raffle/raffleApi';
 import { postPurchaseTicketOne } from '../../api/raffle/purchaseTicketApi';
 import { getTickets } from '../../api/user/ticketsApi';
 import { DeatilItem } from '../../lib/types/item';
@@ -14,6 +15,9 @@ import ItemLoginModal from './ItemLoginModal';
 import RaffleItemConfirmationModal from '../Modal/RaffleItemConfirmationModal';
 
 export default function ItemDetail({ params: { id } }: { params: { id: number } }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const filter = searchParams.get('filter') || 'ALL'; // 기본값 'ALL' 설정
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [detailData, setDetailData] = useState<DeatilItem>({
     item: {
@@ -23,6 +27,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
     },
     totalCount: 0,
     currentCount: 0,
+    ticketPrice: 0,
   });
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
     useState<boolean>(false);
@@ -50,11 +55,21 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
     enabled: !!userToken,
   });
 
-  const fetchGetRaffleDataDetail = async (id: number) => {
+  /**
+   * 래플 데이터 가져오는 함수
+   */
+  const fetchGetRaffleDataDetail = async (id: number): Promise<void> => {
     try {
-      const data = await getRaffleDataDetail(id);
+      const data =
+        filter === 'NOT_FREE'
+          ? await getNotFreeRaffleDataDetail(id)
+          : await getRaffleDataDetail(id);
+      if (!data.item.imageUrl) {
+        data.item.imageUrl = null;
+      }
       setDetailData(data);
     } catch (error) {
+      console.error('Failed to fetch raffle data:', error);
       throw error;
     }
   };
@@ -90,6 +105,10 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
     fetchGetRaffleDataDetail(id);
   };
 
+  const handleToPurchase = () => {
+    router.push(`/purchase/${id}`);
+  };
+
   const percentageComplete = ((detailData.currentCount / detailData.totalCount) * 100).toFixed(2);
 
   if (!detailData) {
@@ -100,7 +119,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
     <section className="flex flex-col justify-center items-center">
       <h1 className="hidden">상세페이지</h1>
       <div className="w-[100%] flex flex-col sm:w-[75%] sm:grid sm:grid-cols-2 justify-between gap-8 items-center p-8">
-        {detailData.item.imageUrl && (
+        {detailData.item.imageUrl ? (
           <Image
             width={400}
             height={400}
@@ -108,6 +127,8 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
             alt={`${detailData.item.name} 이미지`}
             className="object-contain"
           />
+        ) : (
+          <div className="text-gray-500 text-lg">이미지 준비중</div>
         )}
         <div className="w-[100%] flex flex-col gap-4">
           <h2 className="font-semibold text-[1.2rem]">{detailData.item.name}</h2>
@@ -115,6 +136,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
             <div>채워야 하는 티켓 수 : {detailData.totalCount}</div>
             <div>채워진 티켓 수 : {detailData.currentCount}</div>
             <div>완료율 : {percentageComplete}%</div>
+            {filter === 'NOT_FREE' ? <div>티켓가격 : {detailData.ticketPrice}원</div> : ''}
             <div className="mt-6 w-full bg-gray-300 rounded-full h-3 overflow-hidden">
               <div
                 className={`h-full transition-all duration-300 ${
@@ -125,15 +147,27 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
             </div>
           </div>
           <div />
-          <Button
-            type="button"
-            ariaLabel="응모하기"
-            label="응모하기"
-            fontSize="base"
-            width="auto"
-            onClick={handleEnterRaffle}
-            className="w-full bg-primary hover:bg-blue-500 sm:relative sticky top-0"
-          />
+          {filter === 'NOT_FREE' ? (
+            <Button
+              type="button"
+              ariaLabel="결제하기"
+              label="결제하기"
+              width="auto"
+              fontSize="base"
+              onClick={handleToPurchase}
+              className="w-full text-white font-bold bg-primary hover:bg-blue-500 sm:relative sticky top-0"
+            />
+          ) : (
+            <Button
+              type="button"
+              ariaLabel="응모하기"
+              label="응모하기"
+              fontSize="base"
+              width="auto"
+              onClick={handleEnterRaffle}
+              className="w-full text-white font-bold bg-primary hover:bg-blue-500 sm:relative sticky top-0"
+            />
+          )}
         </div>
       </div>
       <RaffleItemConfirmationModal
@@ -142,17 +176,26 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
         itemName={detailData.item.name}
         itemImageUrl={detailData.item.imageUrl}
       />
-      {detailData.item.imageList.map(
-        (image: { id: string | null | undefined; imageUrl: string | StaticImport }) => (
-          <Image
-            key={image.id}
-            width={2000}
-            height={200}
-            src={image.imageUrl}
-            alt={`${detailData.item.name} image ${image.id}`}
-            className="w-[100%] sm:w-[70%] h-auto mb-10"
-          />
-        ),
+      {detailData.item.imageList.length > 0 ? (
+        detailData.item.imageList.map(
+          (image: { id: string | null | undefined; imageUrl: string | StaticImport }) =>
+            image.imageUrl ? (
+              <Image
+                key={image.id}
+                width={2000}
+                height={200}
+                src={image.imageUrl}
+                alt={`${detailData.item.name} image ${image.id}`}
+                className="w-[100%] sm:w-[70%] h-auto mb-10"
+              />
+            ) : (
+              <div key={image.id || Math.random()} className="text-gray-500 text-lg">
+                이미지 준비중
+              </div>
+            ),
+        )
+      ) : (
+        <div className="text-gray-500 text-lg">이미지 준비중</div>
       )}
       {isLoginModalOpen && <ItemLoginModal onClose={handleOpenClose} />}
     </section>

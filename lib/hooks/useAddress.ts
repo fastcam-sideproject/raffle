@@ -1,10 +1,21 @@
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useAuthStore from '../store/useAuthStore';
 import { DaumPostcodeAddress, PurchaseAddress } from '../types/purchase';
 import { postAddress } from '../../api/user/addressApi';
 
-export const useAddress = () => {
+/**
+ * @description 우편주소 데이터를 처리하는 커스텀 훅
+ * @returns {string} address
+ * @returns {string} detailAddress
+ * @returns {boolean} isPostcodeOpen
+ * @returns {DaumPostcodeAddress} daumAddress
+ * @returns {function} setIsPostcodeOpen
+ * @returns {function} handleComplete
+ * @returns {function} handleOnChange
+ * @returns {function} handleRegisterAddress
+ */
+export default function useAddress() {
   const [address, setAddress] = useState<string>('');
   const [detailAddress, setDetailAddress] = useState<string>('');
   const [isPostcodeOpen, setIsPostcodeOpen] = useState<boolean>(false);
@@ -20,11 +31,15 @@ export const useAddress = () => {
     query: '',
   });
   const userToken = useAuthStore((state) => state.userToken);
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationKey: ['postAddress'],
     mutationFn: (addressData: PurchaseAddress) => postAddress(addressData, userToken),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['getMyInfo'],
+      });
       alert('주소 등록 성공');
     },
     onError: (error: Error) => {
@@ -33,7 +48,7 @@ export const useAddress = () => {
     },
   });
 
-  const handleComplete = (data: DaumPostcodeAddress) => {
+  const handleComplete = (data: DaumPostcodeAddress): void => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -59,7 +74,7 @@ export const useAddress = () => {
     setIsPostcodeOpen(false);
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setDetailAddress(event.target.value);
   };
 
@@ -95,4 +110,4 @@ export const useAddress = () => {
     handleOnChange,
     handleRegisterAddress,
   };
-};
+}

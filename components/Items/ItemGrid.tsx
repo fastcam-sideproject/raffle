@@ -8,9 +8,9 @@ import { KakaoAdFit } from '../KakaoAdFit';
 
 export default function ItemGrid() {
   const [filter, setFilter] = useState<'ALL' | 'FREE' | 'NOT_FREE' | 'COMPLETED'>('ALL');
-  const [isManualOpen, setIsManualOpen] = useState(false);
+  const [isManualOpen, setIsManualOpen] = useState<boolean>(false);
 
-  const handleManualOpen = () => {
+  const handleManualOpen = (): void => {
     setIsManualOpen(!isManualOpen);
   };
 
@@ -38,13 +38,13 @@ export default function ItemGrid() {
               >
                 무료
               </button>
-              {/* <button
-            type="button"
-            className={`px-4 py-2 ${filter === 'NOT_FREE' ? 'bg-primary text-white rounded font-bold' : ''}`}
-            onClick={() => setFilter('NOT_FREE')}
-          >
-            유료
-          </button> */}
+              <button
+                type="button"
+                className={`px-4 py-2 ${filter === 'NOT_FREE' ? 'bg-primary text-white rounded font-bold' : 'border-solid border-b-[2px] border-primary hover:bg-primary hover:text-white hover:rounded hover:font-bold'}`}
+                onClick={() => setFilter('NOT_FREE')}
+              >
+                유료
+              </button>
               <button
                 type="button"
                 className={`px-4 py-2 ${filter === 'COMPLETED' ? 'bg-primary text-white rounded font-bold' : 'border-solid border-b-[2px] border-primary hover:bg-primary hover:text-white hover:rounded hover:font-bold'}`}
