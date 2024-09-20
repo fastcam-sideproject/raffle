@@ -14,7 +14,7 @@ async function getTickets(userToken: string) {
       },
     });
     if (!response.ok) {
-      console.error('응모권 불러오기 실패', response.status);
+      throw new Error('응모권 불러오기 실패');
     }
     return response.json();
   } catch (error) {
