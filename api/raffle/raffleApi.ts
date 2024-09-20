@@ -59,6 +59,20 @@ async function getRaffleDataDetail(raffleId: number) {
   }
 }
 
+async function getNotFreeRaffleDataDetail(raffleId: number) {
+  try {
+    const response = await fetch(`${baseURL}/api/v1/raffle/active/not_free/detail/${raffleId}`);
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(`데이터를 불러오는데 실패했습니다: ${error.message}`);
+    } else {
+      console.log('데이터를 불러오는데 실패했습니다. 알 수 없는 오류가 발생했습니다.', error);
+    }
+  }
+}
+
 async function postPurchaseRaffle({
   raffleId,
   userToken,
@@ -127,6 +141,7 @@ export {
   getRaffleData,
   getPopularRaffleData,
   getRaffleDataDetail,
+  getNotFreeRaffleDataDetail,
   postPurchaseRaffle,
   getRaffleNotFreeItem,
   getRaffleFreeItem,

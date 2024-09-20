@@ -64,6 +64,7 @@ export type RaffleItemConfirmationModalProps = {
 };
 
 export type DeatilItem = {
+  ticketPrice: number;
   item: Item & {
     imageList: [];
   };

@@ -12,7 +12,9 @@ export default function ItemPopular() {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (isError) return <p>Error: {error instanceof Error ? error.message : error}</p>;
+  if (isError) {
+    return <p>Error: {error instanceof Error ? error.message : JSON.stringify(error)}</p>;
+  }
 
   return (
     <>
