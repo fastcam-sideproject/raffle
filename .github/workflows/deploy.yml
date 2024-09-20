@@ -21,14 +21,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
-        env:
-          NEXT_APP_EMAIL: ${{ secrets.NEXT_APP_EMAIL }}
-          NEXT_APP_PWD: ${{ secrets.NEXT_APP_PWD }}
+      - name: Set environment variables
         run: |
-          echo "NEXT_APP_EMAIL: $NEXT_APP_EMAIL"
-          echo "NEXT_APP_PWD: $NEXT_APP_PWD"
-          npm run build
+          echo "NEXT_PUBLIC_EMAIL: ${{ secrets.NEXT_PUBLIC_EMAIL }}"
+          echo "NEXT_PUBLIC_PWD: ${{ secrets.NEXT_PUBLIC_PWD }}"
+        env:
+          NEXT_PUBLIC_EMAIL: ${{ secrets.NEXT_PUBLIC_EMAIL }}
+          NEXT_PUBLIC_PWD: ${{ secrets.NEXT_PUBLIC_PWD }}
+
+      - name: Build project
+        run: npm run build
+        env:
+          NEXT_PUBLIC_EMAIL: ${{ secrets.NEXT_PUBLIC_EMAIL }}
+          NEXT_PUBLIC_PWD: ${{ secrets.NEXT_PUBLIC_PWD }}
 
       - name: Transfer files to EC2
         uses: appleboy/scp-action@master
