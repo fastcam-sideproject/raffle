@@ -40,7 +40,7 @@ export default function ItemGrid() {
               </button>
               <button
                 type="button"
-                className={`px-4 py-2 ${filter === 'NOT_FREE' ? 'bg-primary text-white rounded font-bold' : ''}`}
+                className={`px-4 py-2 ${filter === 'NOT_FREE' ? 'bg-primary text-white rounded font-bold' : 'border-solid border-b-[2px] border-primary hover:bg-primary hover:text-white hover:rounded hover:font-bold'}`}
                 onClick={() => setFilter('NOT_FREE')}
               >
                 유료
