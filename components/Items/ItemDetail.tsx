@@ -174,6 +174,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
         onClose={handleOpenClose}
         itemName={detailData.item.name}
         itemImageUrl={detailData.item.imageUrl}
+        type="raffle"
       />
       {detailData.item.imageList.length > 0 ? (
         detailData.item.imageList.map(

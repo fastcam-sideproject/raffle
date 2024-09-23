@@ -2,13 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import RaffleInfo from '../../../components/payment/RaffleInfo';
 import OrdererInfo from '../../../components/payment/OrdererInfo';
 import ShippingInfo from '../../../components/payment/ShippingInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
 import { postPurchaseRaffleItem } from '../../../api/raffle/purchaseRaffleItemApi';
 import RaffleItemConfirmationModal from '../../../components/Modal/RaffleItemConfirmationModal';
+import { getNotFreeRaffleDataDetail } from '../../../api/raffle/raffleApi';
 
 export default function PurchasePage({
   params,
@@ -30,6 +31,11 @@ export default function PurchasePage({
   if (!userToken) {
     throw new Error('userToken이 없습니다.');
   }
+
+  const { data: raffleDetailItem } = useQuery({
+    queryKey: ['getNotFreeRaffleDataDetail'],
+    queryFn: () => getNotFreeRaffleDataDetail(parseInt(id)),
+  });
 
   useEffect(() => {
     setIsAllChecked(isTermsChecked && isPurchaseChecked);
@@ -58,6 +64,10 @@ export default function PurchasePage({
     setIsRaffleConfirmationModalOpen(false);
     router.push('/shop');
   };
+
+  if (!raffleDetailItem) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -117,8 +127,9 @@ export default function PurchasePage({
       <RaffleItemConfirmationModal
         isOpen={isRaffleConfirmationModalOpen}
         onClose={handleCloseModal}
-        itemName="상품명"
-        itemImageUrl="/image/item.jpg"
+        itemName={raffleDetailItem.item.name}
+        itemImageUrl={raffleDetailItem.item.imageUrl}
+        type="purchase"
       />
     </main>
   );
