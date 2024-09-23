@@ -1,10 +1,17 @@
 import baseURL from '../baseURL';
 
-export async function postPurchaseRaffle({ raffleId }: { raffleId: number }) {
+export async function postPurchaseRaffleItem({
+  raffleId,
+  userToken,
+}: {
+  raffleId: string;
+  userToken: string | null;
+}) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/purchase/${raffleId}`, {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${userToken}`,
         'Content-Type': 'application/json',
       },
     });

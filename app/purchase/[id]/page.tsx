@@ -2,10 +2,12 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import RaffleInfo from '../../../components/payment/RaffleInfo';
 import OrdererInfo from '../../../components/payment/OrdererInfo';
 import ShippingInfo from '../../../components/payment/ShippingInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
+import { postPurchaseRaffleItem } from '../../../api/raffle/purchaseRaffleItemApi';
 
 export default function PurchasePage({
   params,
@@ -20,15 +22,23 @@ export default function PurchasePage({
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isTermsChecked, setIsTermsChecked] = useState<boolean>(false);
   const [isPurchaseChecked, setIsPurchaseChecked] = useState<boolean>(false);
+  const userToken = localStorage.getItem('access_token');
 
   useEffect(() => {
     setIsAllChecked(isTermsChecked && isPurchaseChecked);
   }, [isTermsChecked, isPurchaseChecked]);
 
+  const mutate = useMutation({
+    mutationKey: ['postPurchaseRaffleItem'],
+    mutationFn: () => postPurchaseRaffleItem({ raffleId: id, userToken }),
+  });
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isAllChecked) {
-      router.push('/');
+      mutate.mutate();
+      alert('구매가 완료되었습니다.');
+      router.push('/shop');
     }
   };
 
