@@ -73,30 +73,6 @@ async function getNotFreeRaffleDataDetail(raffleId: number) {
   }
 }
 
-async function postPurchaseRaffle({
-  raffleId,
-  userToken,
-}: {
-  raffleId: number;
-  userToken: string;
-}) {
-  try {
-    const response = await fetch(`${baseURL}/api/v1/raffle/purchase/${raffleId}`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error('raffle item 구매 실패');
-    }
-    return response.json();
-  } catch (error) {
-    console.error('raffle item 구매 실패', error);
-  }
-}
-
 async function getRaffleNotFreeItem(userToken: string) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/active/not_free`, {
@@ -142,7 +118,6 @@ export {
   getPopularRaffleData,
   getRaffleDataDetail,
   getNotFreeRaffleDataDetail,
-  postPurchaseRaffle,
   getRaffleNotFreeItem,
   getRaffleFreeItem,
 };
