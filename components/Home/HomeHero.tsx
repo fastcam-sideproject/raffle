@@ -44,7 +44,7 @@ export default function HomeHero() {
         <p className="md:text-xl mb-6 text-shadow-white-shadow">행운을 받아가세요!</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="text-xl font-semibold mb-4">숫자 맞추기 게임</h3>
+            <h3 className="text-xl font-semibold mb-4">숫자 맞추기 게임 7️⃣</h3>
             <p className="mb-4">1부터 100까지의 숫자를 맞춰 응모권을 획득하세요!</p>
             <Button
               label="시작하기"
@@ -68,7 +68,7 @@ export default function HomeHero() {
             />
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="text-xl font-semibold mb-4">숫자야구 게임</h3>
+            <h3 className="text-xl font-semibold mb-4">숫자야구 게임 ⚾️</h3>
             <p className="mb-4">3자리 숫자를 맞춰 응모권을 획득하세요!</p>
             <Button
               label="시작하기"
