@@ -7,14 +7,19 @@ export default function RaffleItemConfirmationModal({
   onClose,
   itemName,
   itemImageUrl,
+  type,
 }: RaffleItemConfirmationModalProps) {
   if (!isOpen) return null;
+
+  const message = type === 'purchase' ? '구매완료' : '응모완료';
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-[1000] bg-gray-600 bg-opacity-50 ">
       <div className="w-auto max-h-[90%] sm:w-[75%] md:w-[60%] lg:w-[35%] flex flex-col items-center bg-white rounded shadow-lg">
         <div className="w-full rounded-t bg-primary text-white flex justify-center p-6">
-          <h2 className="text-2xl font-semibold">{itemName} 응모완료</h2>
+          <h2 className="text-2xl font-semibold">
+            {itemName} {message}
+          </h2>
         </div>
         <div className="flex flex-col p-6">
           <Image
