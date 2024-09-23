@@ -72,7 +72,9 @@ export default function HomeHero() {
       {userToken && isNumberGuessingGameStart && (
         <NumberGuessingGame onClose={() => setIsNumberGuessingGameStart(false)} />
       )}
-      {userToken && isMemoryCardGameStart && <MemoryCardGame />}
+      {userToken && isMemoryCardGameStart && (
+        <MemoryCardGame onClose={() => setIsMemoryCardGameStart(false)} />
+      )}
       {userToken && isShowAdvertisement && (
         <Advertisement onClose={() => setIsShowAdvertisement(false)} />
       )}
