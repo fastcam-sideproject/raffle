@@ -61,7 +61,7 @@ export type RaffleItemConfirmationModalProps = {
   onClose: () => void;
   itemName: string;
   itemImageUrl: string;
-  type: 'purchase' | 'raffle';
+  type?: 'purchase' | 'raffle';
 };
 
 export type DeatilItem = {
