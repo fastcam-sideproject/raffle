@@ -10,21 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 코드 체크아웃
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # 2. Node.js 설치
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18'
 
-      # 3. 의존성 설치
       - name: Install dependencies
         run: npm install
 
-      # 4. 프로젝트 빌드
       - name: Build project
         env:
           NEXT_APP_EMAIL: ${{ secrets.NEXT_APP_EMAIL }}
@@ -34,45 +30,25 @@ jobs:
           echo "NEXT_APP_PWD: $NEXT_APP_PWD"
           npm run build
 
-      # 5. .env 파일 생성 (run으로만 작성)
-      - name: Create .env file
-        run: |
-          echo "NEXT_APP_EMAIL=${{ secrets.NEXT_APP_EMAIL }}" >> .env
-          echo "NEXT_APP_PWD=${{ secrets.NEXT_APP_PWD }}" >> .env
-
-      # 6. .env 파일을 EC2로 전송 (별도의 uses 블록으로 작성)
-      - name: Transfer .env to EC2
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: .env
-          target: /home/ubuntu/app
-
-      # 7. 파일을 EC2로 전송
-      - name: Transfer project files to EC2
+      - name: Transfer files to EC2
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           source: .
-          target: /home/ubuntu/app
+          target: app
 
-      # 8. EC2에서 PM2를 사용하여 앱 실행
-      - name: Deploy to EC2 using PM2
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/app
+            cd ./app
+            git pull origin main
             npm install
             npm run build
-            pm2 delete all || true
-            pm2 start npm --name "my-app" -- start
-            pm2 save
-            pm2 startup
+            sudo nohup npm run start &
             exit
