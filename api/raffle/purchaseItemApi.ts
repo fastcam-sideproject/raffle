@@ -1,6 +1,6 @@
 import baseURL from '../baseURL';
 
-export async function postPurchaseRaffleItem({
+export async function postPurchaseItem({
   raffleId,
   userToken,
 }: {
@@ -16,10 +16,10 @@ export async function postPurchaseRaffleItem({
       },
     });
     if (!response.ok) {
-      throw new Error('raffle item 구매 실패');
+      throw new Error('상품 구매 실패');
     }
     return response.json();
   } catch (error) {
-    console.error('raffle item 구매 실패', error);
+    console.error('상품 구매 실패', error);
   }
 }

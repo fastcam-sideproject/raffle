@@ -7,9 +7,9 @@ import RaffleInfo from '../../../components/payment/RaffleInfo';
 import OrdererInfo from '../../../components/payment/OrdererInfo';
 import ShippingInfo from '../../../components/payment/ShippingInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
-import { postPurchaseRaffleItem } from '../../../api/raffle/purchaseRaffleItemApi';
 import RaffleItemConfirmationModal from '../../../components/Modal/RaffleItemConfirmationModal';
 import { getNotFreeRaffleDataDetail } from '../../../api/raffle/raffleApi';
+import { postPurchaseItem } from '../../../api/raffle/purchaseItemApi';
 
 export default function PurchasePage({
   params,
@@ -42,8 +42,8 @@ export default function PurchasePage({
   }, [isTermsChecked, isPurchaseChecked]);
 
   const mutate = useMutation({
-    mutationKey: ['postPurchaseRaffleItem'],
-    mutationFn: () => postPurchaseRaffleItem({ raffleId: parseInt(id), userToken }),
+    mutationKey: ['postPurchaseItem'],
+    mutationFn: () => postPurchaseItem({ raffleId: parseInt(id), userToken }),
     onSuccess: () => {
       setIsRaffleConfirmationModalOpen(true);
     },
