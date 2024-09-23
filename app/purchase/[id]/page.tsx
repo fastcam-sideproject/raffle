@@ -2,10 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import RaffleInfo from '../../../components/payment/RaffleInfo';
 import OrdererInfo from '../../../components/payment/OrdererInfo';
 import ShippingInfo from '../../../components/payment/ShippingInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
+import RaffleItemConfirmationModal from '../../../components/Modal/RaffleItemConfirmationModal';
+import { getNotFreeRaffleDataDetail } from '../../../api/raffle/raffleApi';
+import { postPurchaseItem } from '../../../api/raffle/purchaseItemApi';
 
 export default function PurchasePage({
   params,
@@ -20,17 +24,50 @@ export default function PurchasePage({
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isTermsChecked, setIsTermsChecked] = useState<boolean>(false);
   const [isPurchaseChecked, setIsPurchaseChecked] = useState<boolean>(false);
+  const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
+    useState<boolean>(false);
+  const userToken = localStorage.getItem('access_token');
+
+  if (!userToken) {
+    throw new Error('userToken이 없습니다.');
+  }
+
+  const { data: raffleDetailItem } = useQuery({
+    queryKey: ['getNotFreeRaffleDataDetail'],
+    queryFn: () => getNotFreeRaffleDataDetail(parseInt(id)),
+  });
 
   useEffect(() => {
     setIsAllChecked(isTermsChecked && isPurchaseChecked);
   }, [isTermsChecked, isPurchaseChecked]);
 
+  const mutate = useMutation({
+    mutationKey: ['postPurchaseItem'],
+    mutationFn: () => postPurchaseItem({ raffleId: parseInt(id), userToken }),
+    onSuccess: () => {
+      setIsRaffleConfirmationModalOpen(true);
+    },
+    onError: (error) => {
+      alert('응모에 실패했습니다.');
+      console.error('응모에 실패했습니다.', error);
+    },
+  });
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isAllChecked) {
-      router.push('/');
+      mutate.mutate();
     }
   };
+
+  const handleCloseModal = () => {
+    setIsRaffleConfirmationModalOpen(false);
+    router.push('/shop');
+  };
+
+  if (!raffleDetailItem) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -87,6 +124,13 @@ export default function PurchasePage({
           </section>
         </div>
       </form>
+      <RaffleItemConfirmationModal
+        isOpen={isRaffleConfirmationModalOpen}
+        onClose={handleCloseModal}
+        itemName={raffleDetailItem.item.name}
+        itemImageUrl={raffleDetailItem.item.imageUrl}
+        type="purchase"
+      />
     </main>
   );
 }
