@@ -75,3 +75,4 @@ jobs:
             pm2 start npm --name "my-app" -- start
             pm2 save
             pm2 startup
+            exit
