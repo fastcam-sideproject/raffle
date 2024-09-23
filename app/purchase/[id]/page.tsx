@@ -24,6 +24,10 @@ export default function PurchasePage({
   const [isPurchaseChecked, setIsPurchaseChecked] = useState<boolean>(false);
   const userToken = localStorage.getItem('access_token');
 
+  if (!userToken) {
+    throw new Error('userToken이 없습니다.');
+  }
+
   useEffect(() => {
     setIsAllChecked(isTermsChecked && isPurchaseChecked);
   }, [isTermsChecked, isPurchaseChecked]);

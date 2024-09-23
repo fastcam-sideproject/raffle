@@ -5,7 +5,7 @@ export async function postPurchaseRaffleItem({
   userToken,
 }: {
   raffleId: string;
-  userToken: string | null;
+  userToken: string;
 }) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/purchase/${raffleId}`, {
