@@ -3,10 +3,12 @@ import Button from '../../lib/common/Button';
 import useAuthStore from '../../lib/store/useAuthStore';
 import NumberGuessingGame from '../NumberGuessingGame';
 import MemoryCardGame from '../MemoryCardGame';
+import NumberBaseballGame from '../NumberBaseballGame';
 
 export default function HomeHero() {
   const [isNumberGuessingGameStart, setIsNumberGuessingGameStart] = useState<boolean>(false);
   const [isMemoryCardGameStart, setIsMemoryCardGameStart] = useState<boolean>(false);
+  const [isNumberBaseballGameStart, setIsNumberBaseballGameStart] = useState<boolean>(false);
   const userToken = useAuthStore((state) => state.userToken);
 
   const handleShowNumberGuessingGame = () => {
@@ -25,8 +27,16 @@ export default function HomeHero() {
     }
   };
 
+  const handleShowNumberBaseballGame = () => {
+    if (userToken) {
+      setIsNumberBaseballGameStart(true);
+    } else {
+      alert('로그인해주세요.');
+    }
+  };
+
   return (
-    <section className="min-h-[25rem] flex flex-col items-center justify-center bg-blue-50">
+    <section className="min-h-[40rem] flex flex-col items-center justify-center bg-blue-50">
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-lg md:text-3xl font-bold mb-4 text-shadow-white-shadow">
           All You Raffle 에 오신것을 환영합니다
@@ -57,6 +67,18 @@ export default function HomeHero() {
               onClick={handleShowMemoryCardGame}
             />
           </div>
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h3 className="text-xl font-semibold mb-4">숫자야구 게임</h3>
+            <p className="mb-4">3자리 숫자를 맞춰 응모권을 획득하세요!</p>
+            <Button
+              label="시작하기"
+              width="full"
+              fontSize="base"
+              className="text-white font-bold bg-primary hover:bg-blue-500"
+              type="button"
+              onClick={handleShowNumberBaseballGame}
+            />
+          </div>
         </div>
       </div>
       {userToken && isNumberGuessingGameStart && (
@@ -64,6 +86,9 @@ export default function HomeHero() {
       )}
       {userToken && isMemoryCardGameStart && (
         <MemoryCardGame onClose={() => setIsMemoryCardGameStart(false)} />
+      )}
+      {userToken && isNumberBaseballGameStart && (
+        <NumberBaseballGame onClose={() => setIsNumberBaseballGameStart(false)} />
       )}
     </section>
   );

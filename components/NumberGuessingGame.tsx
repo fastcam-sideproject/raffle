@@ -96,7 +96,7 @@ export default function NumberGuessingGame({ onClose }: { onClose: () => void })
             fontSize="base"
             width="full"
             onClick={handleResetGame}
-            className=" bg-gray-500 text-white p-2 hover:bg-gray-600"
+            className="bg-gray-500 text-white p-2 hover:bg-gray-600"
           />
         )}
         {message && (
