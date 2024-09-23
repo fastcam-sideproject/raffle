@@ -70,7 +70,6 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
       setDetailData(data);
     } catch (error) {
       console.error('Failed to fetch raffle data:', error);
-      throw error;
     }
   };
 

@@ -4,7 +4,7 @@ export async function postPurchaseRaffleItem({
   raffleId,
   userToken,
 }: {
-  raffleId: string;
+  raffleId: number;
   userToken: string;
 }) {
   try {

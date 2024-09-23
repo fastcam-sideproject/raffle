@@ -8,6 +8,7 @@ import OrdererInfo from '../../../components/payment/OrdererInfo';
 import ShippingInfo from '../../../components/payment/ShippingInfo';
 import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary';
 import { postPurchaseRaffleItem } from '../../../api/raffle/purchaseRaffleItemApi';
+import RaffleItemConfirmationModal from '../../../components/Modal/RaffleItemConfirmationModal';
 
 export default function PurchasePage({
   params,
@@ -22,6 +23,8 @@ export default function PurchasePage({
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isTermsChecked, setIsTermsChecked] = useState<boolean>(false);
   const [isPurchaseChecked, setIsPurchaseChecked] = useState<boolean>(false);
+  const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
+    useState<boolean>(false);
   const userToken = localStorage.getItem('access_token');
 
   if (!userToken) {
@@ -34,16 +37,26 @@ export default function PurchasePage({
 
   const mutate = useMutation({
     mutationKey: ['postPurchaseRaffleItem'],
-    mutationFn: () => postPurchaseRaffleItem({ raffleId: id, userToken }),
+    mutationFn: () => postPurchaseRaffleItem({ raffleId: parseInt(id), userToken }),
+    onSuccess: () => {
+      setIsRaffleConfirmationModalOpen(true);
+    },
+    onError: (error) => {
+      alert('응모에 실패했습니다.');
+      console.error('응모에 실패했습니다.', error);
+    },
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isAllChecked) {
       mutate.mutate();
-      alert('구매가 완료되었습니다.');
-      router.push('/shop');
     }
+  };
+
+  const handleCloseModal = () => {
+    setIsRaffleConfirmationModalOpen(false);
+    router.push('/shop');
   };
 
   return (
@@ -101,6 +114,12 @@ export default function PurchasePage({
           </section>
         </div>
       </form>
+      <RaffleItemConfirmationModal
+        isOpen={isRaffleConfirmationModalOpen}
+        onClose={handleCloseModal}
+        itemName="상품명"
+        itemImageUrl="/image/item.jpg"
+      />
     </main>
   );
 }
