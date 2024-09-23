@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
 
 export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
   const [cards, setCards] = useState<{ id: number; symbol: string; flipped: boolean }[]>([]);
@@ -6,6 +7,7 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
   const [moves, setMoves] = useState<number>(0);
   const [gameOver, setGameOver] = useState<boolean>(false);
+  const { mutate } = useTicketPlusOne();
 
   const symbols = ['🍎', '🍌', '🍇', '🍊', '🍓', '🍑', '🍍', '🥝'];
 
@@ -46,6 +48,7 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
         setFlippedIndexes([]);
         if (matchedPairs.length + 1 === symbols.length) {
           setGameOver(true);
+          mutate();
         }
       } else {
         setTimeout(() => setFlippedIndexes([]), 1000);

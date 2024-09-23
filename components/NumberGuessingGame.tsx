@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../lib/common/Button';
+import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
+import { on } from 'events';
 
 export default function NumberGuessingGame({ onClose }: { onClose: () => void }) {
   const [targetNumber, setTargetNumber] = useState<number>(0);
   const [guess, setGuess] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [attempts, setAttempts] = useState<number>(0);
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState<boolean>(false);
+  const { mutate } = useTicketPlusOne();
 
   useEffect(() => {
     handleResetGame();
@@ -24,6 +27,7 @@ export default function NumberGuessingGame({ onClose }: { onClose: () => void })
     if (guessNumber === targetNumber) {
       setMessage(`축하합니다. ${attempts + 1}번 만에 맞추셨습니다.`);
       setGameOver(true);
+      mutate();
     } else if (guessNumber < targetNumber) {
       setMessage('더 큰 숫자를 입력해보세요.');
     } else {
