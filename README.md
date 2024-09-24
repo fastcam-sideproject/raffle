@@ -18,8 +18,6 @@
 <div align="center">
   <img src="./public/image/docs/home_main.png" width="50%" />
   <img src="./public/image/docs/popular_item.png" width="50%" />
-  <img src="" width="23%" />
-  <img src="" width="23%" />
 </div>
 
 <br/><br />
