@@ -27,6 +27,7 @@ export default function MemberInfoPage() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   if (isError) {
     throw new Error('회원 정보를 불러오는데 실패했습니다.');
   }
@@ -67,7 +68,7 @@ export default function MemberInfoPage() {
           ) : (
             <PhoneNumber />
           )}
-          {userData ? (
+          {userData?.address ? (
             <>
               <div className="w-full flex flex-col items-start gap-1 ">
                 <span className="text-gray-700 font-bold text-base sm:text-lg">우편주소</span>
