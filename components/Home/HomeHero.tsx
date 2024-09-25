@@ -4,11 +4,14 @@ import useAuthStore from '../../lib/store/useAuthStore';
 import NumberGuessingGame from '../NumberGuessingGame';
 import MemoryCardGame from '../MemoryCardGame';
 import NumberBaseballGame from '../NumberBaseballGame';
+import MovingGame from '../MovingGame';
 
 export default function HomeHero() {
   const [isNumberGuessingGameStart, setIsNumberGuessingGameStart] = useState<boolean>(false);
   const [isMemoryCardGameStart, setIsMemoryCardGameStart] = useState<boolean>(false);
   const [isNumberBaseballGameStart, setIsNumberBaseballGameStart] = useState<boolean>(false);
+  const [isCatchGameStart, setIsCatchGameStart] = useState<boolean>(false);
+
   const userToken = useAuthStore((state) => state.userToken);
 
   const handleShowNumberGuessingGame = () => {
@@ -30,6 +33,14 @@ export default function HomeHero() {
   const handleShowNumberBaseballGame = () => {
     if (userToken) {
       setIsNumberBaseballGameStart(true);
+    } else {
+      alert('로그인해주세요.');
+    }
+  };
+
+  const handleCatchGame = () => {
+    if (userToken) {
+      setIsCatchGameStart(true);
     } else {
       alert('로그인해주세요.');
     }
@@ -79,6 +90,18 @@ export default function HomeHero() {
               onClick={handleShowNumberBaseballGame}
             />
           </div>
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h3 className="text-xl font-semibold mb-4">티켓 잡기게임 🍀</h3>
+            <p className="mb-4">티켓 을 잡고 응모권을 얻으세요!</p>
+            <Button
+              label="시작하기"
+              width="full"
+              fontSize="base"
+              className="text-white font-bold bg-primary hover:bg-blue-500"
+              type="button"
+              onClick={handleCatchGame}
+            />
+          </div>
         </div>
       </div>
       {userToken && isNumberGuessingGameStart && (
@@ -90,6 +113,7 @@ export default function HomeHero() {
       {userToken && isNumberBaseballGameStart && (
         <NumberBaseballGame onClose={() => setIsNumberBaseballGameStart(false)} />
       )}
+      {userToken && isCatchGameStart && <MovingGame onClose={() => setIsCatchGameStart(false)} />}
     </section>
   );
 }

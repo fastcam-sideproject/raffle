@@ -2,35 +2,13 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
 import useAuthStore from '../lib/store/useAuthStore';
-import { refreshApi } from '../api/user/refreshApi';
 
 export default function AuthHandler() {
   const router = useRouter();
-  const { setUserToken, logout, refreshToken } = useAuthStore((state) => ({
+  const { setUserToken } = useAuthStore((state) => ({
     setUserToken: state.setUserToken,
-    logout: state.logout,
-    refreshToken: state.refreshToken,
   }));
-
-  const mutate = useMutation({
-    mutationKey: ['refreshToken'],
-    mutationFn: () => refreshApi(refreshToken),
-    onSuccess: (data) => {
-      const { jwt: accessToken } = data;
-      if (accessToken) {
-        localStorage.setItem('access_token', accessToken);
-        setUserToken(accessToken, refreshToken);
-      } else {
-        logout();
-      }
-    },
-    onError: (error) => {
-      console.error('토큰 갱신 실패', error);
-      logout();
-    },
-  });
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -49,18 +27,6 @@ export default function AuthHandler() {
       router.replace('/');
     }
   }, [router, setUserToken]);
-
-  useEffect(() => {
-    if (!refreshToken) return;
-    const intervalId = setInterval(
-      () => {
-        mutate.mutate();
-      },
-      15 * 60 * 1000,
-    );
-
-    return () => clearInterval(intervalId);
-  }, [mutate, refreshToken]);
 
   return null;
 }
