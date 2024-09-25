@@ -1,3 +1,4 @@
+import useAuthStore from '../../lib/store/useAuthStore';
 import baseURL from '../baseURL';
 
 /**
@@ -5,6 +6,7 @@ import baseURL from '../baseURL';
  * @param userToken
  */
 async function getTickets(userToken: string) {
+  const { logout } = useAuthStore.getState();
   try {
     const response = await fetch(`${baseURL}/api/v1/user/tickets`, {
       method: 'GET',
@@ -13,12 +15,17 @@ async function getTickets(userToken: string) {
         Authorization: `Bearer ${userToken}`,
       },
     });
+    if (response.status === 401) {
+      console.error('인증 실패: 토큰이 만료되었습니다.');
+      logout();
+      return;
+    }
     if (!response.ok) {
       throw new Error('응모권 불러오기 실패');
     }
     return response.json();
   } catch (error) {
-    console.error('응모권 불러오기 실패', error);
+    throw new Error(`응모권 불러오기 실패: ${error}`);
   }
 }
 
@@ -36,7 +43,7 @@ async function postTicketsPlusOne(userToken: string) {
     }
     return response.json();
   } catch (error) {
-    console.error('티켓 추가 실패', error);
+    throw new Error(`티켓 추가 실패: ${error}`);
   }
 }
 

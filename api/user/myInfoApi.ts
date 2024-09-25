@@ -1,6 +1,9 @@
 import baseURL from '../baseURL';
+import useAuthStore from '../../lib/store/useAuthStore';
 
 export async function getMyInfo(userToken: string) {
+  const { logout } = useAuthStore.getState();
+
   try {
     const response = await fetch(`${baseURL}/api/v1/user/mypage`, {
       method: 'GET',
@@ -12,8 +15,13 @@ export async function getMyInfo(userToken: string) {
     if (!response.ok) {
       throw new Error(`마이페이지 불러오기 실패: ${response.statusText}`);
     }
+    if (response.status === 401) {
+      console.error('인증 실패: 토큰이 만료되었습니다.');
+      logout();
+      return;
+    }
     return response.json();
   } catch (error) {
-    console.error('마이페이지 불러오기 실패', error);
+    throw new Error(`마이페이지 불러오기 실패: ${error}`);
   }
 }
