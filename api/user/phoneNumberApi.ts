@@ -18,13 +18,13 @@ async function postPhoneNumber({
         phone_number: phoneNumber,
       }),
     });
-
     if (!response.ok) {
       throw new Error('전화번호 등록 실패');
     }
     return response;
   } catch (error) {
-    console.error('전화번호 등록 실패', error);
+    console.error('API Error:', error);
+    throw error;
   }
 }
 
@@ -52,7 +52,8 @@ async function postVerifyPhone({
     }
     return response.json();
   } catch (error) {
-    console.error('휴대폰 인증번호 요청 실패', error);
+    console.error('API Error:', error);
+    throw error;
   }
 }
 

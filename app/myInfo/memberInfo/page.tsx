@@ -32,7 +32,7 @@ export default function MemberInfoPage() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center h-[40rem] p-4 sm:p-8">
+    <main className="flex flex-col items-center justify-center h-[50rem] p-4 sm:p-8">
       <section className="w-full bg-white p-8 rounded shadow-lg max-w-md sm:max-w-xl">
         <div className="flex flex-col items-center mb-4">
           <div className="w-auto h-auto bg-gray-400 rounded-full p-5 mb-5">
@@ -67,7 +67,7 @@ export default function MemberInfoPage() {
           ) : (
             <PhoneNumber />
           )}
-          {userData ? (
+          {userData?.address ? (
             <>
               <div className="w-full flex flex-col items-start gap-1 ">
                 <span className="text-gray-700 font-bold text-base sm:text-lg">우편주소</span>
