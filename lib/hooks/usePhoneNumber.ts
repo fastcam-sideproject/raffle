@@ -49,7 +49,7 @@ export default function usePhoneNumber() {
     },
   });
 
-  const checkVerificationCode = (): void => {
+  const checkVerificationCode = () => {
     if (!phoneNumber) {
       alert('전화번호를 입력해주세요');
       return;
@@ -66,7 +66,7 @@ export default function usePhoneNumber() {
     }
   };
 
-  const handleVerifyPhoneNumber = (): void => {
+  const handleVerifyPhoneNumber = () => {
     if (!/^\d{3}-\d{3,4}-\d{4}$/.test(phoneNumber)) {
       alert('전화번호를 입력해주세요');
       return;
@@ -74,7 +74,7 @@ export default function usePhoneNumber() {
     verifyPhoneNumberMutation.mutate();
   };
 
-  const handleRegisterPhoneNumber = (): void => {
+  const handleRegisterPhoneNumber = () => {
     if (!isVerified) {
       alert('휴대폰 인증을 완료해주세요');
       return;
@@ -82,7 +82,7 @@ export default function usePhoneNumber() {
     registerPhoneNumberMutation.mutate();
   };
 
-  const formatPhoneNumber = (value: string): string => {
+  const formatPhoneNumber = (value: string) => {
     const cleaned = value.replace(/\D/g, '');
     let formatted = '';
 
@@ -96,7 +96,7 @@ export default function usePhoneNumber() {
     return formatted;
   };
 
-  const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const formattedPhoneNumber = formatPhoneNumber(event.target.value);
     setPhoneNumber(formattedPhoneNumber);
   };

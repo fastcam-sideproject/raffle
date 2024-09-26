@@ -48,7 +48,7 @@ export default function useAddress() {
     },
   });
 
-  const handleComplete = (data: DaumPostcodeAddress): void => {
+  const handleComplete = (data: DaumPostcodeAddress) => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -74,7 +74,7 @@ export default function useAddress() {
     setIsPostcodeOpen(false);
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(event.target.value);
   };
 
