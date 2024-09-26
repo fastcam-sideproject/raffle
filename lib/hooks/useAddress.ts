@@ -44,7 +44,7 @@ export default function useAddress() {
     },
     onError: (error: Error) => {
       alert('주소 등록 실패');
-      throw error;
+      console.error('주소 등록 실패', error);
     },
   });
 

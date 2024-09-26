@@ -16,6 +16,7 @@ export async function postAddress(addressData: PurchaseAddress, userToken: strin
     }
     return response;
   } catch (error) {
-    console.error('주소 등록 실패', error);
+    console.error('API Error:', error);
+    throw error;
   }
 }
