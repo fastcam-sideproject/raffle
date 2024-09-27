@@ -14,7 +14,7 @@ export default function AddressForm({
   handleRegisterAddress,
 }: AddressFormProps) {
   return (
-    <>
+    <div>
       <label htmlFor="address" className="text-gray-700 font-bold text-base">
         우편주소
       </label>
@@ -31,7 +31,7 @@ export default function AddressForm({
         />
         <Button
           type="button"
-          label="우편번호 찾기"
+          label="찾기"
           onClick={() => setIsPostcodeOpen(true)}
           width="auto"
           fontSize="base"
@@ -54,7 +54,7 @@ export default function AddressForm({
         />
         <Button
           type="button"
-          label="배송주소 등록"
+          label="등록"
           onClick={handleRegisterAddress}
           width="auto"
           fontSize="base"
@@ -73,6 +73,6 @@ export default function AddressForm({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

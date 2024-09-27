@@ -15,7 +15,7 @@ export default function PhoneNumber() {
   } = usePhoneNumber();
 
   return (
-    <>
+    <div>
       <label htmlFor="phoneNumber" className="text-gray-700 font-bold text-base">
         전화번호
       </label>
@@ -32,8 +32,8 @@ export default function PhoneNumber() {
         />
         <Button
           type="button"
-          label="인증번호 요청"
-          width="auto"
+          label="인증요청"
+          width="1/3"
           fontSize="base"
           onClick={handleVerifyPhoneNumber}
           disabled={isVerified}
@@ -57,7 +57,7 @@ export default function PhoneNumber() {
         />
         <Button
           type="button"
-          label="인증번호 확인"
+          label="확인"
           width="auto"
           fontSize="base"
           onClick={checkVerificationCode}
@@ -69,13 +69,13 @@ export default function PhoneNumber() {
         <Button
           type="button"
           label="전화번호 등록"
-          width="1/3"
+          width="auto"
           fontSize="base"
           onClick={handleRegisterPhoneNumber}
           disabled={!isVerified}
           className="text-white font-bold bg-primary hover:bg-blue-500"
         />
       </div>
-    </>
+    </div>
   );
 }

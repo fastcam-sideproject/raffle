@@ -44,11 +44,11 @@ export default function useAddress() {
     },
     onError: (error: Error) => {
       alert('주소 등록 실패');
-      throw error;
+      console.error('주소 등록 실패', error);
     },
   });
 
-  const handleComplete = (data: DaumPostcodeAddress): void => {
+  const handleComplete = (data: DaumPostcodeAddress) => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -74,7 +74,7 @@ export default function useAddress() {
     setIsPostcodeOpen(false);
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(event.target.value);
   };
 
