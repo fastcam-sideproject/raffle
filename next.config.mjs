@@ -11,6 +11,13 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      test: /\.(stories|story)\.[tj]sx?$/,
+      loader: 'ignore-loader',
+    });
+    return config;
+  },
 };
 
 export default nextConfig;
