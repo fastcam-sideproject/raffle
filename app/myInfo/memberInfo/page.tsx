@@ -33,7 +33,7 @@ export default function MemberInfoPage() {
   }
 
   return (
-    <main className="flex flex-col items-center justify-center h-[40rem] p-4 sm:p-8">
+    <main className="flex flex-col items-center justify-center h-[50rem] p-4 sm:p-8">
       <section className="w-full bg-white p-8 rounded shadow-lg max-w-md sm:max-w-xl">
         <div className="flex flex-col items-center mb-4">
           <div className="w-auto h-auto bg-gray-400 rounded-full p-5 mb-5">
