@@ -24,7 +24,6 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     if (score >= 5) {
-      alert('티켓을 얻었습니다!');
       mutate();
       onClose();
     }
@@ -130,6 +129,7 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
         </div>
         <div className="flex flex-col items-center justify-center bg-gray-100 rounded p-6">
           <h2 className="text-2xl font-bold mb-4">티켓을 다섯장 잡으세요!</h2>
+          <div>키보드 방향키를 움직여 티켓을 잡으세요!</div>
           <canvas
             ref={canvasRef}
             width={300}
