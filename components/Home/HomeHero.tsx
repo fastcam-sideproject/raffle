@@ -11,7 +11,9 @@ export default function HomeHero() {
 
   const userToken = useAuthStore((state) => state.userToken);
 
-  // 랜덤 게임 선택 함수
+  /**
+   * @description 랜덤 게임 시작 버튼 클릭 시 실행되는 함수
+   */
   const handleRandomGameStart = () => {
     if (!userToken) {
       alert('로그인해주세요.');
@@ -24,7 +26,7 @@ export default function HomeHero() {
   };
 
   return (
-    <section className="min-h-[40rem] flex flex-col items-center justify-center bg-blue-50">
+    <section className="min-h-[30rem] flex flex-col items-center justify-center bg-blue-50">
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-lg md:text-3xl font-bold mb-4 text-shadow-white-shadow">
           All You Raffle 에 오신것을 환영합니다
