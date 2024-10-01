@@ -1,11 +1,12 @@
 import useAuthStore from '../../lib/store/useAuthStore';
+import { getTicketsResponse, postTicketsPlusOneResponse } from '../../lib/types/ticket';
 import baseURL from '../baseURL';
 
 /**
  * 유저의 응모권 갯수 가져오기
  * @param userToken
  */
-async function getTickets(userToken: string) {
+async function getTickets(userToken: string): Promise<getTicketsResponse> {
   const { logout } = useAuthStore.getState();
   try {
     const response = await fetch(`${baseURL}/api/v1/user/tickets`, {
@@ -18,7 +19,6 @@ async function getTickets(userToken: string) {
     if (response.status === 401) {
       console.error('인증 실패: 토큰이 만료되었습니다.');
       logout();
-      return;
     }
     if (!response.ok) {
       throw new Error('응모권 불러오기 실패');
@@ -29,7 +29,7 @@ async function getTickets(userToken: string) {
   }
 }
 
-async function postTicketsPlusOne(userToken: string) {
+async function postTicketsPlusOne(userToken: string): Promise<postTicketsPlusOneResponse> {
   try {
     const response = await fetch(`${baseURL}/api/v1/user/tickets/plus_one`, {
       method: 'POST',
