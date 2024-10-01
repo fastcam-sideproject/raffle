@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
+// import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
 import Button from '../lib/common/Button';
 
 export default function NumberBaseballGame({ onClose }: { onClose: () => void }) {
@@ -8,7 +8,7 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
   const [message, setMessage] = useState<string>('');
   const [attempts, setAttempts] = useState<number>(0);
   const [gameOver, setGameOver] = useState<boolean>(false);
-  const { mutate } = useTicketPlusOne();
+  // const { mutate } = useTicketPlusOne();
 
   useEffect(() => {
     handleResetGame();
@@ -51,8 +51,9 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
 
     if (strikes === 3) {
       setMessage(`축하합니다! ${attempts + 1}번 만에 맞췄습니다.`);
+      alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       setGameOver(true);
-      mutate(); // 티켓 지급
+      // mutate(); // 티켓 지급
     } else {
       setMessage(`${strikes} 스트라이크, ${balls} 볼`);
     }
