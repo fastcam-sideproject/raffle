@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
+// import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
 
 interface Player {
   x: number;
@@ -20,11 +20,12 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [score, setScore] = useState<number>(0);
   const targetImage = useRef<HTMLImageElement | null>(null);
-  const { mutate } = useTicketPlusOne();
+  // const { mutate } = useTicketPlusOne();
 
   useEffect(() => {
     if (score >= 5) {
-      mutate();
+      // mutate();
+      alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       onClose();
     }
   }, [score, onClose]);

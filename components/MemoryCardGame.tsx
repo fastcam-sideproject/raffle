@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
+// import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
 
 export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
   const [cards, setCards] = useState<{ id: number; symbol: string; flipped: boolean }[]>([]);
@@ -7,7 +7,7 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
   const [moves, setMoves] = useState<number>(0);
   const [gameOver, setGameOver] = useState<boolean>(false);
-  const { mutate } = useTicketPlusOne();
+  // const { mutate } = useTicketPlusOne();
 
   const symbols = ['🍎', '🍌', '🍇', '🍊', '🍓', '🍑', '🍍', '🥝'];
 
@@ -47,8 +47,9 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
         setMatchedPairs([...matchedPairs, cards[firstIndex].symbol]);
         setFlippedIndexes([]);
         if (matchedPairs.length + 1 === symbols.length) {
+          alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
           setGameOver(true);
-          mutate();
+          // mutate();
         }
       } else {
         setTimeout(() => setFlippedIndexes([]), 1000);
