@@ -3,5 +3,5 @@ export type postTicketsPlusOneResponse = {
 };
 
 export type getTicketsResponse = {
-  tickets: number;
+  tickets: string;
 };
