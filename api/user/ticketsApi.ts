@@ -1,5 +1,4 @@
 import useAuthStore from '../../lib/store/useAuthStore';
-import { postTicketsPlusOneResponse } from '../../lib/types/ticket';
 import baseURL from '../baseURL';
 
 /**
@@ -29,7 +28,7 @@ async function getTickets(userToken: string): Promise<number> {
   }
 }
 
-async function postTicketsPlusOne(userToken: string): Promise<postTicketsPlusOneResponse> {
+async function postTicketsPlusOne(userToken: string): Promise<number> {
   try {
     const response = await fetch(`${baseURL}/api/v1/user/tickets/plus_one`, {
       method: 'POST',
