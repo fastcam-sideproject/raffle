@@ -1,12 +1,12 @@
 import useAuthStore from '../../lib/store/useAuthStore';
-import { getTicketsResponse, postTicketsPlusOneResponse } from '../../lib/types/ticket';
+import { postTicketsPlusOneResponse } from '../../lib/types/ticket';
 import baseURL from '../baseURL';
 
 /**
  * 유저의 응모권 갯수 가져오기
  * @param userToken
  */
-async function getTickets(userToken: string): Promise<getTicketsResponse> {
+async function getTickets(userToken: string): Promise<number> {
   const { logout } = useAuthStore.getState();
   try {
     const response = await fetch(`${baseURL}/api/v1/user/tickets`, {
