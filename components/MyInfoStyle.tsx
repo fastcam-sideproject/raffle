@@ -41,14 +41,17 @@ export default function MyInfoStyle({ userData }: { userData: UserData }) {
             </div>
             <span>&gt;</span>
           </li>
-          <li className="w-full sm:w-2/3 flex items-center justify-between py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">
+          <li
+            className="w-full sm:w-2/3 flex items-center justify-between py-2 px-4 bg-white border border-gray-300 rounded hover:bg-gray-100 cursor-pointer"
+            onClick={() => router.push('/myInfo/purchaseHistory')}
+          >
             <div className="flex gap-2">
               <img
                 src="/icon/submissionHistory.svg"
-                alt="응모 이력 아이콘"
+                alt="래플 이력 아이콘"
                 className="w-4 sm:w-5 h-auto"
               />
-              <h4 className="text-base sm:text-lg">응모 이력</h4>
+              <h4 className="text-base sm:text-lg">래플 이력</h4>
             </div>
             <span>&gt;</span>
           </li>
