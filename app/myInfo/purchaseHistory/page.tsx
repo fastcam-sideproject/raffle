@@ -5,28 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { getPurchaseHistory } from '../../../api/raffle/purchaseItemApi';
 import useAuthStore from '../../../lib/store/useAuthStore';
-
-export type PurchaseItems = {
-  id: number;
-  count: number;
-  isWinner: boolean;
-  raffle: {
-    id: number;
-    totalCount: number;
-    status: string;
-    completedDate: string;
-    ticketPrice: number;
-    item: {
-      id: number;
-      name: string;
-      category: string;
-      imageUrl: string;
-    };
-    winner?: {
-      name: string;
-    };
-  };
-};
+import { PurchaseHistoryResponse } from '../../../lib/types/purchase';
 
 export default function PurchaseHistoryPage() {
   const userToken = useAuthStore<string>((state) => state.userToken);
@@ -38,7 +17,7 @@ export default function PurchaseHistoryPage() {
     isLoading,
     isError,
     error,
-  } = useQuery<PurchaseItems[]>({
+  } = useQuery<PurchaseHistoryResponse>({
     queryKey: ['purchaseHistory', offset, size],
     queryFn: () => getPurchaseHistory({ userToken, offset, size }),
     enabled: !!userToken,

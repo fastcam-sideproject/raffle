@@ -1,3 +1,4 @@
+import { PurchaseHistoryResponse } from '../../lib/types/purchase';
 import baseURL from '../baseURL';
 
 async function postPurchaseItem({ raffleId, userToken }: { raffleId: number; userToken: string }) {
@@ -24,9 +25,9 @@ async function getPurchaseHistory({
   size,
 }: {
   userToken: string;
-  offset?: number;
-  size?: number;
-}) {
+  offset: number;
+  size: number;
+}): Promise<PurchaseHistoryResponse> {
   try {
     const response = await fetch(
       `${baseURL}/api/v1/purchase_history?offset=${offset}&size=${size}`,
@@ -38,13 +39,12 @@ async function getPurchaseHistory({
         },
       },
     );
-
     if (!response.ok) {
       throw new Error('구매 내역 조회 실패');
     }
     return response.json();
   } catch (error) {
-    console.error('구매 내역 조회 실패', error);
+    throw error;
   }
 }
 
