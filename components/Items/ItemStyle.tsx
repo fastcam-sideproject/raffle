@@ -64,7 +64,7 @@ export default function ItemStyle({
     staleTime: 1000 * 60,
   });
 
-  const handleImageClick = (event: React.MouseEvent): void => {
+  const handleImageClick = (event: React.MouseEvent) => {
     if (status === 'COMPLETED') {
       event.preventDefault();
       setIsModalOpen(!isModalOpen);
@@ -74,7 +74,7 @@ export default function ItemStyle({
   /**
    * 응모하기 버튼 클릭 시 실행되는 함수
    */
-  const handleEnterRaffle = (): void => {
+  const handleEnterRaffle = () => {
     if (!userToken) {
       setIsLoginModalOpen(true);
     } else {
@@ -87,7 +87,7 @@ export default function ItemStyle({
       } else if (!userData.address.address || !userData.address.detail) {
         setIsAddressModalOpen(true);
         return;
-      } else if (ticketsCount > 0) {
+      } else if (typeof ticketsCount === 'number' && ticketsCount > 0) {
         mutate.mutate();
         setIsRaffleConfirmationModalOpen(true);
       } else {
@@ -96,7 +96,7 @@ export default function ItemStyle({
     }
   };
 
-  const handleCloseRaffleConfirmationModal = (): void => {
+  const handleCloseRaffleConfirmationModal = () => {
     if (!userToken) {
       setIsLoginModalOpen(false);
     } else {

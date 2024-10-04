@@ -1,12 +1,18 @@
+import { VerifyPhoneResponse } from '../../lib/types/phone';
 import baseURL from '../baseURL';
 
+/**
+ * @description 전화번호를 DB에 저장하는 API
+ * @param {string} phoneNumber
+ * @param {string} userToken
+ */
 async function postPhoneNumber({
   phoneNumber,
   userToken,
 }: {
   phoneNumber: string;
   userToken: string;
-}) {
+}): Promise<Response> {
   try {
     const response = await fetch(`${baseURL}/api/v1/user/set_phoneNumber`, {
       method: 'POST',
@@ -28,13 +34,18 @@ async function postPhoneNumber({
   }
 }
 
+/**
+ * @description 전화번호 인증번호를 요청하는 API
+ * @param {string} phoneNumber
+ * @param {string} userToken
+ */
 async function postVerifyPhone({
   phoneNumber,
   userToken,
 }: {
   phoneNumber: string;
   userToken: string;
-}) {
+}): Promise<VerifyPhoneResponse> {
   try {
     const response = await fetch(`${baseURL}/api/v1/login/verify_phone`, {
       method: 'POST',

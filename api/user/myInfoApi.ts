@@ -1,7 +1,8 @@
 import baseURL from '../baseURL';
 import useAuthStore from '../../lib/store/useAuthStore';
+import { getMyInfoResponse } from '../../lib/types/user';
 
-export async function getMyInfo(userToken: string) {
+export async function getMyInfo(userToken: string): Promise<getMyInfoResponse> {
   const { logout } = useAuthStore.getState();
 
   try {
@@ -18,7 +19,6 @@ export async function getMyInfo(userToken: string) {
     if (response.status === 401) {
       console.error('인증 실패: 토큰이 만료되었습니다.');
       logout();
-      return;
     }
     return response.json();
   } catch (error) {

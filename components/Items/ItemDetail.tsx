@@ -81,7 +81,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
     if (!userToken) {
       setIsLoginModalOpen(true);
     } else {
-      if (ticketsCount > 0) {
+      if (ticketsCount !== undefined && ticketsCount > 0) {
         mutate.mutate();
       } else {
         alert('응모권이 부족합니다.');

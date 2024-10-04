@@ -24,3 +24,28 @@ export type DaumPostcodeAddress = BaseAddress & {
   addressType: string;
   query: string;
 };
+
+/**
+ * @description 래플 이력 조회 함수 API 응답 타입
+ */
+export type PurchaseHistoryResponse = {
+  id: number;
+  count: number;
+  isWinner: boolean;
+  raffle: {
+    id: number;
+    totalCount: number;
+    status: string;
+    completedDate: string;
+    ticketPrice: number;
+    item: {
+      id: number;
+      name: string;
+      category: string;
+      imageUrl: string;
+    };
+    winner?: {
+      name: string;
+    };
+  };
+}[];

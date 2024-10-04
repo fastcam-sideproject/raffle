@@ -21,26 +21,27 @@ export default function HeaderNav() {
    * 사용자 응모권 갯수를 나타내는 useQuery
    * !!enabled: userToken이 존재할 때만 실행
    */
-  const { data, isLoading } = useQuery({
+  const { data: ticketsCount, isLoading } = useQuery({
     queryKey: ['getTickets'],
     queryFn: () => getTickets(userToken),
     enabled: !!userToken,
   });
+
   if (isLoading) return <div>Loading...</div>;
 
-  const handleProfileClick = (): void => {
+  const handleProfileClick = () => {
     setIsPopverOpen(!isPopverOpen);
   };
 
-  const handleClosePopver = (): void => {
+  const handleClosePopver = () => {
     setIsPopverOpen(false);
   };
 
-  const handleNavDropDown = (): void => {
+  const handleNavDropDown = () => {
     setToggle(!toggle);
   };
 
-  const closeMenu = (): void => {
+  const closeMenu = () => {
     setToggle(false);
   };
 
@@ -94,7 +95,7 @@ export default function HeaderNav() {
             {userToken && (
               <div className="flex gap-2 justify-center py-2 px-4 w-full">
                 <img src="/icon/ticket.svg" alt="사용자 응모권 갯수" />
-                <span className="font-bold">{data}</span>
+                <span className="font-bold">{ticketsCount}</span>
               </div>
             )}
           </li>
