@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { getPurchaseHistory } from '../../../api/raffle/purchaseItemApi';
 import useAuthStore from '../../../lib/store/useAuthStore';
 import { PurchaseHistoryResponse } from '../../../lib/types/purchase';
+import { getPurchaseHistory } from '../../../api/history/purchaseHistoryApi';
 
 export default function PurchaseHistoryPage() {
   const userToken = useAuthStore<string>((state) => state.userToken);
