@@ -49,7 +49,6 @@ export default function useAdminPostItem() {
   const handleRegisterAdminItem = () => {
     const data = new FormData();
 
-    // 이미지 파일 추가
     if (formData.itemImage) {
       data.append('image', formData.itemImage);
     }

@@ -7,12 +7,14 @@ import useAdminPostItem from '../../lib/hooks/useAdminPostItem'; // 커스텀 �
 export default function AdminItemRegForm() {
   const { formData, handleChange, handleRegisterAdminItem, previewImage } = useAdminPostItem();
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleRegisterAdminItem();
+  };
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleRegisterAdminItem();
-      }}
+      onSubmit={handleSubmit}
       className="w-[70%] bg-blue-50 border-solid border-[2px] border-primary rounded flex flex-col gap-4 p-8"
     >
       <label htmlFor="itemName" className="flex flex-col gap-2">
