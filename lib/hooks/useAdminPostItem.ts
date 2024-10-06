@@ -7,7 +7,7 @@ interface AdminRegFormData {
   itemName: string;
   itemCategory: number;
   itemDescription: string;
-  itemImage: File | null; // 파일 타입으로 변경
+  itemImage: File | null;
 }
 
 export default function useAdminPostItem() {
@@ -17,7 +17,7 @@ export default function useAdminPostItem() {
     itemName: '',
     itemCategory: 0,
     itemDescription: '',
-    itemImage: null, // 기본값을 null로 설정
+    itemImage: null,
   });
   const [previewImage, setPreviewImage] = useState<string | null>(null); // 미리보기 이미지 상태
 
@@ -40,7 +40,7 @@ export default function useAdminPostItem() {
     if (type === 'file' && files && files[0]) {
       const file = files[0];
       setFormData({ ...formData, itemImage: file });
-      setPreviewImage(URL.createObjectURL(file)); // 미리보기 URL 설정
+      setPreviewImage(URL.createObjectURL(file));
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -51,16 +51,15 @@ export default function useAdminPostItem() {
 
     // 이미지 파일 추가
     if (formData.itemImage) {
-      data.append('image', formData.itemImage); // FormData에 파일 추가
+      data.append('image', formData.itemImage);
     }
 
-    // createItemDto 내부의 각 속성을 FormData에 추가
-    data.append('name', formData.itemName); // 아이템 이름 추가
-    data.append('category', String(formData.itemCategory)); // 카테고리 추가 (숫자 -> 문자열 변환)
-    data.append('description', formData.itemDescription); // 설명 추가
+    data.append('name', formData.itemName);
+    data.append('category', String(formData.itemCategory));
+    data.append('description', formData.itemDescription);
 
-    console.log(data); // FormData 확인용
-    mutation.mutate(data); // FormData를 전송
+    console.log(data);
+    mutation.mutate(data);
   };
 
   return {
