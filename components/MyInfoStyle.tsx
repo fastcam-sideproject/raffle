@@ -1,9 +1,19 @@
+'use client';
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { UserData } from '../lib/types/user';
+import useMyInfo from '../lib/hooks/useMyInfo';
 
-export default function MyInfoStyle({ userData }: { userData: UserData }) {
+export default function MyInfoStyle() {
   const router = useRouter();
+  const { data: userData, isLoading, isError, error } = useMyInfo();
+
+  if (isLoading) return <div>로딩 중...</div>;
+
+  if (isError)
+    return <div>Error: {error instanceof Error ? error.message : JSON.stringify(error)}</div>;
+
+  if (!userData) return <div>로그인이 필요합니다.</div>;
 
   const handleMemberInfoNavigation = () => {
     router.push('/myInfo/memberInfo');

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import useAuthStore from '../lib/store/useAuthStore';
 
 export default function AuthHandler() {
@@ -21,8 +22,8 @@ export default function AuthHandler() {
      * 그리고 router를 이용하여 홈으로 이동.
      */
     if (accessToken && refreshToken) {
-      localStorage.setItem('access_token', accessToken);
-      localStorage.setItem('refresh_token', refreshToken);
+      Cookies.set('access_token', accessToken);
+      Cookies.set('refresh_token', refreshToken);
       setUserToken(accessToken, refreshToken);
       router.replace('/');
     }

@@ -8,10 +8,10 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
   const popoverRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-
   const handleLogout = () => {
     logout();
     localStorage.removeItem('access_token');
+    router.push('/');
     onClose();
   };
 
@@ -19,7 +19,6 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
     router.push('/myInfo');
     onClose();
   };
-
 
   return (
     <div
@@ -29,22 +28,22 @@ export default function ProfilePopover({ onClose }: { onClose: () => void }) {
       <ul>
         <li>
           <Button
-            type='button'
-            label='로그아웃'
+            type="button"
+            label="로그아웃"
             onClick={handleLogout}
-            className='text-black py-2 px-4 bg-gray-100 hover:bg-gray-200 '
-            width='full'
-            fontSize='base'
+            className="text-black py-2 px-4 bg-gray-100 hover:bg-gray-200 "
+            width="full"
+            fontSize="base"
           />
         </li>
         <li>
           <Button
-            type='button'
-            label='나의 정보'
+            type="button"
+            label="나의 정보"
             onClick={handleMypageNavigation}
-            className='text-black py-2 px-4 bg-gray-100 hover:bg-gray-200 '
-            width='full'
-            fontSize='base'
+            className="text-black py-2 px-4 bg-gray-100 hover:bg-gray-200 "
+            width="full"
+            fontSize="base"
           />
         </li>
       </ul>
