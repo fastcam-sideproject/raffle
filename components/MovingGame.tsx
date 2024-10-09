@@ -22,6 +22,13 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     if (score >= 5) {
+      if (
+        typeof window !== 'undefined' &&
+        window.Mobile &&
+        typeof window.Mobile.sendToMobile === 'function'
+      ) {
+        window.Mobile.sendToMobile(true);
+      }
       alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       onClose();
     }
@@ -141,6 +148,13 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
   }, []);
 
   const handleCloseModal = () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.Mobile &&
+      typeof window.Mobile.sendCancel === 'function'
+    ) {
+      window.Mobile.sendCancel();
+    }
     onClose();
   };
 

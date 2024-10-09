@@ -27,7 +27,17 @@ export default function NumberGuessingGame({ onClose }: { onClose: () => void })
       setMessage(`축하합니다. ${attempts + 1}번 만에 맞추셨습니다.`);
       alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       setGameOver(true);
-      // mutate();
+
+      // 성공 시 모바일에 알림 전송
+      if (
+        typeof window !== 'undefined' &&
+        window.Mobile &&
+        typeof window.Mobile.sendToMobile === 'function'
+      ) {
+        window.Mobile.sendToMobile(true);
+      }
+
+      // mutate(); // 티켓 지급
     } else if (guessNumber < targetNumber) {
       setMessage('더 큰 숫자를 입력해보세요.');
     } else {
@@ -48,6 +58,14 @@ export default function NumberGuessingGame({ onClose }: { onClose: () => void })
   };
 
   const handleCloseModal = () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.Mobile &&
+      typeof window.Mobile.sendCancel === 'function'
+    ) {
+      // 닫기 시 모바일에 취소 알림 전송
+      window.Mobile.sendCancel();
+    }
     onClose();
     handleResetGame();
   };

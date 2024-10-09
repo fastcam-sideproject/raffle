@@ -49,6 +49,16 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
         if (matchedPairs.length + 1 === symbols.length) {
           alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
           setGameOver(true);
+
+          // 성공 시 모바일로 알림 전송
+          if (
+            typeof window !== 'undefined' &&
+            window.Mobile &&
+            typeof window.Mobile.sendToMobile === 'function'
+          ) {
+            window.Mobile.sendToMobile(true);
+          }
+
           // mutate();
         }
       } else {
@@ -58,6 +68,14 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
   };
 
   const handleCloseModal = () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.Mobile &&
+      typeof window.Mobile.sendCancel === 'function'
+    ) {
+      // 닫기 시 모바일에 취소 알림 전송
+      window.Mobile.sendCancel();
+    }
     onClose();
   };
 
@@ -77,7 +95,11 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
             {cards.map((card, index) => (
               <div
                 key={card.id}
-                className={`h-16 flex items-center justify-center text-2xl cursor-pointer ${flippedIndexes.includes(index) || matchedPairs.includes(card.symbol) ? 'bg-blue-200' : 'bg-gray-300'}`}
+                className={`h-16 flex items-center justify-center text-2xl cursor-pointer ${
+                  flippedIndexes.includes(index) || matchedPairs.includes(card.symbol)
+                    ? 'bg-blue-200'
+                    : 'bg-gray-300'
+                }`}
                 onClick={() => handleCardClick(index)}
               >
                 {flippedIndexes.includes(index) || matchedPairs.includes(card.symbol)

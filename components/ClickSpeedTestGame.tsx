@@ -22,6 +22,14 @@ export default function ClickSpeedTest({ onClose }: { onClose: () => void }) {
       const finalResult = clicks / 10;
       setResult(finalResult);
       if (finalResult >= 5 && !hasMutated) {
+        // 성공 시 모바일로 알림 전송
+        if (
+          typeof window !== 'undefined' &&
+          window.Mobile &&
+          typeof window.Mobile.sendToMobile === 'function'
+        ) {
+          window.Mobile.sendToMobile(true);
+        }
         // mutate();
         setHasMutated(true);
       } else if (!hasMutated) {
@@ -29,7 +37,7 @@ export default function ClickSpeedTest({ onClose }: { onClose: () => void }) {
       }
     }
     return () => clearInterval(timer);
-  }, [gameStarted, timeLeft, hasMutated]);
+  }, [gameStarted, timeLeft, hasMutated, clicks]);
 
   const startGame = () => {
     setClicks(0);
@@ -47,6 +55,14 @@ export default function ClickSpeedTest({ onClose }: { onClose: () => void }) {
   };
 
   const handleCloseModal = () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.Mobile &&
+      typeof window.Mobile.sendCancel === 'function'
+    ) {
+      // 닫기 시 모바일에 취소 알림 전송
+      window.Mobile.sendCancel();
+    }
     onClose();
   };
 
