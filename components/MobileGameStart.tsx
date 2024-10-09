@@ -21,13 +21,7 @@ export default function MobileGameStart() {
   const [activeGame, setActiveGame] = useState<JSX.Element | null>(null);
 
   useEffect(() => {
-    console.log('userToken:', userToken);
     if (userToken === null) return;
-
-    if (!userToken) {
-      alert('로그인해주세요.');
-      return;
-    }
 
     const games = [
       <NumberGuessingGame onClose={() => setActiveGame(null)} key="numberGuessing" />,
