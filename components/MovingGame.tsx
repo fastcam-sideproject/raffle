@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-// import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
 
 interface Player {
   x: number;
@@ -20,19 +19,14 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [score, setScore] = useState<number>(0);
   const targetImage = useRef<HTMLImageElement | null>(null);
-  // const { mutate } = useTicketPlusOne();
 
   useEffect(() => {
     if (score >= 5) {
-      // mutate();
       alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       onClose();
     }
   }, [score, onClose]);
 
-  /**
-   * @description 캔버스 그리기
-   */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -52,6 +46,7 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
     let touchStartX: number = 0;
     let touchStartY: number = 0;
 
+    // 키보드 입력 처리
     const handleKeyDown = (e: KeyboardEvent) => {
       e.preventDefault();
       keys[e.key] = true;
@@ -62,6 +57,7 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
       keys[e.key] = false;
     };
 
+    // 터치 입력 처리
     const handleTouchStart = (e: TouchEvent) => {
       const touch = e.touches[0];
       touchStartX = touch.clientX;
@@ -93,20 +89,20 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
     image.src = '/icon/ticket.svg';
     targetImage.current = image;
 
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    // 이벤트 리스너를 캔버스에 추가
+    canvas.addEventListener('keydown', handleKeyDown);
+    canvas.addEventListener('keyup', handleKeyUp);
     canvas.addEventListener('touchstart', handleTouchStart);
     canvas.addEventListener('touchmove', handleTouchMove);
 
     const gameLoop = () => {
+      // 키보드 입력에 따른 플레이어 이동
       if (keys['ArrowUp'] && player.y > 0) player.y -= player.speed;
       if (keys['ArrowDown'] && player.y + player.height < canvas.height) player.y += player.speed;
       if (keys['ArrowLeft'] && player.x > 0) player.x -= player.speed;
       if (keys['ArrowRight'] && player.x + player.width < canvas.width) player.x += player.speed;
 
-      /**
-       * @description 충돌감지
-       */
+      // 충돌 감지
       if (
         player.x < target.x + target.width &&
         player.x + player.width > target.x &&
@@ -118,20 +114,14 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
         target.y = Math.random() * (canvas.height - 20);
       }
 
-      /**
-       * @description 화면 초기화
-       */
+      // 화면 초기화
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      /**
-       * @description 플레이어
-       */
+      // 플레이어 그리기
       ctx.fillStyle = 'blue';
       ctx.fillRect(player.x, player.y, player.width, player.height);
 
-      /**
-       * @description 목표물
-       */
+      // 목표물 그리기
       if (targetImage.current?.complete) {
         ctx.drawImage(targetImage.current, target.x, target.y, target.width, target.height);
       }
@@ -142,8 +132,9 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
     gameLoop();
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
+      // 이벤트 리스너 제거
+      canvas.removeEventListener('keydown', handleKeyDown);
+      canvas.removeEventListener('keyup', handleKeyUp);
       canvas.removeEventListener('touchstart', handleTouchStart);
       canvas.removeEventListener('touchmove', handleTouchMove);
     };
@@ -169,6 +160,7 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
             width={300}
             height={200}
             className="border-2 border-primary rounded"
+            tabIndex={0} // 캔버스 요소가 포커스를 받을 수 있게 설정
           ></canvas>
           <div className="mt-4 text-lg">Score: {score}</div>
         </div>
