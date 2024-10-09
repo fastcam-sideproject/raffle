@@ -55,7 +55,6 @@ export default function AdminDashboard() {
       }
     }
   };
-  console.log('Form Data:', formData);
 
   return (
     <section className="flex justify-center">
