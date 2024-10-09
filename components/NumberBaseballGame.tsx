@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
 import Button from '../lib/common/Button';
+import { sendCancelMessage, sendSuccessMessage } from '../lib/utils/mobileActions';
 
 export default function NumberBaseballGame({ onClose }: { onClose: () => void }) {
   const [targetNumber, setTargetNumber] = useState<number[]>([]);
@@ -29,11 +29,6 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
     return numbers;
   };
 
-  // 환경 감지 (Android 또는 iOS)
-  const isIOS = () => {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  };
-
   const handleGuess = () => {
     const guessArray = guess.split('').map(Number);
 
@@ -59,17 +54,7 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
       setGameOver(true);
 
       // 성공 시 모바일로 알림 전송
-      if (isIOS()) {
-        // iOS 성공 알림
-        if (typeof window !== 'undefined' && window.webkit?.messageHandlers?.Mobile?.postMessage) {
-          window.webkit.messageHandlers.Mobile.postMessage(true);
-        }
-      } else {
-        // Android 성공 알림
-        if (typeof window !== 'undefined' && window.Mobile?.sendToMobile) {
-          window.Mobile.sendToMobile(true);
-        }
-      }
+      sendSuccessMessage();
 
       // mutate(); // 티켓 지급
     } else {
@@ -97,20 +82,7 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
   };
 
   const handleCloseModal = () => {
-    if (isIOS()) {
-      // iOS 취소 알림
-      if (
-        typeof window !== 'undefined' &&
-        window.webkit?.messageHandlers?.MobileCancel?.postMessage
-      ) {
-        window.webkit.messageHandlers.MobileCancel.postMessage(null);
-      }
-    } else {
-      // Android 취소 알림
-      if (typeof window !== 'undefined' && window.Mobile?.sendCancel) {
-        window.Mobile.sendCancel();
-      }
-    }
+    sendCancelMessage(); // 취소 시 메시지 전송
     onClose();
   };
 
