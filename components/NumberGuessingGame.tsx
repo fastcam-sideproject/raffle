@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../lib/common/Button';
 // import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
-import { on } from 'events';
 
 export default function NumberGuessingGame({ onClose }: { onClose: () => void }) {
   const [targetNumber, setTargetNumber] = useState<number>(0);
