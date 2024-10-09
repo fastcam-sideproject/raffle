@@ -25,17 +25,10 @@ export default function NumberGuessingGame({ onClose }: { onClose: () => void })
 
     if (guessNumber === targetNumber) {
       setMessage(`축하합니다. ${attempts + 1}번 만에 맞추셨습니다.`);
-      alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       setGameOver(true);
 
       // 성공 시 모바일에 알림 전송
-      if (
-        typeof window !== 'undefined' &&
-        window.Mobile &&
-        typeof window.Mobile.sendToMobile === 'function'
-      ) {
-        window.Mobile.sendToMobile(true);
-      }
+      handleSuccessMessage();
 
       // mutate(); // 티켓 지급
     } else if (guessNumber < targetNumber) {
@@ -44,6 +37,23 @@ export default function NumberGuessingGame({ onClose }: { onClose: () => void })
       setMessage('더 작은 숫자를 입력해보세요.');
     }
     setGuess('');
+  };
+
+  /**
+   * @description iOS 및 Android 환경에 맞게 성공 알림 전송
+   */
+  const handleSuccessMessage = () => {
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      // iOS 성공 알림
+      if (typeof window !== 'undefined' && window.webkit?.messageHandlers?.Mobile?.postMessage) {
+        window.webkit.messageHandlers.Mobile.postMessage(true);
+      }
+    } else {
+      // Android 성공 알림
+      if (typeof window !== 'undefined' && window.Mobile?.sendToMobile) {
+        window.Mobile.sendToMobile(true);
+      }
+    }
   };
 
   /**
@@ -57,14 +67,23 @@ export default function NumberGuessingGame({ onClose }: { onClose: () => void })
     setGameOver(false);
   };
 
+  /**
+   * @description 게임 종료 시 iOS 및 Android 환경에 맞게 취소 알림 전송
+   */
   const handleCloseModal = () => {
-    if (
-      typeof window !== 'undefined' &&
-      window.Mobile &&
-      typeof window.Mobile.sendCancel === 'function'
-    ) {
-      // 닫기 시 모바일에 취소 알림 전송
-      window.Mobile.sendCancel();
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      // iOS 취소 알림
+      if (
+        typeof window !== 'undefined' &&
+        window.webkit?.messageHandlers?.MobileCancel?.postMessage
+      ) {
+        window.webkit.messageHandlers.MobileCancel.postMessage(null);
+      }
+    } else {
+      // Android 취소 알림
+      if (typeof window !== 'undefined' && window.Mobile?.sendCancel) {
+        window.Mobile.sendCancel();
+      }
     }
     onClose();
     handleResetGame();
