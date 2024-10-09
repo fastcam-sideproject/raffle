@@ -22,15 +22,7 @@ export default function ClickSpeedTest({ onClose }: { onClose: () => void }) {
       const finalResult = clicks / 10;
       setResult(finalResult);
       if (finalResult >= 5 && !hasMutated) {
-        // 성공 시 모바일로 알림 전송
-        if (
-          typeof window !== 'undefined' &&
-          window.Mobile &&
-          typeof window.Mobile.sendToMobile === 'function'
-        ) {
-          window.Mobile.sendToMobile(true);
-        }
-        // mutate();
+        handleSuccess();
         setHasMutated(true);
       } else if (!hasMutated) {
         setGameFailed(true);
@@ -54,14 +46,39 @@ export default function ClickSpeedTest({ onClose }: { onClose: () => void }) {
     }
   };
 
+  // 환경 감지 (Android 또는 iOS)
+  const isIOS = () => {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  };
+
+  const handleSuccess = () => {
+    if (isIOS()) {
+      // iOS 성공 알림
+      if (typeof window !== 'undefined' && window.webkit?.messageHandlers?.Mobile?.postMessage) {
+        window.webkit.messageHandlers.Mobile.postMessage(true);
+      }
+    } else {
+      // Android 성공 알림
+      if (typeof window !== 'undefined' && window.Mobile?.sendToMobile) {
+        window.Mobile.sendToMobile(true);
+      }
+    }
+  };
+
   const handleCloseModal = () => {
-    if (
-      typeof window !== 'undefined' &&
-      window.Mobile &&
-      typeof window.Mobile.sendCancel === 'function'
-    ) {
-      // 닫기 시 모바일에 취소 알림 전송
-      window.Mobile.sendCancel();
+    if (isIOS()) {
+      // iOS 취소 알림
+      if (
+        typeof window !== 'undefined' &&
+        window.webkit?.messageHandlers?.MobileCancel?.postMessage
+      ) {
+        window.webkit.messageHandlers.MobileCancel.postMessage(null);
+      }
+    } else {
+      // Android 취소 알림
+      if (typeof window !== 'undefined' && window.Mobile?.sendCancel) {
+        window.Mobile.sendCancel();
+      }
     }
     onClose();
   };

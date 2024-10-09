@@ -29,6 +29,11 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
     return numbers;
   };
 
+  // 환경 감지 (Android 또는 iOS)
+  const isIOS = () => {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  };
+
   const handleGuess = () => {
     const guessArray = guess.split('').map(Number);
 
@@ -51,16 +56,19 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
 
     if (strikes === 3) {
       setMessage(`축하합니다! ${attempts + 1}번 만에 맞췄습니다.`);
-      alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       setGameOver(true);
 
-      // 모바일에 성공 알림 전송
-      if (
-        typeof window !== 'undefined' &&
-        window.Mobile &&
-        typeof window.Mobile.sendToMobile === 'function'
-      ) {
-        window.Mobile.sendToMobile(true);
+      // 성공 시 모바일로 알림 전송
+      if (isIOS()) {
+        // iOS 성공 알림
+        if (typeof window !== 'undefined' && window.webkit?.messageHandlers?.Mobile?.postMessage) {
+          window.webkit.messageHandlers.Mobile.postMessage(true);
+        }
+      } else {
+        // Android 성공 알림
+        if (typeof window !== 'undefined' && window.Mobile?.sendToMobile) {
+          window.Mobile.sendToMobile(true);
+        }
       }
 
       // mutate(); // 티켓 지급
@@ -89,13 +97,19 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
   };
 
   const handleCloseModal = () => {
-    if (
-      typeof window !== 'undefined' &&
-      window.Mobile &&
-      typeof window.Mobile.sendCancel === 'function'
-    ) {
-      // 모바일에 취소 알림 전송
-      window.Mobile.sendCancel();
+    if (isIOS()) {
+      // iOS 취소 알림
+      if (
+        typeof window !== 'undefined' &&
+        window.webkit?.messageHandlers?.MobileCancel?.postMessage
+      ) {
+        window.webkit.messageHandlers.MobileCancel.postMessage(null);
+      }
+    } else {
+      // Android 취소 알림
+      if (typeof window !== 'undefined' && window.Mobile?.sendCancel) {
+        window.Mobile.sendCancel();
+      }
     }
     onClose();
   };

@@ -47,19 +47,8 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
         setMatchedPairs([...matchedPairs, cards[firstIndex].symbol]);
         setFlippedIndexes([]);
         if (matchedPairs.length + 1 === symbols.length) {
-          alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
           setGameOver(true);
-
-          // 성공 시 모바일로 알림 전송
-          if (
-            typeof window !== 'undefined' &&
-            window.Mobile &&
-            typeof window.Mobile.sendToMobile === 'function'
-          ) {
-            window.Mobile.sendToMobile(true);
-          }
-
-          // mutate();
+          handleSuccess();
         }
       } else {
         setTimeout(() => setFlippedIndexes([]), 1000);
@@ -67,14 +56,39 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
     }
   };
 
+  // 환경 감지 (Android 또는 iOS)
+  const isIOS = () => {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  };
+
+  const handleSuccess = () => {
+    if (isIOS()) {
+      // iOS 성공 알림
+      if (typeof window !== 'undefined' && window.webkit?.messageHandlers?.Mobile?.postMessage) {
+        window.webkit.messageHandlers.Mobile.postMessage(true);
+      }
+    } else {
+      // Android 성공 알림
+      if (typeof window !== 'undefined' && window.Mobile?.sendToMobile) {
+        window.Mobile.sendToMobile(true);
+      }
+    }
+  };
+
   const handleCloseModal = () => {
-    if (
-      typeof window !== 'undefined' &&
-      window.Mobile &&
-      typeof window.Mobile.sendCancel === 'function'
-    ) {
-      // 닫기 시 모바일에 취소 알림 전송
-      window.Mobile.sendCancel();
+    if (isIOS()) {
+      // iOS 취소 알림
+      if (
+        typeof window !== 'undefined' &&
+        window.webkit?.messageHandlers?.MobileCancel?.postMessage
+      ) {
+        window.webkit.messageHandlers.MobileCancel.postMessage(null);
+      }
+    } else {
+      // Android 취소 알림
+      if (typeof window !== 'undefined' && window.Mobile?.sendCancel) {
+        window.Mobile.sendCancel();
+      }
     }
     onClose();
   };
