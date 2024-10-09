@@ -160,7 +160,7 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
             width={300}
             height={200}
             className="border-2 border-primary rounded"
-            tabIndex={0} // 캔버스 요소가 포커스를 받을 수 있게 설정
+            tabIndex={0}
           ></canvas>
           <div className="mt-4 text-lg">Score: {score}</div>
         </div>

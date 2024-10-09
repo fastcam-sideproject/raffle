@@ -1,7 +1,16 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // "app-game" 경로에서는 Footer를 렌더링하지 않음
+  if (pathname === '/app-game') {
+    return null;
+  }
   return (
     <footer className="w-full bg-gray-50">
       <div className="px-24 py-10 grid grid-cols-4 gap-12 max-md:flex max-md:flex-col max-md:p-10">

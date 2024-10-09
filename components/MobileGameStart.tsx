@@ -23,7 +23,7 @@ export default function MobileGameStart() {
   }, []);
 
   return (
-    <section className="min-h-[30rem] flex flex-col items-center justify-center bg-blue-50">
+    <section className="min-h-[30rem] flex flex-col items-center justify-center">
       {activeGame}
     </section>
   );
