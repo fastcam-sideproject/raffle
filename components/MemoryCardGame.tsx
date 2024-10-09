@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { sendCancelMessage, sendSuccessMessage } from '../lib/utils/mobileActions';
+
 // import useTicketPlusOne from '../lib/hooks/useTicketPlusOne';
 
 export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
@@ -48,7 +50,7 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
         setFlippedIndexes([]);
         if (matchedPairs.length + 1 === symbols.length) {
           setGameOver(true);
-          handleSuccess();
+          sendSuccessMessage(); // 성공 메시지 전송
         }
       } else {
         setTimeout(() => setFlippedIndexes([]), 1000);
@@ -56,40 +58,8 @@ export default function MemoryCardGame({ onClose }: { onClose: () => void }) {
     }
   };
 
-  // 환경 감지 (Android 또는 iOS)
-  const isIOS = () => {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  };
-
-  const handleSuccess = () => {
-    if (isIOS()) {
-      // iOS 성공 알림
-      if (typeof window !== 'undefined' && window.webkit?.messageHandlers?.Mobile?.postMessage) {
-        window.webkit.messageHandlers.Mobile.postMessage(true);
-      }
-    } else {
-      // Android 성공 알림
-      if (typeof window !== 'undefined' && window.Mobile?.sendToMobile) {
-        window.Mobile.sendToMobile(true);
-      }
-    }
-  };
-
   const handleCloseModal = () => {
-    if (isIOS()) {
-      // iOS 취소 알림
-      if (
-        typeof window !== 'undefined' &&
-        window.webkit?.messageHandlers?.MobileCancel?.postMessage
-      ) {
-        window.webkit.messageHandlers.MobileCancel.postMessage(null);
-      }
-    } else {
-      // Android 취소 알림
-      if (typeof window !== 'undefined' && window.Mobile?.sendCancel) {
-        window.Mobile.sendCancel();
-      }
-    }
+    sendCancelMessage(); // 취소 메시지 전송
     onClose();
   };
 
