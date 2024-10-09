@@ -49,6 +49,8 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
     };
 
     let keys: { [key: string]: boolean } = {};
+    let touchStartX: number = 0;
+    let touchStartY: number = 0;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       e.preventDefault();
@@ -60,12 +62,41 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
       keys[e.key] = false;
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      if (deltaX > 0 && player.x + player.width < canvas.width) {
+        player.x += player.speed; // 오른쪽 이동
+      } else if (deltaX < 0 && player.x > 0) {
+        player.x -= player.speed; // 왼쪽 이동
+      }
+
+      if (deltaY > 0 && player.y + player.height < canvas.height) {
+        player.y += player.speed; // 아래쪽 이동
+      } else if (deltaY < 0 && player.y > 0) {
+        player.y -= player.speed; // 위쪽 이동
+      }
+
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    };
+
     const image = new Image();
     image.src = '/icon/ticket.svg';
     targetImage.current = image;
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
+    canvas.addEventListener('touchstart', handleTouchStart);
+    canvas.addEventListener('touchmove', handleTouchMove);
 
     const gameLoop = () => {
       if (keys['ArrowUp'] && player.y > 0) player.y -= player.speed;
@@ -113,6 +144,8 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
 
@@ -130,7 +163,7 @@ export default function MovingGame({ onClose }: { onClose: () => void }) {
         </div>
         <div className="flex flex-col items-center justify-center bg-gray-100 rounded p-6">
           <h2 className="text-2xl font-bold mb-4">티켓을 다섯장 잡으세요!</h2>
-          <div>키보드 방향키를 움직여 티켓을 잡으세요!</div>
+          <div>키보드 방향키 또는 터치를 사용해 티켓을 잡으세요!</div>
           <canvas
             ref={canvasRef}
             width={300}

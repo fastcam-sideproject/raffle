@@ -1,14 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { getMyInfo } from '../../api/user/myInfoApi';
 import useAuthStore from '../store/useAuthStore';
+import { getMyInfoResponse } from '../types/user';
 
 /**
  * @description 사용자의 정보를 나타내는 커스텀 훅
  * @returns {object} queryResult
  * @returns {string} userToken
  */
-export default function useMyInfo() {
+export default function useMyInfo(): UseQueryResult<getMyInfoResponse, Error> & {
+  userToken: string;
+} {
   const router = useRouter();
   const userToken = useAuthStore<string>((state) => state.userToken);
 

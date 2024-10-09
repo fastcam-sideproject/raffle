@@ -21,6 +21,13 @@ const useAuthStore = create<AuthStore>()(
         }
         set({ userToken: '', refreshToken: '' });
       },
+      hydrateToken: () => {
+        if (typeof window !== 'undefined') {
+          const storedToken = localStorage.getItem('access_token') || '';
+          const storedRefreshToken = localStorage.getItem('refresh_token') || '';
+          set({ userToken: storedToken, refreshToken: storedRefreshToken });
+        }
+      },
     }),
     {
       name: 'auth-storage',

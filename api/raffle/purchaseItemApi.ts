@@ -1,12 +1,6 @@
 import baseURL from '../baseURL';
 
-export async function postPurchaseItem({
-  raffleId,
-  userToken,
-}: {
-  raffleId: number;
-  userToken: string;
-}) {
+async function postPurchaseItem({ raffleId, userToken }: { raffleId: number; userToken: string }) {
   try {
     const response = await fetch(`${baseURL}/api/v1/raffle/purchase/${raffleId}`, {
       method: 'POST',
@@ -23,3 +17,5 @@ export async function postPurchaseItem({
     console.error('상품 구매 실패', error);
   }
 }
+
+export { postPurchaseItem };

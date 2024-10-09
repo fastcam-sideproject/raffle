@@ -5,6 +5,7 @@ import NumberGuessingGame from '../NumberGuessingGame';
 import MemoryCardGame from '../MemoryCardGame';
 import NumberBaseballGame from '../NumberBaseballGame';
 import MovingGame from '../MovingGame';
+import ClickSpeedTest from '../ClickSpeedTestGame';
 
 export default function HomeHero() {
   const [activeGame, setActiveGame] = useState<string | null>(null);
@@ -20,7 +21,7 @@ export default function HomeHero() {
       return;
     }
 
-    const games = ['numberGuessing', 'memoryCard', 'numberBaseball', 'catchGame'];
+    const games = ['numberGuessing', 'memoryCard', 'numberBaseball', 'catchGame', 'clickSpeedTest'];
     const randomGame = games[Math.floor(Math.random() * games.length)];
     setActiveGame(randomGame);
   };
@@ -62,6 +63,9 @@ export default function HomeHero() {
       )}
       {userToken && activeGame === 'catchGame' && (
         <MovingGame onClose={() => setActiveGame(null)} />
+      )}
+      {userToken && activeGame === 'clickSpeedTest' && (
+        <ClickSpeedTest onClose={() => setActiveGame(null)} />
       )}
     </section>
   );
