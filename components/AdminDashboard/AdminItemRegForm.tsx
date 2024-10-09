@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 import Button from '../../lib/common/Button';
-import useAdminPostItem from '../../lib/hooks/useAdminPostItem'; // 커스텀 훅 사용
+import useAdminPostItem from '../../lib/hooks/useAdminPostItem';
 
 export default function AdminItemRegForm() {
   const { formData, handleChange, handleRegisterAdminItem, previewImage } = useAdminPostItem();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     handleRegisterAdminItem();
   };
 

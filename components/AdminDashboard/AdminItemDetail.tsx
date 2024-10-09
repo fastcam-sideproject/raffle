@@ -12,7 +12,6 @@ export default function AdminItemDetail({ params: { id } }: { params: { id: numb
   const fetchGetAdminItem = async (id: number): Promise<void> => {
     try {
       const result = await getAdminRaffleItemDetail(userToken, id);
-      console.log(result);
       setData(result);
     } catch (error) {
       console.error('Failed to fetch raffle data:', error);
@@ -72,6 +71,15 @@ export default function AdminItemDetail({ params: { id } }: { params: { id: numb
             </div>
           </div>
         </div>
+        <label htmlFor="itemDetailImage" className="flex flex-col gap-2">
+          상세 이미지 : 물건의 상세 이미지를 올려주세요
+          <input
+            type="file"
+            name="itemDetailImage"
+            accept="image/*"
+            className="p-4 rounded-lg border-solid border-[1px]"
+          />
+        </label>
         <div className="flex flex-col">
           {data?.imageList.map((item: any) => (
             <Image

@@ -30,7 +30,6 @@ export default function useAdminPostItem() {
     },
     onError: (error: Error) => {
       alert('아이템 등록 실패');
-      console.log(formData);
       console.error('아이템 등록 실패', error);
     },
   });
@@ -53,11 +52,17 @@ export default function useAdminPostItem() {
       data.append('image', formData.itemImage);
     }
 
-    data.append('name', formData.itemName);
-    data.append('category', String(formData.itemCategory));
-    data.append('description', formData.itemDescription);
+    const createItemDto = {
+      name: formData.itemName,
+      category: formData.itemCategory,
+      description: formData.itemDescription,
+    };
 
-    console.log(data);
+    data.append(
+      'createItemDto',
+      new Blob([JSON.stringify(createItemDto)], { type: 'application/json' }),
+    );
+
     mutation.mutate(data);
   };
 

@@ -70,17 +70,25 @@ async function postAdminRaffleStart(adminToken: string, raffleId: number) {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${adminToken}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({}),
     });
+
     if (!response.ok) {
       const errorResponse = await response.json().catch(() => ({
         message: 'Unknown error',
       }));
-      throw new Error(`raffle item 등록 실패: ${errorResponse.message || response.status}`);
+      throw new Error(`Raffle item 시작 실패: ${errorResponse.message || response.status}`);
     }
-    return await response.json();
+    const result = await response.text();
+    if (result) {
+      return JSON.parse(result);
+    } else {
+      return {};
+    }
   } catch (error) {
-    console.error('Error posting item:', error instanceof Error ? error.message : error);
+    console.error('Error starting raffle item:', error instanceof Error ? error.message : error);
     throw error;
   }
 }
@@ -91,17 +99,25 @@ async function postAdminRaffleStop(adminToken: string, raffleId: number) {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${adminToken}`,
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({}),
     });
+
     if (!response.ok) {
       const errorResponse = await response.json().catch(() => ({
         message: 'Unknown error',
       }));
-      throw new Error(`raffle item 등록 실패: ${errorResponse.message || response.status}`);
+      throw new Error(`Raffle item 시작 실패: ${errorResponse.message || response.status}`);
     }
-    return await response.json();
+    const result = await response.text();
+    if (result) {
+      return JSON.parse(result);
+    } else {
+      return {};
+    }
   } catch (error) {
-    console.error('Error posting item:', error instanceof Error ? error.message : error);
+    console.error('Error starting raffle item:', error instanceof Error ? error.message : error);
     throw error;
   }
 }
@@ -122,7 +138,12 @@ async function deleteAdminRaffleItem(adminToken: string, raffleId: number) {
       throw new Error(`raffle item 삭제 실패: ${errorResponse.message || response.status}`);
     }
 
-    return await response.json();
+    const result = await response.text();
+    if (result) {
+      return JSON.parse(result);
+    } else {
+      return {};
+    }
   } catch (error) {
     console.error('Error deleting item:', error instanceof Error ? error.message : error);
     throw error;
