@@ -25,7 +25,7 @@ export const sendCancelMessage = () => {
       typeof window !== 'undefined' &&
       window.webkit?.messageHandlers?.MobileCancel?.postMessage
     ) {
-      window.webkit.messageHandlers.MobileCancel.postMessage(null);
+      window.webkit.messageHandlers.MobileCancel.postMessage(true);
     }
   } else {
     // Android 취소 알림
