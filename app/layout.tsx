@@ -8,11 +8,6 @@ import './globals.css';
 const pretendard = localFont({
   src: [
     {
-      path: '../public/fonts/Pretendard-Thin.otf',
-      weight: '100',
-      style: 'normal',
-    },
-    {
       path: '../public/fonts/Pretendard-Regular.otf',
       weight: '400',
       style: 'normal',
