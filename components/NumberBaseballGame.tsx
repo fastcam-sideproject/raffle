@@ -53,6 +53,16 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
       setMessage(`축하합니다! ${attempts + 1}번 만에 맞췄습니다.`);
       alert('앱 심사중으로 쿠폰이 발급되질 않습니다! 심사후에 이용해주세요!');
       setGameOver(true);
+
+      // 모바일에 성공 알림 전송
+      if (
+        typeof window !== 'undefined' &&
+        window.Mobile &&
+        typeof window.Mobile.sendToMobile === 'function'
+      ) {
+        window.Mobile.sendToMobile(true);
+      }
+
       // mutate(); // 티켓 지급
     } else {
       setMessage(`${strikes} 스트라이크, ${balls} 볼`);
@@ -79,6 +89,14 @@ export default function NumberBaseballGame({ onClose }: { onClose: () => void })
   };
 
   const handleCloseModal = () => {
+    if (
+      typeof window !== 'undefined' &&
+      window.Mobile &&
+      typeof window.Mobile.sendCancel === 'function'
+    ) {
+      // 모바일에 취소 알림 전송
+      window.Mobile.sendCancel();
+    }
     onClose();
   };
 
