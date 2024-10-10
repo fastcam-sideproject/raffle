@@ -1,14 +1,12 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
 import { getWinnerHistory } from '../../../api/history/winnerHistoryApi';
 import useAuthStore from '../../../lib/store/useAuthStore';
 
 export default function WinnerHistoryPage() {
   const userToken = useAuthStore<string>((state) => state.userToken);
-  const [cursor, setCursor] = useState<number>(0);
-  const [size] = useState<number>(5);
+
   const {
     data: winnerData,
     isLoading,
@@ -16,7 +14,7 @@ export default function WinnerHistoryPage() {
     error,
   } = useQuery({
     queryKey: ['getWinnerHistory'],
-    queryFn: () => getWinnerHistory({ userToken, cursor, size }),
+    queryFn: () => getWinnerHistory({ userToken }),
     enabled: !!userToken,
   });
 

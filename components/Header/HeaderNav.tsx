@@ -89,6 +89,15 @@ export default function HeaderNav() {
               Contact
             </Link>
           </li>
+          <li className="sm:border-none border-solid border-2 border-primary rounded-xl bg-slate-100 p-2 flex items-center justify-center ">
+            <Link
+              href="/review"
+              className={`p-2 w-full text-center ${pathName === '/review' ? 'text-blue-700 font-bold' : 'text-gray-500'}`}
+              onClick={closeMenu}
+            >
+              Review
+            </Link>
+          </li>
         </ul>
         <ul className="flex gap-3 items-center">
           <li>
