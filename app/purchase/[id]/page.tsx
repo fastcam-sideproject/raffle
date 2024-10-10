@@ -10,6 +10,8 @@ import FinalPaymentSummary from '../../../components/payment/FinalPaymentSummary
 import RaffleItemConfirmationModal from '../../../components/Modal/RaffleItemConfirmationModal';
 import { getNotFreeRaffleDataDetail } from '../../../api/raffle/raffleApi';
 import { postPurchaseItem } from '../../../api/raffle/purchaseItemApi';
+import useAuthStore from '../../../lib/store/useAuthStore';
+import Skeleton from '../../../components/Skeleton';
 
 export default function PurchasePage({
   params,
@@ -26,11 +28,13 @@ export default function PurchasePage({
   const [isPurchaseChecked, setIsPurchaseChecked] = useState<boolean>(false);
   const [isRaffleConfirmationModalOpen, setIsRaffleConfirmationModalOpen] =
     useState<boolean>(false);
-  const userToken = localStorage.getItem('access_token');
+  const userToken = useAuthStore<string>((state) => state.userToken);
 
-  if (!userToken) {
-    throw new Error('userToken이 없습니다.');
-  }
+  useEffect(() => {
+    if (!userToken) {
+      router.push('/');
+    }
+  }, [userToken, router]);
 
   const { data: raffleDetailItem } = useQuery({
     queryKey: ['getNotFreeRaffleDataDetail'],
@@ -66,7 +70,23 @@ export default function PurchasePage({
   };
 
   if (!raffleDetailItem) {
-    return <div>로딩 중...</div>;
+    return (
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-center mb-8">상품 결제</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-full" />
+          </div>
+          <div className="space-y-4">
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-full" />
+          </div>
+        </div>
+      </main>
+    );
   }
 
   return (

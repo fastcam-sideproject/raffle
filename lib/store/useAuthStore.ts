@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+import Cookies from 'js-cookie';
 import { AuthStore } from '../types/authStores';
 
 const useAuthStore = create<AuthStore>()(
@@ -9,15 +10,15 @@ const useAuthStore = create<AuthStore>()(
       refreshToken: '',
       setUserToken: (userToken, refreshToken) => {
         if (typeof window !== 'undefined') {
-          localStorage.setItem('access_token', userToken);
-          localStorage.setItem('refresh_token', refreshToken);
+          Cookies.set('access_token', userToken);
+          Cookies.set('refresh_token', refreshToken);
         }
         set({ userToken, refreshToken });
       },
       logout: () => {
         if (typeof window !== 'undefined') {
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('refresh_token');
+          Cookies.remove('access_token');
+          Cookies.remove('refresh_token');
         }
         set({ userToken: '', refreshToken: '' });
       },
@@ -31,7 +32,6 @@ const useAuthStore = create<AuthStore>()(
     }),
     {
       name: 'auth-storage',
-      storage: typeof window !== 'undefined' ? createJSONStorage(() => localStorage) : undefined,
     },
   ),
 );
