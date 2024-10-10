@@ -125,6 +125,19 @@ const config: Config = {
         full: '1000px',
       },
     },
+    spacing: {
+      '0': '0px',
+      '1': '0.15rem',
+      '2': '0.25rem',
+      '3': '0.5rem',
+      '4': '0.75rem',
+      '5': '1rem',
+      '6': '1.25rem',
+      '7': '1.5rem',
+      '8': '2rem',
+      '9': '2.5rem',
+      '10': '3rem',
+    },
   },
   plugins: [
     function ({ addUtilities }: { addUtilities: Function }) {
