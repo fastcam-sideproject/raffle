@@ -16,3 +16,65 @@
     animation: scroll 20s linear infinite;
   }
 }
+
+@layer base {
+  :root {
+    --color-neutral-0: #ffffff;
+    --color-neutral-5: ##f6f7f9;
+    --color-neutral-7: #e8eaed;
+    --color-neutral-10: #d9dce2;
+    --color-neutral-20: #bcc1cc;
+    --color-neutral-30: #9fa6b6;
+    --color-neutral-40: #828ca0;
+    --color-neutral-50: #677288;
+    --color-neutral-60: #515a6b;
+    --color-neutral-70: #3b414e;
+    --color-neutral-80: #252931;
+    --color-neutral-90: #161a1d;
+    --color-neutral-100: #0b0c0f;
+
+    --color-primary-5: #eff6ff;
+    --color-primary-10: #dbeafe;
+    --color-primary-20: #93c5fd;
+    --color-primary-30: #60a5fa;
+    --color-primary-40: #3b82f6;
+    --color-primary-50: #2563eb;
+    --color-primary-60: #1d4ed8;
+    --color-primary-70: #1e40af;
+    --color-primary-80: #1e3a8a;
+    --color-primary-90: #172554;
+
+    --color-error-5: #fdf2f3;
+    --color-error-10: #fbd6d8;
+    --color-error-20: #f5a3a8;
+    --color-error-30: #f1747c;
+    --color-error-40: #ec4651;
+    --color-error-50: #e71825;
+    --color-error-60: #b9131e;
+    --color-error-70: #8b0e16;
+    --color-error-80: #5c0a0f;
+    --color-error-90: #2e0507;
+
+    --color-warn-5: #fff8e9;
+    --color-warn-10: #ffeac1;
+    --color-warn-20: #ffe2a7;
+    --color-warn-30: #ffd47c;
+    --color-warn-40: #ffc550;
+    --color-warn-50: #ffb724;
+    --color-warn-60: #98690a;
+    --color-warn-70: #66490e;
+    --color-warn-80: #4d370b;
+    --color-warn-90: #332507;
+
+    --color-success-5: #effaf0;
+    --color-success-10: #c8efc9;
+    --color-success-20: #a0e3a3;
+    --color-success-30: #79d87d;
+    --color-success-40: #51cc56;
+    --color-success-50: #35b53a;
+    --color-success-60: #2a8e2e;
+    --color-success-70: #1e6721;
+    --color-success-80: #123f14;
+    --color-success-90: #071808;
+  }
+}
