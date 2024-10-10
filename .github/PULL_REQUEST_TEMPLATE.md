@@ -2,13 +2,11 @@
 
 - [ ] bugfix
 - [ ] feature
-- [ ]  refactor
-- [ ]  documentation
-- [ ]  other
+- [ ] refactor
+- [ ] documentation
+- [ ] other
 
-
-List any relevant issue numbers(selected):
-
+## List any relevant issue numbers(selected):
 
 ## Description
 
