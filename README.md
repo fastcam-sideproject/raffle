@@ -18,6 +18,7 @@
 <div align="center">
   <img src="https://github.com/fastcam-sideproject/RaffleReadmeImgs/blob/main/Docs/home_main.png" width="50%" />
   <img src="https://github.com/fastcam-sideproject/RaffleReadmeImgs/blob/main/Docs/popular_item.png" width="50%" />
+    <img src="https://github.com/fastcam-sideproject/RaffleReadmeImgs/blob/main/item.png" width="50%" />
 </div>
 
 <br/><br />
