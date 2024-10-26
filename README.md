@@ -111,15 +111,6 @@ npm run dev
       <td align="center" valign="middle">
         <div>
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
-          <img width="50" src="https://emojiisland.com/cdn/shop/products/Dog_Emoji_large.png?v=1571606065" />
-          <p align="center">
-            Husky
-          </p>
-        </div>
-      </td>
-      <td align="center" valign="middle">
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" width="500" height="1" />
           <img width="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ESLint_logo.svg/256px-ESLint_logo.svg.png" />
           <p align="center">
             Eslint
