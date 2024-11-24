@@ -131,3 +131,21 @@ npm run dev
 </table>
 
 <br/><br/>
+
+
+## AllYouTaffle 개발 과정
+
+### 1️⃣ 먼저 피그마로 기획을 했습니다.
+
+### [🖼️ 피그마 링크](https://www.figma.com/design/RpOiZprqU1PxqwebLfJ84o/AllYouRaffle-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0-1&t=iuBNFpoLEVeCFJPS-1)
+
+- AllYouRaffle 프로젝트를 BE 2명과 FE 2명에서 기획을 한 후 피그마 와이어프레임을 작성하였습니다.
+- 디자인 시안을 확인할 수 있습니다.
+
+### 2️⃣ 개발 과정에서 고민 했던 내용
+
+- AllYouRaffle을 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
+
+
+<br/><br/>
+
