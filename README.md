@@ -25,6 +25,7 @@
 
 ## 배포 링크
 
+### 프로젝트는 무산되어 배포가 중지 되었습니다.
 ### [https://allyouraffle.co.kr/](https://allyouraffle.co.kr/)
 
 <br/><br/>
@@ -133,7 +134,7 @@ npm run dev
 <br/><br/>
 
 
-## AllYouTaffle 개발 과정
+## AllYouRaffle 개발 과정
 
 ### 1️⃣ 먼저 피그마로 기획을 했습니다.
 
@@ -144,8 +145,8 @@ npm run dev
 
 ### 2️⃣ 개발 과정에서 고민 했던 내용
 
-- AllYouRaffle을 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
-
+AllYouRaffle을 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
+- [AllYouRaffle 프로젝트 운영 경험](https://wiggly-baroness-02b.notion.site/AllYouRaffle-1286a40423b8808b850bf5c102b7992e?pvs=4)
 
 <br/><br/>
 
