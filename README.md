@@ -148,5 +148,7 @@ npm run dev
 AllYouRaffle을 기획 및 구현하면서 고민했던 내용들을 볼 수 있습니다.
 - [AllYouRaffle 프로젝트 운영 경험](https://wiggly-baroness-02b.notion.site/AllYouRaffle-1286a40423b8808b850bf5c102b7992e?pvs=4)
 
+- [서버: Next.js EC2 배포 서비스 죽는 현상 해결하기](https://yho7955.tistory.com/54)
+
 <br/><br/>
 
