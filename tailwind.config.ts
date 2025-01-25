@@ -21,6 +21,7 @@ const config: Config = {
         neutral: {
           '0': 'var(--color-neutral-0)',
           '5': 'var(--color-neutral-5)',
+          '7': 'var(--color-neutral-7)',
           '10': 'var(--color-neutral-10)',
           '20': 'var(--color-neutral-20)',
           '30': 'var(--color-neutral-30)',
@@ -30,7 +31,7 @@ const config: Config = {
           '70': 'var(--color-neutral-70)',
           '80': 'var(--color-neutral-80)',
           '90': 'var(--color-neutral-90)',
-          '100': 'var(--color-neutral-100)',
+          '95': 'var(--color-neutral-95)',
         },
         primary: {
           '5': 'var(--color-primary-5)',
