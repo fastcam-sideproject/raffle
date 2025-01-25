@@ -2,15 +2,13 @@ import baseURL from '../baseURL';
 
 export async function getWinnerHistory({
   userToken,
-  cursor,
-  size,
+  size = 5,
 }: {
   userToken: string;
-  cursor: number;
-  size: number;
+  size?: number;
 }) {
   try {
-    const response = await fetch(`${baseURL}/api/v1/winner_history?cursor=${cursor}&size=${size}`, {
+    const response = await fetch(`${baseURL}/api/v1/winner_history?size=${size}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${userToken}`,

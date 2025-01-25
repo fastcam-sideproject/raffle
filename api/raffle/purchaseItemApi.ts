@@ -15,6 +15,7 @@ async function postPurchaseItem({ raffleId, userToken }: { raffleId: number; use
     return response.json();
   } catch (error) {
     console.error('상품 구매 실패', error);
+    throw error;
   }
 }
 
