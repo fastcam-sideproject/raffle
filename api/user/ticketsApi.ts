@@ -1,49 +1,29 @@
-import useAuthStore from '../../lib/store/useAuthStore';
-import baseURL from '../baseURL';
+import { AxiosResponse } from 'axios';
+import { client } from '../http';
 
 /**
- * 유저의 응모권 갯수 가져오기
- * @param userToken
+ * @description 유저의 응모권 갯수 가져오기
  */
-async function getTickets(userToken: string): Promise<number> {
-  const { logout } = useAuthStore.getState();
+const getTickets = async (): Promise<number> => {
   try {
-    const response = await fetch(`${baseURL}/api/v1/user/tickets`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userToken}`,
-      },
-    });
-    if (response.status === 401) {
-      console.error('인증 실패: 토큰이 만료되었습니다.');
-      logout();
-    }
-    if (!response.ok) {
-      throw new Error('응모권 불러오기 실패');
-    }
-    return response.json();
+    const response = await client.get('/api/v1/user/tickets');
+    return response.data;
   } catch (error) {
-    throw new Error(`응모권 불러오기 실패: ${error}`);
+    console.log('응모권 불러오기 실패:', error);
+    throw error;
   }
-}
+};
 
-async function postTicketsPlusOne(userToken: string): Promise<number> {
+/**
+ * @description 유저의 으옹권 갯수 +1 추가하기
+ */
+const postTicketsPlusOne = async (): Promise<AxiosResponse<number>> => {
   try {
-    const response = await fetch(`${baseURL}/api/v1/user/tickets/plus_one`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userToken}`,
-      },
-    });
-    if (!response.ok) {
-      throw new Error('티켓 추가 실패');
-    }
-    return response.json();
+    return await client.post('/api/v1/user/tickets/plus_one');
   } catch (error) {
-    throw new Error(`티켓 추가 실패: ${error}`);
+    console.log('응모권 추가 실패:', error);
+    throw error;
   }
-}
+};
 
 export { getTickets, postTicketsPlusOne };

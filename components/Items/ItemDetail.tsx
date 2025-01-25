@@ -51,7 +51,7 @@ export default function ItemDetail({ params: { id } }: { params: { id: number } 
 
   const { data: ticketsCount } = useQuery({
     queryKey: ['getTickets'],
-    queryFn: () => getTickets(userToken),
+    queryFn: () => getTickets(),
     enabled: !!userToken,
   });
 

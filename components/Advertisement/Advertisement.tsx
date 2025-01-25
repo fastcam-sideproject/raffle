@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useTicketPlusOne from '@/lib/hooks/useTicketPlusOne';
 import { KakaoAdFit } from '../KakaoAdFit';
-import { postTicketsPlusOne } from '../../api/user/ticketsApi';
 import Button from '../../lib/common/Button';
-import useAuthStore from '../../lib/store/useAuthStore';
 import { AdvertisementProps } from '../../lib/types/advertisement';
 
 export default function Advertisement({ onClose }: AdvertisementProps) {
@@ -13,22 +11,7 @@ export default function Advertisement({ onClose }: AdvertisementProps) {
   const [countdown, setCountdown] = useState<number>(3);
   const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false);
 
-  const userToken = useAuthStore((state) => state.userToken);
-  const queryClient = useQueryClient();
-
-  const mutate = useMutation({
-    mutationKey: ['postTicketsPlusOne'],
-    mutationFn: () => postTicketsPlusOne(userToken),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getTickets'] });
-      alert('티켓 추가 성공');
-      onClose();
-    },
-    onError: (error: Error) => {
-      alert('티켓 추가 실패');
-      throw error;
-    },
-  });
+  const { mutate } = useTicketPlusOne();
 
   useEffect(() => {
     if (countdown > 0) {
@@ -43,8 +26,9 @@ export default function Advertisement({ onClose }: AdvertisementProps) {
 
   const handleCloseButton = () => {
     if (isButtonEnabled) {
-      mutate.mutate();
+      mutate();
       setIsToggle(!isToggle);
+      onClose();
     }
   };
 

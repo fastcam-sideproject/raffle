@@ -21,13 +21,22 @@ export default function HeaderNav() {
    * 사용자 응모권 갯수를 나타내는 useQuery
    * !!enabled: userToken이 존재할 때만 실행
    */
-  const { data: ticketsCount, isLoading } = useQuery({
+  const {
+    data: ticketsCount,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ['getTickets'],
-    queryFn: () => getTickets(userToken),
+    queryFn: getTickets,
+    staleTime: 1000 * 60 * 1,
     enabled: !!userToken,
   });
 
   if (isLoading) return <div>Loading...</div>;
+
+  if (isError)
+    return <div>Error: {error instanceof Error ? error.message : JSON.stringify(error)}</div>;
 
   const handleProfileClick = () => {
     setIsPopverOpen(!isPopverOpen);
